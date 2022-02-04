@@ -14,11 +14,11 @@
         <b-col>
           <b-table :items="subjectItems" :fields="fields">
             <template #cell(sub_edit)="{ item }">
-              <b-button @click="editSubject(item)" variant="warning">แก้ไข</b-button>
+              <b-button @click="editSubject(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
             </template>
             <template #cell(sub_del)="{ item }">
               <b-button @click="deleteSubject(item)" variant="danger"
-                >ลบ</b-button
+                ><i class="fas fa-trash-alt"></i></b-button
               >
             </template>
           </b-table>
@@ -67,7 +67,7 @@ export default {
     },
     async deleteSubject (subject) {
       console.log(subject)
-      if (confirm(`คุณต้องการจะลบข้อมูลวิชา${subject.sub_id} หรือไม่`)) {
+      if (confirm(`คุณต้องการจะลบข้อมูลวิชา ${subject.sub_name} หรือไม่`)) {
         const index = this.subjectItems.findIndex(function (item) {
           return subject.sub_id === item.sub_id
         })
@@ -79,7 +79,7 @@ export default {
   data () {
     return {
       fields: [
-        { key: 'sub_id', label: 'ไอดี' },
+        { key: 'sub_id', label: 'No' },
         { key: 'sub_code', label: 'รหัสวิชา' },
         { key: 'sub_name', label: 'ชื่อวิชา' },
         { key: 'sub_credit', label: 'หน่วยกิต' },
@@ -130,7 +130,7 @@ export default {
           module_id: 1
         }
       ],
-      subjectId: 6,
+      subjectId: 4,
       selectedItem: null
     }
   },

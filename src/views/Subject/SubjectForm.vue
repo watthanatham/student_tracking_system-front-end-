@@ -1,10 +1,10 @@
 <template>
   <div>
-    <b-button @click="addNew" variant="primary">เพิ่มข้อมูลวิชา</b-button>
+    <b-button @click="addNew" variant="primary"><i class="far fa-plus-square"></i> เพิ่มข้อมูลวิชา</b-button>
     <b-modal
       id="modal-subject"
       ref="modalSubject"
-      title="วิชา"
+      title="ข้อมูลวิชา"
       @show="showModal"
       @hidden="resetModal"
       @ok="handleOk"
@@ -18,7 +18,6 @@
           <b-form-input
             type="text"
             id="subject-code"
-            placeholder="886xxxxx"
             v-model="form.sub_code"
           >
           </b-form-input>

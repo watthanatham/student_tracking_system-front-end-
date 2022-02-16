@@ -7,7 +7,9 @@
       <b-nav vertical><b-nav-item to="/courselist" @click="showFormInput=!showFormInput">Course
       </b-nav-item>
       <b-nav-item to="/formStudent">Student</b-nav-item>
-      <b-nav-item to="/subjectform">SubjectForm</b-nav-item>
+      <b-nav-item to="/subjectform">Subject Form</b-nav-item>
+      <b-nav-item to="/moduleform">Module Form</b-nav-item>
+      <b-nav-item to="/subject_type_form">Subject Type Form</b-nav-item>
       <b-nav-item to="/about">Logout</b-nav-item>
     </b-nav>
 </div>

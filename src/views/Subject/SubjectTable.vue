@@ -40,8 +40,6 @@ export default {
         this.subjectItems = data.data
       })
     },
-    async addSubject () {
-    },
     async saveSubject (subject) {
       // console.log('submit', subject)
       if (subject.sub_id < 0) {
@@ -130,7 +128,7 @@ export default {
           module_id: 1
         }
       ],
-      subjectId: 5,
+      subjectId: 4,
       selectedItem: null
     }
   },

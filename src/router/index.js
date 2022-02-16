@@ -81,6 +81,22 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Subject/SubjectForm.vue')
+  },
+  {
+    path: '/moduleform',
+    name: 'moduleForm',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/ModuleTF/ModuleForm.vue')
+  },
+  {
+    path: '/subject_type_form',
+    name: 'subject_type_form',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Subject_Type/SubjectTypeForm.vue')
   }
 ]
 

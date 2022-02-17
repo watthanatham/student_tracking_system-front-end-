@@ -42,13 +42,13 @@ export default {
     },
     async saveSubject (subject) {
       // console.log('submit', subject)
-      if (subject.sub_id < 0) {
+      if (subject.sub_id < 0) { // add
         subject.sub_id = this.subjectId
         // console.log(subject.sub_id)
         this.subjectItems.push(subject)
         this.subjectId++
         await axios.post('http://localhost:8081/subject', subject)
-      } else {
+      } else { // save
         const index = this.subjectItems.findIndex((item) => {
           return subject.sub_id === item.sub_id
         })
@@ -87,48 +87,7 @@ export default {
         { key: 'sub_del', label: 'ลบข้อมูล' }
       ],
       subjectItems: [
-        {
-          sub_id: 1,
-          sub_code: '85510459',
-          sub_name: 'Information Technology for Industry',
-          sub_credit: 2,
-          st_id: 2,
-          module_id: 1
-        },
-        {
-          sub_id: 2,
-          sub_code: '85510659',
-          sub_name: 'IT Support',
-          sub_credit: 3,
-          st_id: 1,
-          module_id: 2
-        },
-        {
-          sub_id: 3,
-          sub_code: '85511359',
-          sub_name: 'Discrete and Math',
-          sub_credit: 3,
-          st_id: 2,
-          module_id: 4
-        },
-        {
-          sub_id: 4,
-          sub_code: '85510059',
-          sub_name: 'Statics for comoputing',
-          sub_credit: 3,
-          st_id: 2,
-          module_id: 2
-        },
-        {
-          sub_id: 5,
-          sub_code: '85611259',
-          sub_name: 'Logical Thinking',
-          sub_credit: 3,
-          st_id: 2,
-          module_id: 1
-        }
       ],
-      subjectId: 4,
       selectedItem: null
     }
   },

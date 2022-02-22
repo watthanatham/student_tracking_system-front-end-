@@ -13,90 +13,57 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import('../views/About.vue')
   },
   {
     path: '/courselist',
     name: 'Course List',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Courselist.vue')
+    component: () => import('../views/Courselist.vue')
   },
   {
     path: '/formInput1',
     name: 'Form Input 1',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/FormInput1.vue')
+    component: () => import('../views/FormInput1.vue')
   },
   {
     path: '/formInput2',
     name: 'Form Input 2',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/FormInput2.vue')
+    component: () => import('../views/FormInput2.vue')
   },
   {
     path: '/formInput3',
     name: 'Form Input 3',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/FormInput3.vue')
+    component: () => import('../views/FormInput3.vue')
   },
   {
     path: '/formInput4',
     name: 'Form Input 4',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/FormInput4.vue')
+    component: () => import('../views/FormInput4.vue')
   },
   {
     path: '/formStudent',
     name: 'Form Student',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/FormStudent.vue')
+    component: () => import('../views/FormStudent.vue')
   },
   {
     path: '/subject',
     name: 'Subject',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Subject/SubjectTable.vue')
+    component: () => import('../views/Subject/SubjectTable.vue')
   },
   {
     path: '/subjectform',
     name: 'SubjectForm',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Subject/SubjectForm.vue')
+    component: () => import('../views/Subject/SubjectForm.vue')
   },
   {
     path: '/moduleform',
     name: 'moduleForm',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/ModuleTF/ModuleForm.vue')
+    component: () => import('../views/ModuleTF/ModuleForm.vue')
   },
   {
     path: '/subject_type_form',
     name: 'subject_type_form',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Subject_Type/SubjectTypeForm.vue')
+    component: () => import('../views/Subject_Type/SubjectTypeForm.vue')
   }
 ]
 

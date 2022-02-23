@@ -12,7 +12,7 @@
       </b-row>
       <b-row>
         <b-col>
-          <b-table :items="subjectItems" :fields="fields" class="text-center">
+          <b-table :items="subjectItems" :fields="fields" class="text-left">
             <template #cell(sub_edit)="{ item }">
               <b-button @click="editSubject(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
             </template>

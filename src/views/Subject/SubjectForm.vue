@@ -24,13 +24,25 @@
         </b-form-group>
         <b-form-group
           id="form-group-subject-name"
-          label="ชื่อวิชา"
-          label-for="subject-name"
+          label="ชื่อวิชาภาษาไทย"
+          label-for="subject-name-thai"
         >
           <b-form-input
             type="text"
-            id="subject-name"
-            v-model="form.sub_name"
+            id="subject-name-thai"
+            v-model="form.sub_name_thai"
+          >
+          </b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="form-group-subject-name"
+          label="ชื่อวิชาภาษาอังกฤษ"
+          label-for="subject-name-eng"
+        >
+          <b-form-input
+            type="text"
+            id="subject-name-eng"
+            v-model="form.sub_name_eng"
           >
           </b-form-input>
         </b-form-group>
@@ -82,7 +94,8 @@ export default {
       form: {
         sub_id: -1,
         sub_code: '',
-        sub_name: '',
+        sub_name_thai: '',
+        sub_name_eng: '',
         sub_credit: 0,
         st_id: null,
         module_id: null
@@ -137,7 +150,8 @@ export default {
       this.form = {
         sub_id: -1,
         sub_code: '',
-        sub_name: '',
+        sub_name_thai: '',
+        sub_name_eng: '',
         sub_credit: 0
       }
     },
@@ -148,7 +162,8 @@ export default {
         // edit
         this.form.sub_id = this.subject.id
         this.form.sub_code = this.subject.sub_code
-        this.form.sub_name = this.subject.sub_name
+        this.form.sub_name_thai = this.subject.sub_name_thai
+        this.form.sub_name_eng = this.subject.sub_name_eng
         this.form.sub_credit = this.subject.sub_credit
         this.form.st_id = this.subject.st_id
         this.form.module_id = this.subject.module_id

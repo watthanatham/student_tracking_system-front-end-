@@ -12,7 +12,7 @@
       </b-row>
       <b-row>
         <b-col>
-          <b-table :items="subjectItems" :fields="fields">
+          <b-table :items="subjectItems" :fields="fields" class="text-center">
             <template #cell(sub_edit)="{ item }">
               <b-button @click="editSubject(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
             </template>
@@ -41,10 +41,8 @@ export default {
       })
     },
     async saveSubject (subject) {
-      // console.log('submit', subject)
       if (subject.sub_id < 0) { // add
         subject.sub_id = this.subjectId
-        // console.log(subject.sub_id)
         this.subjectItems.push(subject)
         this.subjectId++
         await axios.post('http://localhost:8081/subject', subject)
@@ -79,7 +77,8 @@ export default {
       fields: [
         { key: 'sub_id', label: 'No' },
         { key: 'sub_code', label: 'รหัสวิชา' },
-        { key: 'sub_name', label: 'ชื่อวิชา' },
+        { key: 'sub_name_thai', label: 'ชื่อวิชาภาษาไทย' },
+        { key: 'sub_name_eng', label: 'ชื่อวิชาภาษาอังกฤษ' },
         { key: 'sub_credit', label: 'หน่วยกิต' },
         { key: 'st_id', label: 'หมวดวิชา' },
         { key: 'module_id', label: 'โมดูล' },

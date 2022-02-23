@@ -46,12 +46,14 @@ export default {
         this.subjectItems.push(subject)
         this.subjectId++
         await axios.post('http://localhost:8081/subject', subject)
+        this.getSubjects()
       } else { // save
         const index = this.subjectItems.findIndex((item) => {
           return subject.sub_id === item.sub_id
         })
         this.subjectItems.splice(index, 1, subject)
         await axios.put('http://localhost:8081/subject/' + subject.sub_id, subject)
+        this.getSubjects()
       }
     },
     editSubject (item) {
@@ -63,12 +65,13 @@ export default {
     },
     async deleteSubject (subject) {
       console.log(subject)
-      if (confirm(`คุณต้องการจะลบข้อมูลวิชา ${subject.sub_name} หรือไม่`)) {
+      if (confirm(`คุณต้องการจะลบข้อมูลวิชา ${subject.sub_name_thai} หรือไม่`)) {
         const index = this.subjectItems.findIndex(function (item) {
           return subject.sub_id === item.sub_id
         })
         this.subjectItems.splice(index, 1)
         await axios.delete('http://localhost:8081/subject/' + subject.sub_id)
+        this.getSubjects()
       }
     }
   },

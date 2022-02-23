@@ -98,7 +98,8 @@ export default {
         sub_name_eng: '',
         sub_credit: 0,
         st_id: null,
-        module_id: null
+        module_id: null,
+        course_id: 1
       },
       id: 0,
       subject_type: [
@@ -152,7 +153,8 @@ export default {
         sub_code: '',
         sub_name_thai: '',
         sub_name_eng: '',
-        sub_credit: 0
+        sub_credit: 0,
+        course_id: 1
       }
     },
     showModal () {
@@ -167,6 +169,7 @@ export default {
         this.form.sub_credit = this.subject.sub_credit
         this.form.st_id = this.subject.st_id
         this.form.module_id = this.subject.module_id
+        this.form.course_id = this.subject.course_id
       }
     },
     resetModal (evt) {

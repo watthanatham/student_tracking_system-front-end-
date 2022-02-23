@@ -2,11 +2,10 @@
   <div class="app-menu min-vh-100">
     <b-img src="../assets/infor.png" width="100%" class="pt-2 pd-2" ></b-img>
       <b-nav vertical>
-      <b-nav-item to="/">Home</b-nav-item>
+      <b-nav-item to="/">หน้าแรก</b-nav-item>
       </b-nav>
-      <b-nav vertical><b-nav-item to="/courselist" @click="showFormInput=!showFormInput">Course
-      </b-nav-item>
-      <b-nav-item to="/formStudent">Student</b-nav-item>
+      <b-nav vertical><b-nav-item to="/courselist">หลักสูตร</b-nav-item>
+      <b-nav-item to="/formStudent">ข้อมูลนิสิต</b-nav-item>
       <b-nav-item to="/subjectform">Subject Form</b-nav-item>
       <b-nav-item to="/moduleform">Module Form</b-nav-item>
       <b-nav-item to="/subject_type_form">Subject Type Form</b-nav-item>
@@ -19,8 +18,6 @@
 export default {
   data () {
     return {
-      showFormInput: false,
-      showForm: false
     }
   }
 }

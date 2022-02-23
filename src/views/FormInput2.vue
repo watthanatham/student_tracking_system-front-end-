@@ -16,7 +16,7 @@
       ></b-form-input>
       <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
     </h3></b-nav-form>
-    <b-table class="table" striped hover :items="items"></b-table>
+    <!-- <b-table class="table" striped hover :items="items"></b-table> -->
   </div>
 </template>
 

@@ -21,11 +21,6 @@ const routes = [
     component: () => import('../views/Courselist.vue')
   },
   {
-    path: '/formInput1',
-    name: 'Form Input 1',
-    component: () => import('../views/FormInput1.vue')
-  },
-  {
     path: '/coursestructure',
     name: 'Course Structure',
     component: () => import('../views/Coursestructure/Coursestructure.vue')
@@ -34,16 +29,6 @@ const routes = [
     path: '/coursestructureform',
     name: 'Course Structure Form',
     component: () => import('../views/Coursestructure/CoursestructureForm.vue')
-  },
-  {
-    path: '/formInput3',
-    name: 'Form Input 3',
-    component: () => import('../views/FormInput3.vue')
-  },
-  {
-    path: '/formInput4',
-    name: 'Form Input 4',
-    component: () => import('../views/FormInput4.vue')
   },
   {
     path: '/student',

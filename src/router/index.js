@@ -46,29 +46,19 @@ const routes = [
     component: () => import('../views/Subject/SubjectForm.vue')
   },
   {
-    path: '/moduleform',
-    name: 'moduleForm',
-    component: () => import('../views/ModuleTF/ModuleForm.vue')
-  },
-  {
-    path: '/subject_type_form',
-    name: 'subject_type_form',
-    component: () => import('../views/Subject_Type/SubjectTypeForm.vue')
-  },
-  {
     path: '/studentform',
     name: 'studentForm',
     component: () => import('../views/Student/StudentForm.vue')
   },
   {
-    path: '/studentresult',
-    name: 'studentResult',
-    component: () => import('../views/Student_Result/StudentResultTable.vue')
+    path: '/subjectType',
+    name: 'Subject Type',
+    component: () => import('../views/SubjectType/Subjecttype.vue')
   },
   {
-    path: '/studentresultform',
-    name: 'studentResultForm',
-    component: () => import('../views/Student_Result/StudentResultForm.vue')
+    path: '/moduleSubject',
+    name: 'Module Subject',
+    component: () => import('../views/Modulesubject/Modulesubject.vue')
   }
 ]
 

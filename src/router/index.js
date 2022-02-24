@@ -26,9 +26,14 @@ const routes = [
     component: () => import('../views/FormInput1.vue')
   },
   {
-    path: '/formInput2',
-    name: 'Form Input 2',
-    component: () => import('../views/FormInput2.vue')
+    path: '/coursestructure',
+    name: 'Course Structure',
+    component: () => import('../views/Coursestructure/Coursestructure.vue')
+  },
+  {
+    path: '/coursestructureform',
+    name: 'Course Structure Form',
+    component: () => import('../views/Coursestructure/CoursestructureForm.vue')
   },
   {
     path: '/formInput3',

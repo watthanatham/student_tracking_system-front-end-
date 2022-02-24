@@ -1,5 +1,11 @@
 <template>
   <div>
+    <b-nav class="mt-4">
+      <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
+      <b-nav-item to="/formInput3">หมวดวิชา</b-nav-item>
+      <b-nav-item to="/formInput4">โมดูลวิชา</b-nav-item>
+      <b-nav-item to="/subject">วิชา</b-nav-item>
+    </b-nav>
     <b-container fluid>
       <b-row>
         <!-- <b-col class="text-right">

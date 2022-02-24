@@ -41,9 +41,9 @@ const routes = [
     component: () => import('../views/FormInput4.vue')
   },
   {
-    path: '/formStudent',
-    name: 'Form Student',
-    component: () => import('../views/FormStudent.vue')
+    path: '/student',
+    name: 'Student',
+    component: () => import('../views/Student/StudentTable.vue')
   },
   {
     path: '/subject',

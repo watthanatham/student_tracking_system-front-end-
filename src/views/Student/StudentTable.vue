@@ -1,0 +1,98 @@
+<template>
+  <div>
+    <b-container fluid>
+      <b-row>
+        <!-- <b-col class="text-right">
+          <studentForm
+            :student="selectedItem"
+            ref="studentForm"
+            @save="savestudent"
+          ></studentForm>
+        </b-col> -->
+      </b-row>
+      <b-row>
+        <b-col>
+          <b-table striped hover :items="studentItems" :fields="fields" class="text-left">
+            <template #cell(stu_edit)="{ item }">
+              <b-button @click="editstudent(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
+            </template>
+            <template #cell(stu_del)="{ item }">
+              <b-button @click="deletestudent(item)" variant="danger"
+                ><i class="fas fa-trash-alt"></i></b-button
+              >
+            </template>
+          </b-table>
+        </b-col>
+      </b-row>
+    </b-container>
+  </div>
+</template>
+<script>
+import axios from 'axios'
+// import studentForm from './studentForm.vue'
+export default {
+  components: {
+    // studentForm
+  },
+  methods: {
+    async getStudents () {
+      await axios.get('http://localhost:8081/student').then(data => {
+        this.studentItems = data.data
+      })
+    },
+    async saveStudent (student) {
+      if (student.stu_id < 0) { // add
+        student.stu_id = this.studentId
+        this.studentItems.push(student)
+        this.studentId++
+        await axios.post('http://localhost:8081/student', student)
+        this.getStudents()
+      } else { // save
+        const index = this.studentItems.findIndex((item) => {
+          return student.stu_id === item.stu_id
+        })
+        this.studentItems.splice(index, 1, student)
+        await axios.put('http://localhost:8081/student/' + student.stu_id, student)
+        this.getStudents()
+      }
+    },
+    editStudent (item) {
+      this.selectedItem = JSON.parse(JSON.stringify(item))
+      this.selectedItem = { ...item }
+      this.$nextTick(() => {
+        this.$refs.studentForm.show()
+      })
+    },
+    async deleteStudent (student) {
+      console.log(student)
+      if (confirm(`คุณต้องการจะลบข้อมูลวิชา ${student.sub_name_thai} หรือไม่`)) {
+        const index = this.studentItems.findIndex(function (item) {
+          return student.stu_id === item.stu_id
+        })
+        this.studentItems.splice(index, 1)
+        await axios.delete('http://localhost:8081/student/' + student.stu_id)
+        this.getStudents()
+      }
+    }
+  },
+  data () {
+    return {
+      fields: [
+        { key: 'stu_id', label: 'No' },
+        { key: 'stu_uid', label: 'รหัสนิสิต' },
+        { key: 'stu_firstname', label: 'ชื่อ' },
+        { key: 'stu_lastname', label: 'นามสกุล' },
+        { key: 'stu_edit', label: 'แก้ไข' },
+        { key: 'stu_del', label: 'ลบข้อมูล' }
+      ],
+      studentItems: [
+      ],
+      selectedItem: null
+    }
+  },
+  mounted () {
+    this.getStudents()
+  }
+}
+</script>
+<style></style>

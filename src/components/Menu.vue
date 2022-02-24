@@ -2,14 +2,14 @@
   <div class="app-menu min-vh-100">
     <b-img src="../assets/infor.png" width="100%" class="pt-2 pd-2" ></b-img>
       <b-nav vertical>
-      <b-nav-item to="/">หน้าแรก</b-nav-item>
+      <b-nav-item to="/" class="">หน้าแรก</b-nav-item>
       </b-nav>
       <b-nav vertical><b-nav-item to="/courselist">หลักสูตร</b-nav-item>
-      <b-nav-item to="/formStudent">ข้อมูลนิสิต</b-nav-item>
+      <b-nav-item to="/student">ข้อมูลนิสิต</b-nav-item>
       <b-nav-item to="/subjectform">Subject Form</b-nav-item>
       <b-nav-item to="/moduleform">Module Form</b-nav-item>
       <b-nav-item to="/subject_type_form">Subject Type Form</b-nav-item>
-      <b-nav-item to="/about">Logout</b-nav-item>
+      <b-nav-item to="/about">ออกจากระบบ</b-nav-item>
     </b-nav>
 </div>
 </template>

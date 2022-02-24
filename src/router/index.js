@@ -59,6 +59,16 @@ const routes = [
     path: '/studentform',
     name: 'studentForm',
     component: () => import('../views/Student/StudentForm.vue')
+  },
+  {
+    path: '/studentresult',
+    name: 'studentResult',
+    component: () => import('../views/Student_Result/StudentResultTable.vue')
+  },
+  {
+    path: '/studentresultform',
+    name: 'studentResultForm',
+    component: () => import('../views/Student_Result/StudentResultForm.vue')
   }
 ]
 

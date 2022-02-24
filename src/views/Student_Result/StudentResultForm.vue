@@ -1,10 +1,10 @@
 <template>
   <div>
-    <b-button @click="addNew" variant="primary"><i class="far fa-plus-square"></i> เพิ่มข้อมูลนิสิต</b-button>
+    <b-button @click="addNew" variant="primary"><i class="far fa-plus-square"></i> เพิ่มข้อมูลผลการเรียน</b-button>
     <b-modal
       id="modal-student"
       ref="modalstudent"
-      title="ข้อมูลนิสิต"
+      title="ข้อมูลผลการเรียนนิสิต"
       @show="showModal"
       @hidden="resetModal"
       @ok="handleOk"
@@ -12,7 +12,7 @@
       <b-form @submit.stop.prevent="submit" @reset.stop.prevent="reset">
         <b-form-group
           id="form-group-student-code"
-          label="รหัสนิสิต"
+          label="ปีการศึกษา"
           label-for="student-code"
         >
           <b-form-input
@@ -24,7 +24,7 @@
         </b-form-group>
         <b-form-group
           id="form-group-student-firstname"
-          label="ชื่อ"
+          label="เทอม"
           label-for="student-firstname"
         >
           <b-form-input

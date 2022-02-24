@@ -3,7 +3,7 @@
     <b-container fluid>
       <b-row>
         <b-col class="text-right">
-          <studentForm
+          <StudentForm
             :student="selectedItem"
             ref="StudentForm"
             @save="saveStudent"

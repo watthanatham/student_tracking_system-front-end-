@@ -1,0 +1,177 @@
+<template>
+  <div>
+    <b-button @click="addNew" variant="primary"><i class="far fa-plus-square"></i> เพิ่มข้อมูลวิชา</b-button>
+    <b-modal
+      id="modal-student"
+      ref="modalstudent"
+      title="ข้อมูลนิสิต"
+      @show="showModal"
+      @hidden="resetModal"
+      @ok="handleOk"
+    >
+      <b-form @stumit.stop.prevent="stumit" @reset.stop.prevent="reset">
+        <b-form-group
+          id="form-group-student-code"
+          label="รหัสนิสิต"
+          label-for="student-code"
+        >
+          <b-form-input
+            type="text"
+            id="student-code"
+            v-model="form.stu_uid"
+          >
+          </b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="form-group-student-firstname"
+          label="ชื่อ"
+          label-for="student-firstname"
+        >
+          <b-form-input
+            type="text"
+            id="student-firstname"
+            v-model="form.stu_firstname"
+          >
+          </b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="form-group-student-lastname"
+          label="นามสกุล"
+          label-for="student-lastname"
+        >
+          <b-form-input
+            type="text"
+            id="student-lastname"
+            v-model="form.stu_lastname"
+          >
+          </b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="form-group-student-username"
+          label="ชื่อบัญชีผู้ใช้"
+          label-for="student-username"
+        >
+          <b-form-input
+            type="text"
+            id="student-username"
+            v-model="form.stu_username"
+          >
+          </b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="form-group-student-password"
+          label="รหัสผ่าน"
+          label-for="student-password"
+        >
+          <b-form-input
+            type="text"
+            id="student-password"
+            v-model="form.stu_password"
+          >
+          </b-form-input>
+        </b-form-group>
+        <b-form-group id="input-group-4" label="หลักสูตร" label-for="input-4">
+          <b-form-select
+            id="input-3"
+            v-model="form.course_id"
+            :options="student_course"
+            required
+          ></b-form-select>
+        </b-form-group>
+      </b-form>
+      <b-card>
+        <pre>
+        {{ form }}
+      </pre
+        >
+      </b-card>
+    </b-modal>
+  </div>
+</template>
+<script>
+export default {
+  props: {
+    student: Object
+  },
+  data () {
+    return {
+      form: {
+        stu_id: -1,
+        stu_uid: '',
+        stu_firstname: '',
+        stu_lastname: '',
+        stu_username: '',
+        stu_password: '',
+        course_id: null
+      },
+      id: 0,
+      student_course: [
+        { text: 'เลือกหมวดวิชา', value: null },
+        { text: 'หลักสูตรใหม่ ปี 2563', value: 1 },
+        { text: 'หลักสูตรสองภาษา', value: 2 }
+      ],
+      isAddNew: false
+    }
+  },
+  methods: {
+    addNew () {
+      this.isAddNew = true
+      this.$nextTick(() => {
+        this.show()
+        this.isAddNew = false
+      })
+    },
+    show () {
+      if (!this.isAddNew) {
+        this.form = { ...this.student }
+        this.id = this.student.stu_id
+      }
+      this.$refs.modalstudent.show()
+    },
+    submit () {
+      console.log(this.form)
+      const student = JSON.parse(JSON.stringify(this.form))
+      student.stu_id = (this.form.stu_id === -1) ? -1 : this.id
+      console.log(student)
+      this.$emit('save', student)
+      this.reset()
+    },
+    reset () {
+      this.form = {
+        stu_id: -1,
+        stu_uid: '',
+        stu_firstname: '',
+        stu_lastname: '',
+        stu_username: '',
+        stu_password: ''
+      }
+    },
+    showModal () {
+      if (this.isAddNew) {
+        this.reset()
+      } else {
+        // edit
+        this.form.stu_id = this.student.id
+        this.form.stu_uid = this.student.stu_uid
+        this.form.stu_firstname = this.student.stu_firstname
+        this.form.stu_lastname = this.student.stu_lastname
+        this.form.stu_username = this.student.stu_username
+        this.form.stu_password = this.student.stu_password
+        this.form.course_id = this.student.course_id
+      }
+    },
+    resetModal (evt) {
+      this.reset()
+    },
+    handleOk (evt) {
+      evt.preventDefault()
+      // if (!this.validateForm) return
+      this.submit()
+      this.$nextTick(() => {
+        this.$bvModal.hide('modal-student')
+      })
+    }
+  }
+}
+</script>
+<style></style>

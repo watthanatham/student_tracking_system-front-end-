@@ -2,22 +2,22 @@
   <div>
     <b-container fluid>
       <b-row>
-        <!-- <b-col class="text-right">
+        <b-col class="text-right">
           <studentForm
             :student="selectedItem"
-            ref="studentForm"
-            @save="savestudent"
-          ></studentForm>
-        </b-col> -->
+            ref="StudentForm"
+            @save="saveStudent"
+          ></StudentForm>
+        </b-col>
       </b-row>
       <b-row>
         <b-col>
           <b-table striped hover :items="studentItems" :fields="fields" class="text-left">
             <template #cell(stu_edit)="{ item }">
-              <b-button @click="editstudent(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
+              <b-button @click="editStudent(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
             </template>
             <template #cell(stu_del)="{ item }">
-              <b-button @click="deletestudent(item)" variant="danger"
+              <b-button @click="deleteStudent(item)" variant="danger"
                 ><i class="fas fa-trash-alt"></i></b-button
               >
             </template>
@@ -29,10 +29,10 @@
 </template>
 <script>
 import axios from 'axios'
-// import studentForm from './studentForm.vue'
+import StudentForm from './StudentForm.vue'
 export default {
   components: {
-    // studentForm
+    StudentForm
   },
   methods: {
     async getStudents () {
@@ -60,12 +60,12 @@ export default {
       this.selectedItem = JSON.parse(JSON.stringify(item))
       this.selectedItem = { ...item }
       this.$nextTick(() => {
-        this.$refs.studentForm.show()
+        this.$refs.StudentForm.show()
       })
     },
     async deleteStudent (student) {
       console.log(student)
-      if (confirm(`คุณต้องการจะลบข้อมูลวิชา ${student.sub_name_thai} หรือไม่`)) {
+      if (confirm(`คุณต้องการจะลบข้อมูลนิสิต ${student.stu_firstname} หรือไม่`)) {
         const index = this.studentItems.findIndex(function (item) {
           return student.stu_id === item.stu_id
         })

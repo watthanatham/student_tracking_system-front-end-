@@ -7,8 +7,6 @@
       <b-nav vertical><b-nav-item to="/courselist">หลักสูตร</b-nav-item>
       <b-nav-item to="/student">ข้อมูลนิสิต</b-nav-item>
       <b-nav-item to="/subjectform">Subject Form</b-nav-item>
-      <b-nav-item to="/moduleform">Module Form</b-nav-item>
-      <b-nav-item to="/subject_type_form">Subject Type Form</b-nav-item>
       <b-nav-item to="/studentform">Student Form</b-nav-item>
       <b-nav-item to="/about">ออกจากระบบ</b-nav-item>
     </b-nav>

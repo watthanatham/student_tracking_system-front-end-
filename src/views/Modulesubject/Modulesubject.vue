@@ -30,7 +30,7 @@ import axios from 'axios'
 export default {
   methods: {
     async getSubjects () {
-      await axios.get('http://localhost:8081/subject').then(data => {
+      await axios.get('http://localhost:8081/model_subject').then(data => {
         this.subjectItems = data.data
       })
     }
@@ -40,7 +40,7 @@ export default {
       fields: [
         { key: 'sub_code', label: 'รหัสวิชา' },
         { key: 'sub_name_thai', label: 'ชื่อวิชา' },
-        { key: 'module_id', label: 'โมดูล', value: 'module_name' }
+        { key: 'module_name', label: 'โมดูล' }
       ],
       subjectItems: [
       ],

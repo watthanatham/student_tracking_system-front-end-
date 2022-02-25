@@ -59,6 +59,16 @@ const routes = [
     path: '/moduleSubject',
     name: 'Module Subject',
     component: () => import('../views/Modulesubject/Modulesubject.vue')
+  },
+  {
+    path: '/studentresult',
+    name: 'Student Result',
+    component: () => import('../views/Student_Result/StudentResultTable')
+  },
+  {
+    path: '/studentresultform',
+    name: 'Student Result Form',
+    component: () => import('../views/Student_Result/StudentResultForm')
   }
 ]
 

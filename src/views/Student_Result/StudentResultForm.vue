@@ -2,8 +2,8 @@
   <div>
     <b-button @click="addNew" variant="primary"><i class="far fa-plus-square"></i> เพิ่มข้อมูลผลการเรียน</b-button>
     <b-modal
-      id="modal-student"
-      ref="modalstudent"
+      id="modal-studentResult"
+      ref="modalstudentResult"
       title="ข้อมูลผลการเรียนนิสิต"
       @show="showModal"
       @hidden="resetModal"
@@ -11,70 +11,34 @@
     >
       <b-form @submit.stop.prevent="submit" @reset.stop.prevent="reset">
         <b-form-group
-          id="form-group-student-code"
+          id="form-group-studentResult-year"
           label="ปีการศึกษา"
-          label-for="student-code"
+          label-for="studentResult-year"
         >
           <b-form-input
             type="text"
-            id="student-code"
-            v-model="form.stu_uid"
+            id="studentResult-year"
+            v-model="form.sr_year"
           >
           </b-form-input>
         </b-form-group>
         <b-form-group
-          id="form-group-student-firstname"
+          id="form-group-studentResult-term"
           label="เทอม"
-          label-for="student-firstname"
+          label-for="studentResult-term"
         >
           <b-form-input
             type="text"
-            id="student-firstname"
-            v-model="form.stu_firstname"
+            id="studentResult-term"
+            v-model="form.sr_term"
           >
           </b-form-input>
         </b-form-group>
-        <b-form-group
-          id="form-group-student-lastname"
-          label="นามสกุล"
-          label-for="student-lastname"
-        >
-          <b-form-input
-            type="text"
-            id="student-lastname"
-            v-model="form.stu_lastname"
-          >
-          </b-form-input>
-        </b-form-group>
-        <b-form-group
-          id="form-group-student-username"
-          label="ชื่อบัญชีผู้ใช้"
-          label-for="student-username"
-        >
-          <b-form-input
-            type="text"
-            id="student-username"
-            v-model="form.stu_username"
-          >
-          </b-form-input>
-        </b-form-group>
-        <b-form-group
-          id="form-group-student-password"
-          label="รหัสผ่าน"
-          label-for="student-password"
-        >
-          <b-form-input
-            type="text"
-            id="student-password"
-            v-model="form.stu_password"
-          >
-          </b-form-input>
-        </b-form-group>
-        <b-form-group id="input-group-4" label="หลักสูตร" label-for="input-4">
+        <b-form-group id="input-group-4" label="ผลการเรียน" label-for="input-4">
           <b-form-select
             id="input-3"
-            v-model="form.course_id"
-            :options="student_course"
+            v-model="form.sr_grade"
+            :options="studentResult_grade"
             required
           ></b-form-select>
         </b-form-group>
@@ -91,24 +55,27 @@
 <script>
 export default {
   props: {
-    student: Object
+    studentResult: Object
   },
   data () {
     return {
       form: {
-        stu_id: -1,
-        stu_uid: '',
-        stu_firstname: '',
-        stu_lastname: '',
-        stu_username: '',
-        stu_password: '',
-        course_id: null
+        sr_id: -1,
+        sr_year: '',
+        sr_term: '',
+        sr_grade: null
       },
       id: 0,
-      student_course: [
-        { text: 'เลือกหมวดวิชา', value: null },
-        { text: 'หลักสูตรใหม่ ปี 2563', value: 1 },
-        { text: 'หลักสูตรสองภาษา', value: 2 }
+      studentResult_grade: [
+        { text: 'เลือกผลการศึกษา', value: null },
+        { text: 'A', value: 'A' },
+        { text: 'B+', value: 'B+' },
+        { text: 'B', value: 'B' },
+        { text: 'C+', value: 'C+' },
+        { text: 'C', value: 'C' },
+        { text: 'D+', value: 'D+' },
+        { text: 'D', value: 'D' },
+        { text: 'F', value: 'F' }
       ],
       isAddNew: false
     }
@@ -123,27 +90,24 @@ export default {
     },
     show () {
       if (!this.isAddNew) {
-        this.form = { ...this.student }
-        this.id = this.student.stu_id
+        this.form = { ...this.studentResult }
+        this.id = this.studentResult.sr_id
       }
-      this.$refs.modalstudent.show()
+      this.$refs.modalstudentResult.show()
     },
     submit () {
       console.log(this.form)
-      const student = JSON.parse(JSON.stringify(this.form))
-      student.stu_id = (this.form.stu_id === -1) ? -1 : this.id
-      console.log(student)
-      this.$emit('save', student)
+      const studentResult = JSON.parse(JSON.stringify(this.form))
+      studentResult.sr_id = (this.form.sr_id === -1) ? -1 : this.id
+      console.log(studentResult)
+      this.$emit('save', studentResult)
       this.reset()
     },
     reset () {
       this.form = {
-        stu_id: -1,
-        stu_uid: '',
-        stu_firstname: '',
-        stu_lastname: '',
-        stu_username: '',
-        stu_password: ''
+        sr_id: -1,
+        sr_year: '',
+        sr_term: ''
       }
     },
     showModal () {
@@ -151,13 +115,7 @@ export default {
         this.reset()
       } else {
         // edit
-        this.form.stu_id = this.student.id
-        this.form.stu_uid = this.student.stu_uid
-        this.form.stu_firstname = this.student.stu_firstname
-        this.form.stu_lastname = this.student.stu_lastname
-        this.form.stu_username = this.student.stu_username
-        this.form.stu_password = this.student.stu_password
-        this.form.course_id = this.student.course_id
+        this.form.sr_id = this.studentResult.id
       }
     },
     resetModal (evt) {
@@ -168,7 +126,7 @@ export default {
       // if (!this.validateForm) return
       this.submit()
       this.$nextTick(() => {
-        this.$bvModal.hide('modal-student')
+        this.$bvModal.hide('modal-studentResult')
       })
     }
   }

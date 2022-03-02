@@ -69,6 +69,11 @@ const routes = [
     path: '/studentresultform',
     name: 'Student Result Form',
     component: () => import('../views/Student_Result/StudentResultForm')
+  },
+  {
+    path: '/studentImport',
+    name: 'Student Import',
+    component: () => import('../views/Student/StudentImport')
   }
 ]
 

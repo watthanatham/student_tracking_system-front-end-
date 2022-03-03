@@ -41,24 +41,25 @@ export default {
       })
     },
     async saveStudent (student) {
-      if (student.stu_id < 0) { // add
-        student.stu_id = this.studentId
+      console.log(student)
+      if (!student.status) { // add
+        // student.stu_id = this.studentId
         this.studentItems.push(student)
-        this.studentId++
+        // this.studentId++
         await axios.post('http://localhost:8081/student', student)
         this.getStudents()
       } else { // save
-        const index = this.studentItems.findIndex((item) => {
-          return student.stu_id === item.stu_id
-        })
-        this.studentItems.splice(index, 1, student)
+        console.log(student)
         await axios.put('http://localhost:8081/student/' + student.stu_id, student)
         this.getStudents()
       }
     },
-    editStudent (item) {
-      this.selectedItem = JSON.parse(JSON.stringify(item))
-      this.selectedItem = { ...item }
+    async editStudent (item) {
+      const temp = await axios.get('http://localhost:8081/student/' + item.stu_id)
+      // console.log(temp.data[0])
+      this.selectedItem = { ...temp.data[0] }
+      this.oid = this.selectedItem.stu_id
+      this.selectedItem.status = true
       this.$nextTick(() => {
         this.$refs.StudentForm.show()
       })
@@ -77,9 +78,9 @@ export default {
   },
   data () {
     return {
+      oid: '',
       fields: [
-        { key: 'stu_id', label: 'No' },
-        { key: 'stu_uid', label: 'รหัสนิสิต' },
+        { key: 'stu_id', label: 'รหัสนิสิต' },
         { key: 'stu_firstname', label: 'ชื่อ' },
         { key: 'stu_lastname', label: 'นามสกุล' },
         { key: 'stu_edit', label: 'แก้ไข' },

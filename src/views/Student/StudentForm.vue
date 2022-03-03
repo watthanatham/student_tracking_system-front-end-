@@ -18,7 +18,7 @@
           <b-form-input
             type="text"
             id="student-code"
-            v-model="form.stu_uid"
+            v-model="form.stu_id"
           >
           </b-form-input>
         </b-form-group>
@@ -95,13 +95,14 @@ export default {
   },
   data () {
     return {
+      stu_id: '',
       form: {
-        stu_id: -1,
-        stu_uid: '',
+        stu_id: '',
         stu_firstname: '',
         stu_lastname: '',
         stu_username: '',
         stu_password: '',
+        status: false,
         course_id: null
       },
       id: 0,
@@ -121,29 +122,34 @@ export default {
         this.isAddNew = false
       })
     },
-    show () {
+    async show () {
       if (!this.isAddNew) {
         this.form = { ...this.student }
-        this.id = this.student.stu_id
+        console.log(this.form)
+        // this.form.status = false
+        // this.stu_id = this.student.stu_id
+        console.log(this.form.stu_id)
+        console.log(this.student.stu_id)
+        // console.log(this.form)
       }
-      this.$refs.modalstudent.show()
+      await this.$refs.modalstudent.show()
     },
     submit () {
-      console.log(this.form)
+      // console.log(this.form)
       const student = JSON.parse(JSON.stringify(this.form))
-      student.stu_id = (this.form.stu_id === -1) ? -1 : this.id
-      console.log(student)
+      // student.stu_id = (this.form.stu_id === -1) ? -1 : this.id
+      // console.log(student)
       this.$emit('save', student)
       this.reset()
     },
     reset () {
       this.form = {
-        stu_id: -1,
-        stu_uid: '',
+        stu_id: '',
         stu_firstname: '',
         stu_lastname: '',
         stu_username: '',
-        stu_password: ''
+        stu_password: '',
+        status: false
       }
     },
     showModal () {
@@ -151,8 +157,7 @@ export default {
         this.reset()
       } else {
         // edit
-        this.form.stu_id = this.student.id
-        this.form.stu_uid = this.student.stu_uid
+        this.form.stu_id = this.student.stu_id
         this.form.stu_firstname = this.student.stu_firstname
         this.form.stu_lastname = this.student.stu_lastname
         this.form.stu_username = this.student.stu_username

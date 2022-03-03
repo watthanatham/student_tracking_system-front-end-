@@ -11,6 +11,7 @@
       <b-nav-item to="/studentresult">Student Result</b-nav-item>
       <b-nav-item to="/studentresultform">Student Result Form</b-nav-item>
       <b-nav-item to="/studentImport">Student Import</b-nav-item>
+      <b-nav-item to="/train_hours">สหกิจ</b-nav-item>
       <b-nav-item to="/about">ออกจากระบบ</b-nav-item>
     </b-nav>
 </div>

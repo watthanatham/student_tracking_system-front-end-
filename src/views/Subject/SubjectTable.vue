@@ -47,24 +47,27 @@ export default {
       })
     },
     async saveSubject (subject) {
-      if (subject.sub_id < 0) { // add
-        subject.sub_id = this.subjectId
+      if (!subject.status) { // add
+        // subject.sub_id = this.subjectId
         this.subjectItems.push(subject)
-        this.subjectId++
+        // this.subjectId++
         await axios.post('http://localhost:8081/subject', subject)
         this.getSubjects()
       } else { // save
-        const index = this.subjectItems.findIndex((item) => {
-          return subject.sub_id === item.sub_id
-        })
-        this.subjectItems.splice(index, 1, subject)
+        // const index = this.subjectItems.findIndex((item) => {
+        //   return subject.sub_id === item.sub_id
+        // })
+        // this.subjectItems.splice(index, 1, subject)
         await axios.put('http://localhost:8081/subject/' + subject.sub_id, subject)
         this.getSubjects()
       }
     },
-    editSubject (item) {
-      this.selectedItem = JSON.parse(JSON.stringify(item))
-      this.selectedItem = { ...item }
+    async editSubject (item) {
+      const temp = await axios.get('http://localhost:8081/subject/' + item.sub_id)
+      // this.selectedItem = JSON.parse(JSON.stringify(item))
+      this.selectedItem = { ...temp.data[0] }
+      this.oid = this.selectedItem.sub_id
+      this.selectedItem.status = true
       this.$nextTick(() => {
         this.$refs.subjectForm.show()
       })
@@ -83,14 +86,14 @@ export default {
   },
   data () {
     return {
+      oid: '',
       fields: [
-        { key: 'sub_id', label: 'No' },
-        { key: 'sub_code', label: 'รหัสวิชา' },
+        { key: 'sub_id', label: 'รหัสวิชา' },
         { key: 'sub_name_thai', label: 'ชื่อวิชาภาษาไทย' },
         { key: 'sub_name_eng', label: 'ชื่อวิชาภาษาอังกฤษ' },
         { key: 'sub_credit', label: 'หน่วยกิต' },
-        { key: 'st_id', label: 'หมวดวิชา' },
-        { key: 'module_id', label: 'โมดูล' },
+        { key: 'st_name', label: 'หมวดวิชา' },
+        { key: 'module_name', label: 'โมดูล' },
         { key: 'sub_edit', label: 'แก้ไข' },
         { key: 'sub_del', label: 'ลบข้อมูล' }
       ],

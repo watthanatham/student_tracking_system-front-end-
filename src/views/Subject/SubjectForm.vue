@@ -18,7 +18,7 @@
           <b-form-input
             type="text"
             id="subject-code"
-            v-model="form.sub_code"
+            v-model="form.sub_id"
           >
           </b-form-input>
         </b-form-group>
@@ -91,15 +91,17 @@ export default {
   },
   data () {
     return {
+      sub_id: '',
       form: {
-        sub_id: -1,
+        sub_id: '',
         sub_code: '',
         sub_name_thai: '',
         sub_name_eng: '',
         sub_credit: 0,
         st_id: null,
         module_id: null,
-        course_id: 1
+        course_id: 1,
+        status: false
       },
       id: 0,
       subject_type: [
@@ -131,30 +133,31 @@ export default {
         this.isAddNew = false
       })
     },
-    show () {
+    async show () {
       if (!this.isAddNew) {
         this.form = { ...this.subject }
-        this.id = this.subject.sub_id
+        // this.id = this.subject.sub_id
       }
-      this.$refs.modalSubject.show()
+      await this.$refs.modalSubject.show()
     },
     submit () {
-      console.log(this.form)
+      // console.log(this.form)
       const subject = JSON.parse(JSON.stringify(this.form))
-      subject.sub_credit = parseFloat(subject.sub_credit)
-      subject.sub_id = (this.form.sub_id === -1) ? -1 : this.id
-      console.log(subject)
+      // subject.sub_credit = parseFloat(subject.sub_credit)
+      // subject.sub_id = (this.form.sub_id === -1) ? -1 : this.id
+      // console.log(subject)
       this.$emit('save', subject)
       this.reset()
     },
     reset () {
       this.form = {
-        sub_id: -1,
+        sub_id: '',
         sub_code: '',
         sub_name_thai: '',
         sub_name_eng: '',
         sub_credit: 0,
-        course_id: 1
+        course_id: 1,
+        status: false
       }
     },
     showModal () {
@@ -163,7 +166,6 @@ export default {
       } else {
         // edit
         this.form.sub_id = this.subject.id
-        this.form.sub_code = this.subject.sub_code
         this.form.sub_name_thai = this.subject.sub_name_thai
         this.form.sub_name_eng = this.subject.sub_name_eng
         this.form.sub_credit = this.subject.sub_credit

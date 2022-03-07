@@ -31,7 +31,7 @@ export default {
   data () {
     return {
       fields: [
-        { key: 'sub_code', label: 'รหัสวิชา' },
+        { key: 'sub_id', label: 'รหัสวิชา' },
         { key: 'sub_name_thai', label: 'ชื่อวิชา' },
         { key: 'sub_credit', label: 'หน่วยกิต' },
         { key: 'st_name', label: 'หมวดวิชา' }

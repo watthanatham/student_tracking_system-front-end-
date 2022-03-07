@@ -6,11 +6,11 @@
       <b-nav-item to="/moduleSubject">โมดูลวิชา</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
-    <b-table class="table" striped hover :items="items"></b-table>
+    <b-table class="table" :items="items"></b-table>
     <b-container fluid>
       <b-row>
         <b-col>
-          <b-table :items="subjecttypeItems" :fields="fields" class="text-left">
+          <b-table striped hover :items="subjecttypeItems" :fields="fields" class="text-left">
           </b-table>
         </b-col>
       </b-row>

@@ -15,6 +15,7 @@
       <b-nav-item to="/studyResult">Study results</b-nav-item>
       <b-nav-item to="/train_hours">สหกิจ</b-nav-item>
       <b-nav-item to="/subject_import">Subject Import</b-nav-item> -->
+      <b-nav-item to="/about"><b-icon icon="gear"></b-icon> จัดการผู้ใช้งาน</b-nav-item>
       <b-nav-item to="/about"><b-icon icon="box-arrow-left"></b-icon> ออกจากระบบ</b-nav-item>
       </b-nav>
     </b-nav>

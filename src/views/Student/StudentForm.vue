@@ -181,6 +181,7 @@ export default {
 </script>
 <style>
 .buttonaddnew {
-  margin-block-start: 10px;
+  margin-block-start: 25px;
+  margin-right: -435px;
 }
 </style>

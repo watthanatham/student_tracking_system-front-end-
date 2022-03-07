@@ -7,7 +7,7 @@
     <b-container fluid>
       <b-row>
         <b-col>
-          <b-table :items="subjecttypeItems" :fields="fields" class="text-left">
+          <b-table :items="subjecttypeItems" :fields="fields" class="tableStudyresult">
           </b-table>
         </b-col>
       </b-row>
@@ -42,4 +42,10 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+.tableStudyresult{
+  text-align: center;
+  width: 1331px;
+  margin-inline-end: 300px;
+  background-color: whitesmoke;
+}</style>

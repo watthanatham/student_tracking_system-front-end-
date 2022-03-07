@@ -6,7 +6,7 @@
       <b-nav-item to="/moduleSubject">โมดูลวิชา</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
- <b-container fluid>
+ <b-container>
       <b-row>
         <b-col class="text-right">
           <CoursestructureForm
@@ -18,7 +18,7 @@
       </b-row>
       <b-row>
         <b-col>
-          <b-table :items="subjectItems" :fields="fields" class="text-left">
+          <b-table :items="subjectItems" :fields="fields" class="tablecourse">
             <template #cell(st_edit)="{ item }">
               <b-button @click="editSubject(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
             </template>
@@ -100,4 +100,15 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+.mt-4 {
+  margin-inline-end: 150px;
+}
+.tablecourse{
+  text-align: center;
+  width: 1331px;
+  margin-inline-end: 300px;
+  margin-block-start: 30px;
+  background-color: whitesmoke;
+}
+</style>

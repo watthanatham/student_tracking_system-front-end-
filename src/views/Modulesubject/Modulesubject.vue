@@ -12,13 +12,13 @@
         class="mr-sm-2"
         placeholder="Search"
       ></b-form-input>
-      <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+      <b-button size="sm" class="search" type="submit">Search</b-button>
     </b-nav-form>
     <b-table class="table" striped hover :items="items"></b-table>
     <b-container fluid>
       <b-row>
         <b-col>
-          <b-table :items="subjectItems" :fields="fields" class="text-left">
+          <b-table :items="subjectItems" :fields="fields" class="tableModule">
           </b-table>
         </b-col>
       </b-row>
@@ -52,4 +52,11 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+.tableModule{
+  text-align: center;
+  width: 1331px;
+  margin-inline-end: 10px;
+  background-color: whitesmoke;
+}
+</style>

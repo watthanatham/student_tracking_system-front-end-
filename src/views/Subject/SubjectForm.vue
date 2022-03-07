@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button @click="addNew" variant="primary"><i class="far fa-plus-square"></i> เพิ่มข้อมูลวิชา</b-button>
+    <b-button @click="addNew" variant="primary" class="buttonSub"><i class="far fa-plus-square"></i> เพิ่มข้อมูลวิชา</b-button>
     <b-modal
       id="modal-subject"
       ref="modalSubject"
@@ -188,4 +188,9 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+.buttonSub {
+  margin-block-start: 4px;
+  margin-right: -435px;
+}
+</style>

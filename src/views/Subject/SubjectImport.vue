@@ -180,7 +180,7 @@ code {
   text-align: left;
 }
 .buttonsubject {
+  margin-right: -1345px;
   margin-block-start: -69px;
-  margin-left: 665px;
 }
 </style>

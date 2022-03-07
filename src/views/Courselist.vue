@@ -18,7 +18,7 @@
       </b-row>
       <b-row>
         <b-col>
-          <b-table striped hover :items="courseItems" :fields="fields" class="text-center">
+          <b-table striped hover :items="courseItems" :fields="fields" class="tablecoursecourse">
           </b-table>
         </b-col>
       </b-row>
@@ -63,4 +63,12 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+.tablecoursecourse{
+  text-align: center;
+  width: 1331px;
+  margin-inline-end: 300px;
+  margin-block-start: 30px;
+  background-color: whitesmoke;
+}
+</style>

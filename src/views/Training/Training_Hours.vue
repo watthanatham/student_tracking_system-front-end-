@@ -12,7 +12,7 @@
       </b-row>
       <b-row>
         <b-col>
-          <b-table striped hover :items="subjectItems" :fields="fields" class="text-left">
+          <b-table striped hover :items="subjectItems" :fields="fields" class="tableTraining">
             <template #cell(sub_edit)="{ item }">
               <b-button @click="editSubject(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
             </template>
@@ -88,4 +88,11 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+.tableTraining{
+  text-align: center;
+  width: 1331px;
+  margin-inline-end: 300px;
+  margin-block-start: 15px;
+  background-color: whitesmoke;
+}</style>

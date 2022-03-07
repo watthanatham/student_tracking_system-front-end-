@@ -10,7 +10,7 @@
     <b-container fluid>
       <b-row>
         <b-col>
-          <b-table striped hover :items="subjecttypeItems" :fields="fields" class="text-left">
+          <b-table striped hover :items="subjecttypeItems" :fields="fields" class="tabletypesubject">
           </b-table>
         </b-col>
       </b-row>
@@ -46,4 +46,11 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+.tabletypesubject{
+  text-align: center;
+  width: 1331px;
+  margin-inline-end: 300px;
+  margin-block-start: 15px;
+  background-color: whitesmoke;
+}</style>

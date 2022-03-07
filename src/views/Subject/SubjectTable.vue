@@ -14,6 +14,8 @@
             ref="subjectForm"
             @save="saveSubject"
           ></SubjectForm>
+          <SubjectImport>
+          </SubjectImport>
         </b-col>
       </b-row>
       <b-row>
@@ -36,9 +38,11 @@
 <script>
 import axios from 'axios'
 import SubjectForm from './SubjectForm.vue'
+import SubjectImport from './SubjectImport.vue'
 export default {
   components: {
-    SubjectForm
+    SubjectForm,
+    SubjectImport
   },
   methods: {
     async getSubjects () {

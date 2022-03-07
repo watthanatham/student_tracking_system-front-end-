@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button @click="addNew" variant="primary"><i class="far fa-plus-square"></i> เพิ่มข้อมูลนิสิต</b-button>
+    <b-button @click="addNew" variant="primary" class="buttonaddnew"><i class="far fa-plus-square"></i> เพิ่มข้อมูลนิสิต</b-button>
     <b-modal
       id="modal-student"
       ref="modalstudent"
@@ -179,4 +179,8 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+.buttonaddnew {
+  margin-block-start: 10px;
+}
+</style>

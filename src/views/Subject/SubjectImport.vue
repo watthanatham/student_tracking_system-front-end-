@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-button @click="addNew" variant="success"><b-icon icon="file-excel"></b-icon> Import CSV</b-button>
+    <b-button @click="addNew" variant="success" class="buttonsubject"><i class="far fa-plus-square"></i> Import CSV</b-button>
     <b-modal
     id="modal-subjectimport"
     ref="modalSubjectImport"
@@ -162,7 +162,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 3px;
 }
 
 .container {
@@ -178,5 +178,9 @@ code {
 
 #app .form {
   text-align: left;
+}
+.buttonsubject {
+  margin-block-start: -69px;
+  margin-left: 665px;
 }
 </style>

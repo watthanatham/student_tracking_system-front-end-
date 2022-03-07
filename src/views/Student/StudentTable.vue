@@ -8,6 +8,7 @@
             ref="StudentForm"
             @save="saveStudent"
           ></StudentForm>
+          <StudentImport></StudentImport>
         </b-col>
       </b-row>
       <b-row>
@@ -30,9 +31,11 @@
 <script>
 import axios from 'axios'
 import StudentForm from './StudentForm.vue'
+import StudentImport from './StudentImport.vue'
 export default {
   components: {
-    StudentForm
+    StudentForm,
+    StudentImport
   },
   methods: {
     async getStudents () {

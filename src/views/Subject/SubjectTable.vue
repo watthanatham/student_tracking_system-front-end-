@@ -54,10 +54,6 @@ export default {
         await axios.post('http://localhost:8081/subject', subject)
         this.getSubjects()
       } else { // save
-        // const index = this.subjectItems.findIndex((item) => {
-        //   return subject.sub_id === item.sub_id
-        // })
-        // this.subjectItems.splice(index, 1, subject)
         await axios.put('http://localhost:8081/subject/' + subject.sub_id, subject)
         this.getSubjects()
       }

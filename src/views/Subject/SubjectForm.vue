@@ -165,7 +165,7 @@ export default {
         this.reset()
       } else {
         // edit
-        this.form.sub_id = this.subject.id
+        this.form.sub_id = this.subject.sub_id
         this.form.sub_name_thai = this.subject.sub_name_thai
         this.form.sub_name_eng = this.subject.sub_name_eng
         this.form.sub_credit = this.subject.sub_credit

@@ -1,6 +1,14 @@
 <template>
   <div id="app">
-    <div class="container">
+    <b-button @click="addNew" variant="success"><b-icon icon="file-excel"></b-icon> Import CSV</b-button>
+    <b-modal
+    id="modal-studentimport"
+    ref="modalStudentImport"
+    title="เพิ่มข้อมูลนิสิต"
+    @show="showModal"
+    @hidden="resetModal"
+    @ok="handleOk">
+      <div class="container">
       <section class="py-5">
         <div class="row mt-5">
           <div class="col-8 offset-2"></div>
@@ -15,8 +23,8 @@
 
               <template slot="thead">
                 <tr>
-                  <th>My Fields</th>
-                  <th>Column</th>
+                  <th>รูปแบบที่กำหนด</th>
+                  <th>คอลัมน์ไฟล์</th>
                 </tr>
               </template>
 
@@ -28,12 +36,13 @@
                 <button @click.prevent="submit">send!</button>
               </template>
             </vue-csv-import>
-            <pre class="mt-15" v-if="csv"><code>{{ csv }}</code></pre>
+            <!-- <pre class="mt-15" v-if="csv"><code>{{ csv }}</code></pre> -->
           </div>
         </div>
       </section>
     </div>
     <button @click="importData">บันทึกข้อมูล</button>
+    </b-modal>
   </div>
 </template>
 
@@ -98,6 +107,34 @@ export default {
     }
   },
   methods: {
+    addNew () {
+      this.isAddnew = true
+      this.$nextTick(() => {
+        this.show()
+        this.isAddnew = false
+      })
+    },
+    async show () {
+      await this.$refs.modalStudentImport.show()
+    },
+    showModal () {
+      this.reset()
+    },
+    resetModal () {
+      this.reset()
+    },
+    handleOk (evt) {
+      evt.preventDefault()
+      this.submit()
+      this.$nextTick(() => {
+        this.$bvModal.hide('modal-studentimport')
+      })
+    },
+    submit () {
+      this.$emit('save')
+      this.importData()
+      this.reset()
+    },
     async importData () {
       this.csv.splice(0, 1)
       var arr = []

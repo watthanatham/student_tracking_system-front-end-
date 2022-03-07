@@ -89,6 +89,11 @@ const routes = [
     path: '/subjectstudyResult',
     name: 'Subject StudyResult',
     component: () => import('../views/Subject_Studyresult/Subjectstudyresult.vue')
+  },
+  {
+    path: '/subject_import',
+    name: 'Subject Import',
+    component: () => import('../views/Subject/SubjectImport.vue')
   }
 ]
 

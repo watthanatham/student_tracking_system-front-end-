@@ -13,6 +13,7 @@
       <b-nav-item to="/studentImport">Student Import</b-nav-item>
       <b-nav-item to="/studyResult">Study results</b-nav-item>
       <b-nav-item to="/train_hours">สหกิจ</b-nav-item>
+      <b-nav-item to="/subject_import">Subject Import</b-nav-item>
       <b-nav-item to="/about">ออกจากระบบ</b-nav-item>
     </b-nav>
 </div>

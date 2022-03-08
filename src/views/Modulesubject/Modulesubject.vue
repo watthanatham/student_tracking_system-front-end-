@@ -14,11 +14,15 @@
       ></b-form-input>
       <b-button size="sm" class="search" type="submit">Search</b-button>
     </b-nav-form>
-    <b-table class="table" striped hover :items="items"></b-table>
+    <b-table class="table" :items="items"></b-table>
     <b-container fluid>
       <b-row>
         <b-col>
+<<<<<<< HEAD
           <b-table :items="subjectItems" :fields="fields" class="tableModule">
+=======
+          <b-table striped hover :items="subjectItems" :fields="fields" class="text-left">
+>>>>>>> 904f8b05ba8fcffc7bba26988b17ec45b148f4bb
           </b-table>
         </b-col>
       </b-row>

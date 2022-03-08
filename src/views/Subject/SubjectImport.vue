@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-button @click="addNew" variant="success" class="buttonsubject"><i class="far fa-plus-square"></i> Import CSV</b-button>
+    <b-button @click="addNew" variant="success" class="buttonsubject"><b-icon icon="cloud-arrow-up-fill"></b-icon> Import CSV</b-button>
     <b-modal
     id="modal-subjectimport"
     ref="modalSubjectImport"

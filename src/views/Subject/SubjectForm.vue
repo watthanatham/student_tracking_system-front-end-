@@ -1,6 +1,10 @@
 <template>
   <div>
+<<<<<<< HEAD
     <b-button @click="addNew" variant="primary" class="buttonSub"><i class="far fa-plus-square"></i> เพิ่มข้อมูลวิชา</b-button>
+=======
+    <b-button @click="addNew" variant="primary"><b-icon icon="plus-square-fill"></b-icon> เพิ่มข้อมูลวิชา</b-button>
+>>>>>>> 904f8b05ba8fcffc7bba26988b17ec45b148f4bb
     <b-modal
       id="modal-subject"
       ref="modalSubject"

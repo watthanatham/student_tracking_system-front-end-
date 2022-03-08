@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button @click="addNew" variant="primary" class="buttonaddnew"><i class="far fa-plus-square"></i> เพิ่มข้อมูลนิสิต</b-button>
+    <b-button @click="addNew" variant="primary" class="buttonaddnew"><b-icon icon="plus-square-fill"></b-icon> เพิ่มข้อมูลนิสิต</b-button>
     <b-modal
       id="modal-student"
       ref="modalstudent"

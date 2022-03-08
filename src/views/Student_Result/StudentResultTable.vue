@@ -78,8 +78,7 @@ export default {
   data () {
     return {
       fields: [
-        { key: 'sr_id', label: 'No' },
-        { key: 'stu_uid', label: 'รหัสนิสิต' },
+        { key: 'stu_id', label: 'รหัสนิสิต' },
         { key: 'stu_firstname', label: 'ชื่อ' },
         { key: 'stu_lastname', label: 'นามสกุล' },
         { key: 'sr_year', label: 'ปีการศึกษา' },

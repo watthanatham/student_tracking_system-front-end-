@@ -1,10 +1,7 @@
 <template>
   <div>
-<<<<<<< HEAD
-    <b-button @click="addNew" variant="primary" class="buttonSub"><i class="far fa-plus-square"></i> เพิ่มข้อมูลวิชา</b-button>
-=======
-    <b-button @click="addNew" variant="primary"><b-icon icon="plus-square-fill"></b-icon> เพิ่มข้อมูลวิชา</b-button>
->>>>>>> 904f8b05ba8fcffc7bba26988b17ec45b148f4bb
+    <!-- <b-button @click="addNew" variant="primary" class="buttonSub"><i class="far fa-plus-square"></i> เพิ่มข้อมูลวิชา</b-button> -->
+    <b-button @click="addNew" variant="primary" class="buttonSub"><b-icon icon="plus-square-fill"></b-icon> เพิ่มข้อมูลวิชา</b-button>
     <b-modal
       id="modal-subject"
       ref="modalSubject"
@@ -194,7 +191,7 @@ export default {
 </script>
 <style>
 .buttonSub {
-  margin-block-start: 4px;
+  margin-block-start: 1px;
   margin-right: -435px;
 }
 </style>

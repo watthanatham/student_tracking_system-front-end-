@@ -18,11 +18,8 @@
     <b-container fluid>
       <b-row>
         <b-col>
-<<<<<<< HEAD
           <b-table :items="subjectItems" :fields="fields" class="tableModule">
-=======
-          <b-table striped hover :items="subjectItems" :fields="fields" class="text-left">
->>>>>>> 904f8b05ba8fcffc7bba26988b17ec45b148f4bb
+          <!-- <b-table striped hover :items="subjectItems" :fields="fields" class="text-left"> -->
           </b-table>
         </b-col>
       </b-row>

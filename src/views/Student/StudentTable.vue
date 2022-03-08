@@ -8,7 +8,7 @@
             ref="StudentForm"
             @save="saveStudent"
           ></StudentForm>
-          <StudentImport></StudentImport>
+          <StudentImport @save="getStudents"></StudentImport>
         </b-col>
       </b-row>
       <b-row>
@@ -43,11 +43,14 @@ export default {
         this.studentItems = data.data
       })
     },
+    save (status) {
+      console.log('ok: ', status)
+      this.getStudents()
+    },
     async saveStudent (student) {
       console.log(student)
       if (!student.status) { // add
         // student.stu_id = this.studentId
-        this.studentItems.push(student)
         // this.studentId++
         await axios.post('http://localhost:8081/student', student)
         this.getStudents()

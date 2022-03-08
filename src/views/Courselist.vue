@@ -18,7 +18,7 @@
       </b-row>
       <b-row>
         <b-col>
-          <b-table striped hover :items="courseItems" :fields="fields" class="tablecoursecourse">
+          <b-table striped hover :items="courseItems" :fields="fields" class="tablecoursecourse" @row-clicked="selectedCourse">
           </b-table>
         </b-col>
       </b-row>
@@ -33,6 +33,10 @@ export default {
     // SubjectForm
   },
   methods: {
+    selectedCourse (item, index, evt) {
+      this.$store.dispatch('setCourse', item.course_id)
+      this.$router.push({ path: '/coursestructure' })
+    },
     async getCourses () {
       await axios.get('http://localhost:8081/course').then(data => {
         this.courseItems = data.data
@@ -63,12 +67,15 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss">
 .tablecoursecourse{
   text-align: center;
   width: 1331px;
   margin-inline-end: 300px;
   margin-block-start: 30px;
   background-color: whitesmoke;
+  & tr {
+    cursor: pointer;
+  }
 }
 </style>

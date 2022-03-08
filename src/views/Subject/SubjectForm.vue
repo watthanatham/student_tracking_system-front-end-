@@ -157,7 +157,7 @@ export default {
         sub_name_thai: '',
         sub_name_eng: '',
         sub_credit: 0,
-        course_id: 1,
+        course_id: this.$store.state.course_id,
         status: false
       }
     },

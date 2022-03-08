@@ -42,7 +42,8 @@ export default {
   },
   methods: {
     async getSubjects () {
-      await axios.get('http://localhost:8081/subject_type').then(data => {
+      const id = this.$store.state.course_id
+      await axios.get('http://localhost:8081/subject_type/' + id).then(data => {
         this.subjectItems = data.data
       })
     },

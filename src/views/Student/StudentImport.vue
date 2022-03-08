@@ -17,8 +17,7 @@
           <div class="col-8 offset-2">
             <vue-csv-import
               v-model="csv"
-              :map-fields="['stu_id', 'course_id', 'stu_firstname', 'stu_lastname', 'stu_username', 'stu_password']"
-            >
+              :map-fields="['stu_id', 'course_id', 'stu_firstname', 'stu_lastname', 'stu_username', 'stu_password']">
               <template slot="error"> File type is invalid </template>
 
               <template slot="thead">
@@ -34,6 +33,9 @@
 
               <template slot="submit" slot-scope="{ submit }">
                 <button @click.prevent="submit">send!</button>
+              </template>
+              <template slot="hasHeaders" slot-scope="{ headers }">
+                {{headers}}
               </template>
             </vue-csv-import>
             <!-- <pre class="mt-15" v-if="csv"><code>{{ csv }}</code></pre> -->
@@ -117,6 +119,9 @@ export default {
     async show () {
       await this.$refs.modalStudentImport.show()
     },
+    reset () {
+      console.log('reset')
+    },
     showModal () {
       this.reset()
     },
@@ -131,8 +136,8 @@ export default {
       })
     },
     submit () {
-      this.$emit('save')
       this.importData()
+      this.$emit('save')
       this.reset()
     },
     async importData () {
@@ -144,7 +149,6 @@ export default {
         ])
       })
       await axios.post('http://localhost:8081/student/import', arr)
-      console.log(arr)
     }
   },
   mounted () {

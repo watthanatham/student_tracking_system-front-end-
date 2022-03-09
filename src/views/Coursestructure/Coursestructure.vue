@@ -2,7 +2,7 @@
   <div>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
-      <b-nav-item to="/subjectType">หมวดวิชา</b-nav-item>
+      <b-nav-item to="/subject_type">หมวดวิชา</b-nav-item>
       <b-nav-item to="/moduleSubject">โมดูลวิชา</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
@@ -85,11 +85,9 @@ export default {
   data () {
     return {
       fields: [
-        // { key: 'st_id', label: 'No' },
         { key: 'st_name', label: 'หัวข้อ' },
         { key: 'st_credit', label: 'หน่วยกิต' },
         { key: 'st_edit', label: 'แก้ไข' }
-        // { key: 'st_del', label: 'ลบข้อมูล' }
       ],
       subjectItems: [
       ],

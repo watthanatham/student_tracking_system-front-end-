@@ -2,8 +2,8 @@
   <div>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
-      <b-nav-item to="/subjectType">หมวดวิชา</b-nav-item>
-      <b-nav-item to="/moduleSubject">โมดูลวิชา</b-nav-item>
+      <b-nav-item to="/subject_type">หมวดวิชา</b-nav-item>
+      <b-nav-item to="/modulesubject">โมดูลวิชา</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
     <b-container fluid>
@@ -20,7 +20,7 @@
       </b-row>
       <b-row>
         <b-col>
-          <b-table striped hover :items="subjectItems" :fields="fields" class="tableSubject">
+          <b-table striped hover :items="subjectItems" :fields="fields" class="tableSubject" @row-clicked="selectedSubject">
             <template #cell(sub_edit)="{ item }">
               <b-button @click="editSubject(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
             </template>
@@ -45,8 +45,14 @@ export default {
     SubjectImport
   },
   methods: {
+    selectedSubject (item, index, evt) {
+      console.log(item.sub_id)
+      this.$store.dispatch('setSub', item.sub_id)
+      this.$router.push({ path: '/student_result' })
+    },
     async getSubjects () {
-      await axios.get('http://localhost:8081/subject').then(data => {
+      const id = this.$store.state.course_id
+      await axios.get('http://localhost:8081/subject/' + id).then(data => {
         this.subjectItems = data.data
       })
     },
@@ -107,10 +113,14 @@ export default {
   }
 }
 </script>
-<style>
-.tableSubject{
+<style lang="scss">
+tableSubject{
   text-align: center;
   width: 1331px;
   margin-inline-end: 300px;
   background-color: whitesmoke;
-}</style>
+  & tr {
+    cursor: pointer;
+  }
+}
+</style>

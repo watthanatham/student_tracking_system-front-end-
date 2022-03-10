@@ -16,7 +16,7 @@
             </div>
             <div class="form-group">
                 <label>รหัสผ่าน</label>
-                <input type="email" class="form-control form-control-lg" />
+                <input type="password" class="form-control form-control-lg" />
             </div>
             <button type="submit" class="btn btn-dark btn-lg">เข้าสู่ระบบ</button>
         </form>

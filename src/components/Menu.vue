@@ -5,7 +5,7 @@
       <!-- <b-nav-item to="/subjectform">Subject Form</b-nav-item> -->
       <!-- <b-nav-item to="/studentform">Student Form</b-nav-item> -->
 
-        <br>
+      <br>
       <b-nav-item to="/" ><b-icon icon="house"></b-icon> หน้าแรก</b-nav-item>
       <b-nav-item to="/courselist"><b-icon icon="collection"></b-icon> หลักสูตร</b-nav-item>
       <b-nav vertical>
@@ -20,7 +20,7 @@
       <b-nav-item to="/subject_import">(Test) Subject Import</b-nav-item>
       <b-nav-item to="/about"><b-icon icon="gear"></b-icon> จัดการผู้ใช้งาน</b-nav-item>
       <b-nav-item to="/about"><b-icon icon="box-arrow-left"></b-icon> ออกจากระบบ</b-nav-item>
-      <b-nav-item to="/loginteacher"><b-icon icon="box-arrow-right"></b-icon> เข้าสู่ระบบ</b-nav-item>
+      <b-nav-item to="/loginbeforescreen"><b-icon icon="box-arrow-right"></b-icon> เข้าสู่ระบบ</b-nav-item>
       </b-nav>
     </b-nav>
 </div>

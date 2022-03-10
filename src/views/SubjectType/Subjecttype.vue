@@ -2,11 +2,11 @@
   <div>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
-      <b-nav-item to="/subjectType">หมวดวิชา</b-nav-item>
-      <b-nav-item to="/moduleSubject">โมดูลวิชา</b-nav-item>
+      <b-nav-item to="/subject_type">หมวดวิชา</b-nav-item>
+      <b-nav-item to="/modulesubject">โมดูลวิชา</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
-    <b-table class="table" :items="items"></b-table>
+    <b-table class="tablesubjecttype" :items="items"></b-table>
     <b-container fluid>
       <b-row>
         <b-col>
@@ -23,7 +23,8 @@ import axios from 'axios'
 export default {
   methods: {
     async getSubjects () {
-      await axios.get('http://localhost:8081/type_subject').then(data => {
+      const id = this.$store.state.course_id
+      await axios.get('http://localhost:8081/type_subject/' + id).then(data => {
         this.subjecttypeItems = data.data
       })
     }
@@ -37,6 +38,12 @@ export default {
         { key: 'st_name', label: 'หมวดวิชา' }
       ],
       subjecttypeItems: [
+        {
+          sub_id: 1,
+          sub_name_thai: 'ม็อก',
+          sub_credit: 2,
+          st_name: 'ศึกษาทั่วไป'
+        }
       ],
       selectedItem: null
     }
@@ -47,7 +54,7 @@ export default {
 }
 </script>
 <style>
-.tabletypesubject{
+.tablesubjecttype{
   text-align: center;
   margin-inline-end: 300px;
   margin-block-start: 15px;

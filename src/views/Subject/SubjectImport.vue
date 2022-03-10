@@ -35,6 +35,9 @@
               <template slot="submit" slot-scope="{ submit }">
                 <button @click.prevent="submit">send!</button>
               </template>
+              <template slot="hasHeaders" slot-scope="{ headers }">
+                {{headers}}
+              </template>
             </vue-csv-import>
             <!-- <pre class="mt-15" v-if="csv"><code>{{ csv }}</code></pre> -->
           </div>
@@ -113,6 +116,9 @@ export default {
         this.show()
         this.isAddnew = false
       })
+    },
+    reset () {
+      console.log('reset')
     },
     async show () {
       await this.$refs.modalSubjectImport.show()

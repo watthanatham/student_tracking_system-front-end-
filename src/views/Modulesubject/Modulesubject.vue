@@ -2,8 +2,8 @@
   <div>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
-      <b-nav-item to="/subjectType">หมวดวิชา</b-nav-item>
-      <b-nav-item to="/moduleSubject">โมดูลวิชา</b-nav-item>
+      <b-nav-item to="/subject_type">หมวดวิชา</b-nav-item>
+      <b-nav-item to="/modulesubject">โมดูลวิชา</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
     <b-nav-form class="nav4">
@@ -31,7 +31,8 @@ import axios from 'axios'
 export default {
   methods: {
     async getSubjects () {
-      await axios.get('http://localhost:8081/model_subject').then(data => {
+      const id = this.$store.state.course_id
+      await axios.get('http://localhost:8081/model_subject/' + id).then(data => {
         this.subjectItems = data.data
       })
     }

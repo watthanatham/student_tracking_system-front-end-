@@ -35,7 +35,11 @@ export default {
   },
   methods: {
     async getStudentResults () {
-      await axios.get('http://localhost:8081/student_result').then(data => {
+      // console.log('ok')
+      const courseId = this.$store.state.course_id
+      const subId = this.$store.state.sub_id
+      // console.log(id)
+      await axios.get('http://localhost:8081/student_result/' + courseId + '/' + subId).then(data => {
         this.student_resutlItems = data.data
       })
     },

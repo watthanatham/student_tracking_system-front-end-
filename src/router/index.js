@@ -18,27 +18,7 @@ const routes = [
   {
     path: '/courselist',
     name: 'courselist',
-    component: () => import('../views/Courselist.vue'),
-    children: [
-      // {
-      //   path: '/coursestructure/:id',
-      //   name: 'coursestructure',
-      //   component: () => import('../views/Coursestructure/Coursestructure.vue')
-      // },
-      {
-        path: '/subject/:id',
-        component: () => import('../views/Subject/SubjectTable.vue')
-      },
-      {
-        path: '/subjectType/:id',
-        component: () => import('../views/SubjectType/Subjecttype.vue')
-      },
-      {
-        path: '/moduleSubject/:id',
-        component: () => import('../views/Modulesubject/Modulesubject.vue')
-      }
-
-    ]
+    component: () => import('../views/Courselist.vue')
   },
   {
     path: '/coursestructure',
@@ -50,11 +30,11 @@ const routes = [
     name: 'Student',
     component: () => import('../views/Student/StudentTable.vue')
   },
-  // {
-  //   path: '/subject',
-  //   name: 'Subject',
-  //   component: () => import('../views/Subject/SubjectTable.vue')
-  // },
+  {
+    path: '/subject',
+    name: 'subject',
+    component: () => import('../views/Subject/SubjectTable.vue')
+  },
   {
     path: '/subjectform',
     name: 'SubjectForm',
@@ -65,19 +45,19 @@ const routes = [
     name: 'studentForm',
     component: () => import('../views/Student/StudentForm.vue')
   },
-  // {
-  //   path: '/subjectType',
-  //   name: 'Subject Type',
-  //   component: () => import('../views/SubjectType/Subjecttype.vue')
-  // },
-  // {
-  //   path: '/moduleSubject',
-  //   name: 'Module Subject',
-  //   component: () => import('../views/Modulesubject/Modulesubject.vue')
-  // },
   {
-    path: '/studentresult',
-    name: 'Student Result',
+    path: '/subject_type',
+    name: 'subjecttype',
+    component: () => import('../views/SubjectType/Subjecttype.vue')
+  },
+  {
+    path: '/modulesubject',
+    name: 'Module Subject',
+    component: () => import('../views/Modulesubject/Modulesubject.vue')
+  },
+  {
+    path: '/student_result',
+    name: 'studentresult',
     component: () => import('../views/Student_Result/StudentResultTable')
   },
   {

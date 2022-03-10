@@ -6,7 +6,6 @@
       <b-nav-item to="/modulesubject">โมดูลวิชา</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
-    <b-table class="tablesubjecttype" :items="items"></b-table>
     <b-container fluid>
       <b-row>
         <b-col>
@@ -42,6 +41,12 @@ export default {
           sub_id: 1,
           sub_name_thai: 'ม็อก',
           sub_credit: 2,
+          st_name: 'ศึกษาทั่วไป'
+        },
+        {
+          sub_id: 2,
+          sub_name_thai: 'ม็อก',
+          sub_credit: 3,
           st_name: 'ศึกษาทั่วไป'
         }
       ],

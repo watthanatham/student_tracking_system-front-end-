@@ -107,9 +107,7 @@ export default {
 }
 .tablecourse{
   text-align: center;
-  width: 1331px;
-  margin-inline-end: 300px;
-  margin-block-start: 30px;
+  margin-block-start: 15px;
   background-color: whitesmoke;
 }
 </style>

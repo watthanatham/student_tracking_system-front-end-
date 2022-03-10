@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <HelloWorld msg="ข่าวสารทางสาขา"/>
-    <img class="image" alt="Vue logo" src="../assets/1.jpg">
   </div>
 </template>
 
@@ -16,9 +15,5 @@ export default {
   }
 }
 </script>
-
 <style>
-  .image{
-    margin: 80px;
-  }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <b-button @click="addNew" variant="primary" class="buttonSub"><i class="far fa-plus-square"></i> เพิ่มข้อมูลวิชา</b-button> -->
     <b-button @click="addNew" variant="primary" class="buttonSub"><b-icon icon="plus-square-fill"></b-icon> เพิ่มข้อมูลวิชา</b-button>
     <b-modal
       id="modal-subject"
@@ -191,7 +190,7 @@ export default {
 </script>
 <style>
 .buttonSub {
-  margin-block-start: 1px;
-  margin-right: -435px;
+  margin-block-start: 10px;
+  margin-left: 765px;
 }
 </style>

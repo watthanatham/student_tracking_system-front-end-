@@ -2,13 +2,13 @@
   <div>
     <b-container fluid>
       <b-row>
-        <!-- <b-col class="text-right">
-          <StudentResultForm
+        <b-col class="text-right">
+          <!-- <StudentResultForm
             :student="selectedItem"
             ref="StudentResultForm"
             @save="saveStudent"
-          ></StudentResultForm
-        </b-col> -->
+          ></StudentResultForm> -->
+        </b-col>
       </b-row>
       <b-row>
         <b-col>
@@ -18,8 +18,7 @@
             </template>
             <template #cell(stu_del)="{ item }">
               <b-button @click="deleteStudentResult(item)" variant="danger"
-                ><i class="fas fa-trash-alt"></i></b-button
-              >
+                ><i class="fas fa-trash-alt"></i></b-button>
             </template>
           </b-table>
         </b-col>

@@ -43,9 +43,10 @@ export default {
 }
 </script>
 <style>
-.tableStudyresult{
+/* .tableStudyresult{
   text-align: center;
   width: 1331px;
   margin-inline-end: 300px;
   background-color: whitesmoke;
-}</style>
+} */
+</style>

@@ -4,7 +4,6 @@
       <b-nav-item to="/subjectstudyResult">วิชาหน่วยกิตที่ต้องเก็บ</b-nav-item>
       <b-nav-item to="/subjectstudyResult">โมดูล</b-nav-item>
     </b-nav>
-    <b-table class="table" striped hover :items="items"></b-table>
     <b-container fluid>
       <b-row>
         <b-col>

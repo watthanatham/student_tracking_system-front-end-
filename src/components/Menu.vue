@@ -19,7 +19,7 @@
       <b-nav-item to="/train_hours">(Test) สหกิจ</b-nav-item>
       <b-nav-item to="/subject_import">(Test) Subject Import</b-nav-item>
       <b-nav-item to="/about"><b-icon icon="gear"></b-icon> จัดการผู้ใช้งาน</b-nav-item>
-      <b-nav-item to="/about"><b-icon icon="box-arrow-left"></b-icon> ออกจากระบบ</b-nav-item>
+      <b-nav-item to="/loginbeforescreen"><b-icon icon="box-arrow-left"></b-icon> ออกจากระบบ</b-nav-item>
       <b-nav-item to="/loginbeforescreen"><b-icon icon="box-arrow-right"></b-icon> เข้าสู่ระบบ</b-nav-item>
       </b-nav>
     </b-nav>

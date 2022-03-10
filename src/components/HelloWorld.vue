@@ -16,8 +16,8 @@
       </b-collapse>
       <b-collapse id="collapse-3">
         <div>
-         <b-table :fields="fields" :items="items">
-         </b-table>
+         <!-- <b-table :fields="fields" :items="items">
+         </b-table> -->
          </div>
       </b-collapse>
        <b-collapse id="collapse-4">

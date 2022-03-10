@@ -6,14 +6,6 @@
       <b-nav-item to="/modulesubject">โมดูลวิชา</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
-    <b-nav-form class="nav4">
-      <b-form-input
-        size="sm"
-        class="mr-sm-2"
-        placeholder="Search"
-      ></b-form-input>
-      <b-button size="sm" class="search" type="submit">Search</b-button>
-    </b-nav-form>
     <b-container fluid>
       <b-row>
         <b-col>

@@ -61,7 +61,6 @@ export default {
 <style>
 .tablesubjecttype{
   text-align: center;
-  width: 1331px;
   margin-inline-end: 300px;
   margin-block-start: 15px;
   background-color: whitesmoke;

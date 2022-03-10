@@ -116,7 +116,6 @@ export default {
 <style lang="scss">
 tableSubject{
   text-align: center;
-  width: 1331px;
   margin-inline-end: 300px;
   background-color: whitesmoke;
   & tr {

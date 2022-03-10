@@ -70,9 +70,8 @@ export default {
 <style lang="scss">
 .tablecoursecourse{
   text-align: center;
-  width: 1331px;
   margin-inline-end: 300px;
-  margin-block-start: 30px;
+  margin-block-start: 40px;
   background-color: whitesmoke;
   & tr {
     cursor: pointer;

@@ -90,6 +90,16 @@ const routes = [
     path: '/subject_import',
     name: 'Subject Import',
     component: () => import('../views/Subject/SubjectImport.vue')
+  },
+  {
+    path: '/loginteacher',
+    name: 'Login Teacher',
+    component: () => import('../components/LoginTeacher/Loginteacher.vue')
+  },
+  {
+    path: '/loginstudent',
+    name: 'Login Student',
+    component: () => import('../components/LoginStudent/Loginstudent.vue')
   }
 ]
 

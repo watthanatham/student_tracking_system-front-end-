@@ -55,7 +55,6 @@ export default {
 <style>
 .tableModule{
   text-align: center;
-  width: 1331px;
   margin-inline-end: 10px;
   background-color: whitesmoke;
 }

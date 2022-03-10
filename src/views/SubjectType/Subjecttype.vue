@@ -42,6 +42,12 @@ export default {
           sub_name_thai: 'ม็อก',
           sub_credit: 2,
           st_name: 'ศึกษาทั่วไป'
+        },
+        {
+          sub_id: 2,
+          sub_name_thai: 'ม็อก',
+          sub_credit: 3,
+          st_name: 'ศึกษาทั่วไป'
         }
       ],
       selectedItem: null

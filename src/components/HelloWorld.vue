@@ -16,9 +16,9 @@
       </b-collapse>
       <b-collapse id="collapse-3">
         <div>
-         <!-- <b-table :fields="fields" :items="items">
-         </b-table> -->
-         </div>
+         <b-table :items="items">
+         </b-table>
+        </div>
       </b-collapse>
        <b-collapse id="collapse-4">
         <a href="https://www.informatics.buu.ac.th/2020/wp-content/uploads/2020/09/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%AD%E0%B8%9A%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%AA%E0%B8%A1%E0%B8%9A%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B9%82%E0%B8%A1%E0%B8%94%E0%B8%B9%E0%B8%A5-AAI-0072-2563.pdf" target="_blank" rel="noopener">-ประกาศ/ขั้นตอน การสอบวัดคุณสมบัติโมดูล</a>

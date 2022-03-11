@@ -100,7 +100,7 @@ export default {
         sub_credit: 0,
         st_id: null,
         module_id: null,
-        course_id: 1,
+        course_id: '',
         status: false
       },
       id: 0,

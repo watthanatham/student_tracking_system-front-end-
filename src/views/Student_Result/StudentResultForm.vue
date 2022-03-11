@@ -11,6 +11,30 @@
     >
       <b-form @submit.stop.prevent="submit" @reset.stop.prevent="reset">
         <b-form-group
+          id="form-group-studentResult-stu_id"
+          label="รหัสนิสิต"
+          label-for="studentResult-stu_id"
+        >
+          <b-form-input
+            type="text"
+            id="studentResult-stu_id"
+            v-model="form.stu_id"
+          >
+          </b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="form-group-studentResult-sub_id"
+          label="รหัสวิชา"
+          label-for="studentResult-sub_id"
+        >
+          <b-form-input
+            type="text"
+            id="studentResult-sub_id"
+            v-model="form.sub_id"
+          >
+          </b-form-input>
+        </b-form-group>
+        <b-form-group
           id="form-group-studentResult-year"
           label="ปีการศึกษา"
           label-for="studentResult-year"
@@ -22,21 +46,17 @@
           >
           </b-form-input>
         </b-form-group>
-        <b-form-group
-          id="form-group-studentResult-term"
-          label="เทอม"
-          label-for="studentResult-term"
-        >
-          <b-form-input
-            type="text"
-            id="studentResult-term"
-            v-model="form.sr_term"
-          >
-          </b-form-input>
-        </b-form-group>
-        <b-form-group id="input-group-4" label="ผลการเรียน" label-for="input-4">
+        <b-form-group id="input-group-1" label="เทอม" label-for="input-1">
           <b-form-select
-            id="input-3"
+            id="input-1"
+            v-model="form.sr_term"
+            :options="studentResult_term"
+            required
+          ></b-form-select>
+        </b-form-group>
+        <b-form-group id="input-group-2" label="ผลการเรียน" label-for="input-2">
+          <b-form-select
+            id="input-2"
             v-model="form.sr_grade"
             :options="studentResult_grade"
             required
@@ -60,10 +80,12 @@ export default {
   data () {
     return {
       form: {
-        sr_id: -1,
+        stu_id: '',
+        sub_id: '',
         sr_year: '',
-        sr_term: '',
-        sr_grade: null
+        sr_term: null,
+        sr_grade: null,
+        status: false
       },
       id: 0,
       studentResult_grade: [
@@ -76,6 +98,12 @@ export default {
         { text: 'D+', value: 'D+' },
         { text: 'D', value: 'D' },
         { text: 'F', value: 'F' }
+      ],
+      studentResult_term: [
+        { text: 'เลือกเทอมการศึกษา', value: null },
+        { text: '1', value: '1' },
+        { text: '2', value: '2' },
+        { text: 'ฤดูร้อน', value: '3' }
       ],
       isAddNew: false
     }
@@ -105,9 +133,12 @@ export default {
     },
     reset () {
       this.form = {
-        sr_id: -1,
+        stu_id: '',
+        sub_id: this.$store.state.sub_id,
         sr_year: '',
-        sr_term: ''
+        sr_term: null,
+        sr_grade: null,
+        status: false
       }
     },
     showModal () {

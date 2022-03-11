@@ -7,20 +7,29 @@
             :student="selectedItem"
             ref="StudentForm"
             @save="saveStudent"
+            class="mr-10"
           ></StudentForm>
-          <StudentImport @save="getStudents"></StudentImport>
+          <StudentImport @save="getStudents" class="ml-10"> </StudentImport>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          <b-table striped hover :items="studentItems" :fields="fields" class="tableStudent">
+          <b-table
+            striped
+            hover
+            :items="studentItems"
+            :fields="fields"
+            class="tableStudent"
+          >
             <template #cell(stu_edit)="{ item }">
-              <b-button @click="editStudent(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
+              <b-button @click="editStudent(item)" variant="warning"
+                ><i class="fas fa-edit"></i
+              ></b-button>
             </template>
             <template #cell(stu_del)="{ item }">
               <b-button @click="deleteStudent(item)" variant="danger"
-                ><i class="fas fa-trash-alt"></i></b-button
-              >
+                ><i class="fas fa-trash-alt"></i
+              ></b-button>
             </template>
           </b-table>
         </b-col>
@@ -38,8 +47,17 @@ export default {
     StudentImport
   },
   methods: {
+    makeToast (title, message, variant = 'success', append = false) {
+      this.toastCount++
+      this.$bvToast.toast(message, {
+        title: 'ข้อมูลนิสิต',
+        variant: variant,
+        autoHideDelay: 3000,
+        appendToast: append
+      })
+    },
     async getStudents () {
-      await axios.get('http://localhost:8081/student').then(data => {
+      await axios.get('http://localhost:8081/student').then((data) => {
         this.studentItems = data.data
       })
     },
@@ -48,20 +66,25 @@ export default {
       this.getStudents()
     },
     async saveStudent (student) {
-      console.log(student)
-      if (!student.status) { // add
-        // student.stu_id = this.studentId
-        // this.studentId++
+      if (!student.status) {
+        // add
         await axios.post('http://localhost:8081/student', student)
         this.getStudents()
-      } else { // save
-        console.log(student)
-        await axios.put('http://localhost:8081/student/' + student.stu_id, student)
+        this.makeToast('เพิ่มสำเร็จ', 'ข้อมูลของ ' + student.stu_firstname + '  ถูกเพิ่มแล้ว')
+      } else {
+        // save
+        await axios.put(
+          'http://localhost:8081/student/' + student.stu_id,
+          student
+        )
         this.getStudents()
+        this.makeToast('แก้ไขสำเร็จ', 'ข้อมูลของ ' + student.stu_firstname + '  ถูกแก้ไขแล้ว')
       }
     },
     async editStudent (item) {
-      const temp = await axios.get('http://localhost:8081/student/' + item.stu_id)
+      const temp = await axios.get(
+        'http://localhost:8081/student/' + item.stu_id
+      )
       // console.log(temp.data[0])
       this.selectedItem = { ...temp.data[0] }
       this.oid = this.selectedItem.stu_id
@@ -72,13 +95,18 @@ export default {
     },
     async deleteStudent (student) {
       console.log(student)
-      if (confirm(`คุณต้องการจะลบข้อมูลนิสิต ${student.stu_firstname} หรือไม่`)) {
+      if (
+        confirm(`คุณต้องการจะลบข้อมูลนิสิต ${student.stu_firstname} หรือไม่`)
+      ) {
         const index = this.studentItems.findIndex(function (item) {
           return student.stu_id === item.stu_id
         })
         this.studentItems.splice(index, 1)
         await axios.delete('http://localhost:8081/student/' + student.stu_id)
         this.getStudents()
+        this.makeToast('ลบสำเร็จ', 'ข้อมูลของ ' + student.stu_firstname + '  ถูกลบแล้ว')
+      } else {
+        this.makeToast('ปรับปรุงไม่สำเร็จ', 'ไม่สามารถลบข้อมูลของ ' + student.stu_firstname + 'danger')
       }
     }
   },
@@ -92,8 +120,7 @@ export default {
         { key: 'stu_edit', label: 'แก้ไข' },
         { key: 'stu_del', label: 'ลบข้อมูล' }
       ],
-      studentItems: [
-      ],
+      studentItems: [],
       selectedItem: null
     }
   },
@@ -102,11 +129,10 @@ export default {
   }
 }
 </script>
-<style>
-/* .tableStudent{
+<style lang="scss">
+.tableStudent {
   text-align: center;
-  width: 1331px;
   margin-inline-end: 300px;
   background-color: whitesmoke;
-} */
+}
 </style>

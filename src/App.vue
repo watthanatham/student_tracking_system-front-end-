@@ -3,7 +3,7 @@
     <b-container fluid>
       <b-row>
         <b-col cols="2" class="app-menu min-vh-100"><Menu /></b-col>
-        <b-col cols="7">
+        <b-col cols="10">
           <b-container>
             <b-row>
               <b-col>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <b-button @click="addNew" variant="success" class="buttonsubject"><b-icon icon="cloud-arrow-up-fill"></b-icon> Import CSV</b-button>
     <b-modal
     id="modal-subjectimport"
@@ -9,19 +9,16 @@
     @hidden="resetModal"
     @ok="handleOk">
       <div class="container">
-      <section class="py-5">
-        <div class="row mt-5">
-          <div class="col-8 offset-2"></div>
-        </div>
-        <div class="row mt-5">
-          <div class="col-8 offset-2">
+      <section>
+        <div>
+          <div >
             <vue-csv-import
               v-model="csv"
               :map-fields="['sub_id', 'st_id', 'module_id', 'course_id', 'sub_name_thai', 'sub_name_eng', 'sub_credit']"
             >
-              <template slot="error"> File type is invalid </template>
+              <template slot="error"> <p class="text-danger">ไม่สามารถอ่านข้อมูลได้ กรุณาอัพโหลดใหม่อีกครั้ง</p></template>
 
-              <template slot="thead">
+              <template >
                 <tr>
                   <th>รูปแบบที่กำหนด</th>
                   <th>คอลัมน์ไฟล์</th>
@@ -29,7 +26,7 @@
               </template>
 
               <template slot="next" slot-scope="{ load }">
-                <button @click.prevent="load">ตรวจสอบข้อมูล</button>
+                <b-button variant="info" @click.prevent="load"><b-icon icon="list-check"></b-icon> ตรวจสอบข้อมูล</b-button>
               </template>
 
               <template slot="submit" slot-scope="{ submit }">
@@ -44,7 +41,6 @@
         </div>
       </section>
     </div>
-    <button @click="importData">บันทึกข้อมูล</button>
     </b-modal>
   </div>
 </template>
@@ -110,6 +106,15 @@ export default {
     }
   },
   methods: {
+    makeToast (title, message, variant = 'success', append = false) {
+      this.toastCount++
+      this.$bvToast.toast(message, {
+        title: 'ข้อมูลวิชา',
+        variant: variant,
+        autoHideDelay: 3000,
+        appendToast: append
+      })
+    },
     addNew () {
       this.isAddnew = true
       this.$nextTick(() => {
@@ -151,6 +156,7 @@ export default {
       })
       await axios.post('http://localhost:8081/subject/import', subjects)
       console.log(subjects)
+      this.makeToast('เพิ่มสำเร็จ', 'ข้อมูลถูกเพิ่มแล้ว')
     }
   },
   mounted () {

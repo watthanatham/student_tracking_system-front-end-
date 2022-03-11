@@ -64,7 +64,7 @@ export default {
       }
     },
     editSubject (item) {
-      this.selectedItem = JSON.parse(JSON.stringify(item))
+      // this.selectedItem = JSON.parse(JSON.stringify(item))
       this.selectedItem = { ...item }
       this.$nextTick(() => {
         this.$refs.coursestructureForm.show()

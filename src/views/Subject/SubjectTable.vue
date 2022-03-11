@@ -8,13 +8,16 @@
     </b-nav>
     <b-container fluid>
       <b-row>
-        <b-col class="text-right">
+        <b-col class="text-left">
           <SubjectForm
             :subject="selectedItem"
-            ref="subjectForm"
+            ref="SubjectForm"
             @save="saveSubject"
+            class="ml-10"
           ></SubjectForm>
-          <SubjectImport>
+          <SubjectImport
+          @save="getSubjects"
+          class="mr-10">
           </SubjectImport>
         </b-col>
       </b-row>
@@ -58,9 +61,7 @@ export default {
     },
     async saveSubject (subject) {
       if (!subject.status) { // add
-        // subject.sub_id = this.subjectId
-        this.subjectItems.push(subject)
-        // this.subjectId++
+        // this.subjectItems.push(subject)
         await axios.post('http://localhost:8081/subject', subject)
         this.getSubjects()
       } else { // save
@@ -70,12 +71,11 @@ export default {
     },
     async editSubject (item) {
       const temp = await axios.get('http://localhost:8081/subject/' + item.sub_id)
-      // this.selectedItem = JSON.parse(JSON.stringify(item))
       this.selectedItem = { ...temp.data[0] }
       this.oid = this.selectedItem.sub_id
       this.selectedItem.status = true
       this.$nextTick(() => {
-        this.$refs.subjectForm.show()
+        this.$refs.SubjectForm.show()
       })
     },
     async deleteSubject (subject) {

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <b-container fluid>
+    <b-container>
       <b-row>
         <b-col class="text-right">
-          <!-- <StudentResultForm
+          <StudentResultForm
             :student="selectedItem"
             ref="StudentResultForm"
             @save="saveStudent"
-          ></StudentResultForm> -->
+          ></StudentResultForm>
         </b-col>
       </b-row>
       <b-row>
@@ -28,23 +28,21 @@
 </template>
 <script>
 import axios from 'axios'
-// import StudentForm from './StudentResultForm.vue'
+import StudentResultForm from './StudentResultForm.vue'
 export default {
   components: {
-    // StudentResultForm
+    StudentResultForm
   },
   methods: {
     async getStudentResults () {
-      // console.log('ok')
       const courseId = this.$store.state.course_id
       const subId = this.$store.state.sub_id
-      // console.log(id)
       await axios.get('http://localhost:8081/student_result/' + courseId + '/' + subId).then(data => {
         this.student_resutlItems = data.data
       })
     },
     async saveStudent (studentresult) {
-      if (studentresult.sr_id < 0) { // add
+      if (!studentresult.status) { // add
         studentresult.sr_id = this.student_resultId
         this.student_resutlItems.push(studentresult)
         this.student_resultId++
@@ -63,7 +61,7 @@ export default {
       this.selectedItem = JSON.parse(JSON.stringify(item))
       this.selectedItem = { ...item }
       this.$nextTick(() => {
-        this.$refs.StudentForm.show()
+        this.$refs.StudentResultForm.show()
       })
     },
     async deleteStudentResult (studentresult) {

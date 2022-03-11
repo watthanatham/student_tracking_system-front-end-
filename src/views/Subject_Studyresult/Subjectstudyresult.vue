@@ -2,8 +2,8 @@
   <div>
     <b-nav class="mt-4">
       <b-nav-item to="/subjectstudyResult">วิชาหน่วยกิตที่ต้องเก็บ</b-nav-item>
+      <b-nav-item to="/subjectstudyResult">โมดูล</b-nav-item>
     </b-nav>
-    <b-table class="table" striped hover :items="items"></b-table>
     <b-container fluid>
       <b-row>
         <b-col>
@@ -19,7 +19,7 @@
 import axios from 'axios'
 export default {
   methods: {
-    async getSubjects () {
+    async getSubject_Studyresult () {
       await axios.get('http://localhost:8081/study_results').then(data => {
         this.subjecttypeItems = data.data
       })
@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       fields: [
-        { key: 'sub_code', label: 'รหัสวิชา' },
+        { key: 'sub_id', label: 'รหัสวิชา' },
         { key: 'sub_credit', label: 'หน่วยกิต' },
         { key: 'sr_grade', label: 'เกรด' }
       ],
@@ -38,7 +38,7 @@ export default {
     }
   },
   mounted () {
-    this.getSubjects()
+    this.getSubject_Studyresult()
   }
 }
 </script>

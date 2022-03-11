@@ -100,6 +100,11 @@ const routes = [
     path: '/loginstudent',
     name: 'Login Student',
     component: () => import('../components/LoginStudent/Loginstudent.vue')
+  },
+  {
+    path: '/loginbeforescreen',
+    name: 'Login Before Screen',
+    component: () => import('../views/Screenbeforelogin/screenbeforelogin.vue')
   }
 ]
 

@@ -20,11 +20,9 @@
   </div>
 </template>
 <script>
-// import NavBar from './components/NavBar.vue'
 import Menu from './components/Menu.vue'
 export default {
   components: {
-    // Navbar,
     Menu
   }
 }

@@ -70,8 +70,9 @@ export default {
       }
     },
     async editSubject (item) {
-      const temp = await axios.get('http://localhost:8081/subject/' + item.sub_id)
+      const temp = await axios.get('http://localhost:8081/subject/sub/' + item.sub_id)
       this.selectedItem = { ...temp.data[0] }
+      console.log(temp)
       this.oid = this.selectedItem.sub_id
       this.selectedItem.status = true
       this.$nextTick(() => {

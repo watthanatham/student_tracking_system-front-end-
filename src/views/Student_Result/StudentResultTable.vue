@@ -4,7 +4,7 @@
       <b-row>
         <b-col class="text-right">
           <StudentResultForm
-            :student="selectedItem"
+            :studentResult="selectedItem"
             ref="StudentResultForm"
             @save="saveStudent"
           ></StudentResultForm>
@@ -39,27 +39,31 @@ export default {
       const subId = this.$store.state.sub_id
       await axios.get('http://localhost:8081/student_result/' + courseId + '/' + subId).then(data => {
         this.student_resutlItems = data.data
+        console.log(this.student_resutlItems)
       })
     },
     async saveStudent (studentresult) {
       if (!studentresult.status) { // add
         studentresult.sr_id = this.student_resultId
-        this.student_resutlItems.push(studentresult)
+        // this.student_resutlItems.push(studentresult)
         this.student_resultId++
         await axios.post('http://localhost:8081/student_result', studentresult)
         this.getStudentResults()
-      } else { // save
-        const index = this.student_resutlItems.findIndex((item) => {
-          return studentresult.sr_id === item.sr_id
-        })
-        this.student_resutlItems.splice(index, 1, studentresult)
+      } else { // edit
         await axios.put('http://localhost:8081/student_result/' + studentresult.sr_id, studentresult)
         this.getStudentResults()
+        // const index = this.student_resutlItems.findIndex((item) => {
+        //   return studentresult.sr_id === item.sr_id
+        // })
+        // this.student_resutlItems.splice(index, 1, studentresult)
       }
     },
-    editStudentResult (item) {
-      this.selectedItem = JSON.parse(JSON.stringify(item))
-      this.selectedItem = { ...item }
+    async editStudentResult (item) {
+      const temp = await axios.get('http://localhost:8081/student_result/result_get/' + item.sr_id)
+      this.selectedItem = { ...temp.data[0] }
+      console.log(temp)
+      this.oid = this.selectedItem.sr_id
+      this.selectedItem.status = true
       this.$nextTick(() => {
         this.$refs.StudentResultForm.show()
       })
@@ -78,6 +82,7 @@ export default {
   },
   data () {
     return {
+      oid: '',
       fields: [
         { key: 'stu_id', label: 'รหัสนิสิต' },
         { key: 'stu_firstname', label: 'ชื่อ' },

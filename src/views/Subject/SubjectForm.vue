@@ -85,6 +85,7 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   props: {
     subject: Object
@@ -105,12 +106,6 @@ export default {
       },
       id: 0,
       subject_type: [
-        { text: 'เลือกหมวดวิชา', value: null },
-        { text: 'วิชาศึกษาทั่วไป', value: 1 },
-        { text: 'วิชาแกน', value: 2 },
-        { text: 'วิชาเอกบังคับ', value: 3 },
-        { text: 'วิชาเอกเลือก', value: 4 },
-        { text: 'วิชาเลือกเสรี', value: 5 }
       ],
       subject_module: [
         { text: 'เลือกโมดูล', value: null },
@@ -126,8 +121,20 @@ export default {
     }
   },
   methods: {
-    addNew () {
+    async selectSubjectType () {
+      const id = this.$store.state.course_id
+      await axios.get('http://localhost:8081/subject_type/st/' + id).then(data => {
+        this.subject_type = data.data
+      })
+      this.subject_type.unshift({ text: 'เลือกหมวดวิชา', value: null })
+    },
+    async addNew () {
+      // call api for select
+      // path api GET: /st/:id
+      // SELECT st_id as value, CONCAT('วิชา',st_name) as text FROM subject_type a WHERE a.course_id = ?;
+      this.selectSubjectType()
       this.isAddNew = true
+      // this.subject_type = { ...this.data() } // Change var to data response from api naja
       this.$nextTick(() => {
         this.show()
         this.isAddNew = false
@@ -135,6 +142,7 @@ export default {
     },
     async show () {
       if (!this.isAddNew) {
+        this.selectSubjectType()
         this.form = { ...this.subject }
         // this.id = this.subject.sub_id
       }
@@ -156,6 +164,8 @@ export default {
         sub_name_thai: '',
         sub_name_eng: '',
         sub_credit: 0,
+        st_id: null,
+        module_id: null,
         course_id: this.$store.state.course_id,
         status: false
       }

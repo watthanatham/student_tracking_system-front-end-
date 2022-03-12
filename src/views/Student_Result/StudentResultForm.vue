@@ -80,6 +80,7 @@ export default {
   data () {
     return {
       form: {
+        sr_id: '',
         stu_id: '',
         sub_id: '',
         sr_year: '',
@@ -116,23 +117,25 @@ export default {
         this.isAddNew = false
       })
     },
-    show () {
+    async show () {
       if (!this.isAddNew) {
         this.form = { ...this.studentResult }
-        this.id = this.studentResult.sr_id
+        console.log(this.form)
+        // this.id = this.studentResult.sr_id
       }
-      this.$refs.modalstudentResult.show()
+      await this.$refs.modalstudentResult.show()
     },
     submit () {
       console.log(this.form)
       const studentResult = JSON.parse(JSON.stringify(this.form))
-      studentResult.sr_id = (this.form.sr_id === -1) ? -1 : this.id
-      console.log(studentResult)
+      // studentResult.sr_id = (this.form.sr_id === -1) ? -1 : this.id
+      // console.log(studentResult)
       this.$emit('save', studentResult)
       this.reset()
     },
     reset () {
       this.form = {
+        sr_id: '',
         stu_id: '',
         sub_id: this.$store.state.sub_id,
         sr_year: '',
@@ -144,9 +147,14 @@ export default {
     showModal () {
       if (this.isAddNew) {
         this.reset()
+        console.log('new')
       } else {
         // edit
-        this.form.sr_id = this.studentResult.id
+        this.show()
+        this.form.sr_id = this.studentResult.sr_id
+        this.form.stu_id = this.studentResult.stu_id
+        this.form.sr_year = this.studentResult.sr_year
+        this.form.sr_grade = this.studentResult.sr_grade
       }
     },
     resetModal (evt) {

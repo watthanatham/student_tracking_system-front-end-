@@ -6,6 +6,16 @@
       <b-nav-item to="/modulesubject">โมดูลวิชา</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
+    <b-dropdown id="dropdown-1" text="เลือกโมดูล" variant="outline-primary" class="m-md-2">
+      <b-dropdown-item href="#">โมดูล 1</b-dropdown-item>
+      <b-dropdown-item href="#">โมดูล 2</b-dropdown-item>
+      <b-dropdown-item href="#">โมดูล 3</b-dropdown-item>
+      <b-dropdown-item href="#">โมดูล 4</b-dropdown-item>
+      <b-dropdown-item href="#">โมดูล 5</b-dropdown-item>
+      <b-dropdown-item href="#">โมดูล 6</b-dropdown-item>
+      <b-dropdown-item href="#">โมดูล 7</b-dropdown-item>
+    </b-dropdown>
+    <b-button pill variant="outline-secondary">search</b-button>
     <b-container fluid>
       <b-row>
         <b-col>

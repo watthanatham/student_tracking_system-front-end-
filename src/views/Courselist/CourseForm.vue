@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button @click="addNew" variant="primary"><i class="far fa-plus-square"></i> เพิ่มข้อมูลหมวดวิชา</b-button>
+    <b-button @click="addNew" variant="primary" class="buttonSub"><b-icon icon="plus-square-fill"></b-icon> เพิ่มหลักสูตร</b-button>
     <b-modal
       id="modal-course"
       ref="modalCourse"
@@ -12,25 +12,37 @@
       <b-form @submit.stop.prevent="submit" @reset.stop.prevent="reset">
         <b-form-group
           id="form-group-course-code"
-          label="หัวข้อ"
+          label="รหัสหลักสูตร"
           label-for="course-code"
         >
           <b-form-input
             type="text"
             id="course-code"
-            v-model="form.st_name"
+            v-model="form.course_id"
           >
           </b-form-input>
         </b-form-group>
         <b-form-group
-          id="form-group-course-cerdit"
+          id="form-group-course-name"
+          label="ชื่อหลักสูตร"
+          label-for="course-name"
+        >
+          <b-form-input
+            type="text"
+            id="course-name-thai"
+            v-model="form.course_name"
+          >
+          </b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="form-group-course-totalcredit"
           label="หน่วยกิต"
-          label-for="course-credit-credit"
+          label-for="course-totalcredit"
         >
           <b-form-input
             type="number"
-            id="course-credit-credit"
-            v-model="form.st_credit"
+            id="course-totalcredit"
+            v-model="form.course_totalcredit"
           >
           </b-form-input>
         </b-form-group>
@@ -45,51 +57,52 @@
   </div>
 </template>
 <script>
+
 export default {
   props: {
-    course: Object
+    subject: Object
   },
   data () {
     return {
+      sub_id: '',
       form: {
-        st_id: -1,
-        st_name: '',
-        st_credit: 0,
-        course_id: ''
+        course_id: '',
+        course_name: '',
+        course_totalcredit: ''
       },
+      id: 0,
       isAddNew: false
     }
   },
   methods: {
-    addNew () {
+    async addNew () {
+      // call api for select
+      // path api GET: /st/:id
+      // SELECT st_id as value, CONCAT('วิชา',st_name) as text FROM subject_type a WHERE a.course_id = ?;
       this.isAddNew = true
       this.$nextTick(() => {
         this.show()
         this.isAddNew = false
       })
     },
-    show () {
+    async show () {
       if (!this.isAddNew) {
         this.form = { ...this.course }
-        this.id = this.course.st_id
+        // this.id = this.subject.sub_id
       }
-      this.$refs.modalCourse.show()
+      await this.$refs.modalCourse.show()
     },
     submit () {
-      console.log(this.form)
+      // console.log(this.form)
       const course = JSON.parse(JSON.stringify(this.form))
-      course.st_credit = parseFloat(course.st_credit)
-      course.st_id = (this.form.st_id === -1) ? -1 : this.id
-      console.log(course)
       this.$emit('save', course)
       this.reset()
     },
     reset () {
       this.form = {
-        st_id: -1,
-        st_name: '',
-        st_credit: 0,
-        course_id: this.$store.state.course_id
+        course_id: '',
+        course_name: '',
+        course_totalcredit: ''
       }
     },
     showModal () {
@@ -97,10 +110,9 @@ export default {
         this.reset()
       } else {
         // edit
-        this.form.st_id = this.course.id
-        this.form.st_name = this.course.st_name
-        this.form.st_credit = this.course.st_credit
-        this.form.course_id = this.$store.state.course_id
+        this.form.course_id = this.course.course_id
+        this.form.course_name = this.course.course_name
+        this.form.course_totalcredit = this.course.course_totalcredit
       }
     },
     resetModal (evt) {
@@ -117,4 +129,9 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+.buttonSub {
+  margin-block-start: 10px;
+  margin-left: 765px;
+}
+</style>

@@ -58,17 +58,17 @@
           >
           </b-form-input>
         </b-form-group>
-        <b-form-group id="input-group-4" label="หมวดวิชา" label-for="input-4">
+        <b-form-group id="input-group-1" label="หมวดวิชา" label-for="input-1">
           <b-form-select
-            id="input-3"
+            id="input-1"
             v-model="form.st_id"
             :options="subject_type"
             required
           ></b-form-select>
         </b-form-group>
-        <b-form-group id="input-group-4" label="โมดูล" label-for="input-4">
+        <b-form-group id="input-group-2" label="โมดูล" label-for="input-2">
           <b-form-select
-            id="input-3"
+            id="input-2"
             v-model="form.module_id"
             :options="subject_module"
             required
@@ -108,33 +108,31 @@ export default {
       subject_type: [
       ],
       subject_module: [
-        { text: 'เลือกโมดูล', value: null },
-        { text: 'โมดูล 1', value: 1 },
-        { text: 'โมดูล 2', value: 2 },
-        { text: 'โมดูล 3', value: 3 },
-        { text: 'โมดูล 4', value: 4 },
-        { text: 'โมดูล 5', value: 5 },
-        { text: 'โมดูล 6', value: 6 },
-        { text: 'โมดูล 7', value: 7 }
       ],
       isAddNew: false
     }
   },
   methods: {
     async selectSubjectType () {
-      const id = this.$store.state.course_id
-      await axios.get('http://localhost:8081/subject_type/st/' + id).then(data => {
+      const tid = this.$store.state.course_id
+      await axios.get('http://localhost:8081/subject_type/st/' + tid).then(data => {
         this.subject_type = data.data
       })
       this.subject_type.unshift({ text: 'เลือกหมวดวิชา', value: null })
+    },
+    async selectModule () {
+      const mid = this.$store.state.course_id
+      await axios.get('http://localhost:8081/model_subject/md/' + mid).then(data => {
+        this.subject_module = data.data
+      })
+      this.subject_module.unshift({ text: 'เลือกโมดูลวิชา', value: null })
+      // console.log(this.subject_module)
     },
     async addNew () {
       // call api for select
       // path api GET: /st/:id
       // SELECT st_id as value, CONCAT('วิชา',st_name) as text FROM subject_type a WHERE a.course_id = ?;
-      this.selectSubjectType()
       this.isAddNew = true
-      // this.subject_type = { ...this.data() } // Change var to data response from api naja
       this.$nextTick(() => {
         this.show()
         this.isAddNew = false
@@ -143,6 +141,7 @@ export default {
     async show () {
       if (!this.isAddNew) {
         this.selectSubjectType()
+        this.selectModule()
         this.form = { ...this.subject }
         // this.id = this.subject.sub_id
       }
@@ -151,9 +150,6 @@ export default {
     submit () {
       // console.log(this.form)
       const subject = JSON.parse(JSON.stringify(this.form))
-      // subject.sub_credit = parseFloat(subject.sub_credit)
-      // subject.sub_id = (this.form.sub_id === -1) ? -1 : this.id
-      // console.log(subject)
       this.$emit('save', subject)
       this.reset()
     },
@@ -181,7 +177,7 @@ export default {
         this.form.sub_credit = this.subject.sub_credit
         this.form.st_id = this.subject.st_id
         this.form.module_id = this.subject.module_id
-        this.form.course_id = this.subject.course_id
+        this.form.course_id = this.$store.state.course_id
       }
     },
     resetModal (evt) {
@@ -195,6 +191,10 @@ export default {
         this.$bvModal.hide('modal-subject')
       })
     }
+  },
+  mounted () {
+    this.selectSubjectType()
+    this.selectModule()
   }
 }
 </script>

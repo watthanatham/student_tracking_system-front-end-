@@ -70,9 +70,9 @@
           >
           </b-form-input>
         </b-form-group>
-        <b-form-group id="input-group-4" label="หลักสูตร" label-for="input-4">
+        <b-form-group id="input-group-1" label="หลักสูตร" label-for="input-1">
           <b-form-select
-            id="input-3"
+            id="input-1"
             v-model="form.course_id"
             :options="student_course"
             required
@@ -89,6 +89,7 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   props: {
     student: Object
@@ -107,14 +108,17 @@ export default {
       },
       id: 0,
       student_course: [
-        { text: 'เลือกหมวดวิชา', value: null },
-        { text: 'หลักสูตรใหม่ ปี 2563', value: 1 },
-        { text: 'หลักสูตรสองภาษา', value: 2 }
       ],
       isAddNew: false
     }
   },
   methods: {
+    async selectCourse () {
+      await axios.get('http://localhost:8081/course/course_form').then(data => {
+        this.student_course = data.data
+      })
+      this.student_course.unshift({ text: 'เลือกหลักสูตร', value: null })
+    },
     addNew () {
       this.isAddNew = true
       this.$nextTick(() => {
@@ -126,19 +130,14 @@ export default {
       if (!this.isAddNew) {
         this.form = { ...this.student }
         console.log(this.form)
-        // this.form.status = false
-        // this.stu_id = this.student.stu_id
+        this.selectCourse()
         console.log(this.form.stu_id)
         console.log(this.student.stu_id)
-        // console.log(this.form)
       }
       await this.$refs.modalstudent.show()
     },
     submit () {
-      // console.log(this.form)
       const student = JSON.parse(JSON.stringify(this.form))
-      // student.stu_id = (this.form.stu_id === -1) ? -1 : this.id
-      // console.log(student)
       this.$emit('save', student)
       this.reset()
     },
@@ -149,6 +148,7 @@ export default {
         stu_lastname: '',
         stu_username: '',
         stu_password: '',
+        course_id: null,
         status: false
       }
     },
@@ -170,12 +170,14 @@ export default {
     },
     handleOk (evt) {
       evt.preventDefault()
-      // if (!this.validateForm) return
       this.submit()
       this.$nextTick(() => {
         this.$bvModal.hide('modal-student')
       })
     }
+  },
+  mounted () {
+    this.selectCourse()
   }
 }
 </script>

@@ -85,7 +85,6 @@ export default {
       const temp = await axios.get(
         'http://localhost:8081/student/' + item.stu_id
       )
-      // console.log(temp.data[0])
       this.selectedItem = { ...temp.data[0] }
       this.oid = this.selectedItem.stu_id
       this.selectedItem.status = true

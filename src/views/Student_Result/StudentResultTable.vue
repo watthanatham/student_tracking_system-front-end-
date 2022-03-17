@@ -6,8 +6,10 @@
           <StudentResultForm
             :studentResult="selectedItem"
             ref="StudentResultForm"
-            @save="saveStudent"
+            @save="saveStudentResult"
+            class="mr-10"
           ></StudentResultForm>
+          <StudentResultImport @save="getStudentResults" class="ml-10"></StudentResultImport>
         </b-col>
       </b-row>
       <b-row>
@@ -29,9 +31,11 @@
 <script>
 import axios from 'axios'
 import StudentResultForm from './StudentResultForm.vue'
+import StudentResultImport from './StudentResultImport.vue'
 export default {
   components: {
-    StudentResultForm
+    StudentResultForm,
+    StudentResultImport
   },
   methods: {
     async getStudentResults () {
@@ -39,10 +43,9 @@ export default {
       const subId = this.$store.state.sub_id
       await axios.get('http://localhost:8081/student_result/' + courseId + '/' + subId).then(data => {
         this.student_resutlItems = data.data
-        console.log(this.student_resutlItems)
       })
     },
-    async saveStudent (studentresult) {
+    async saveStudentResult (studentresult) {
       if (!studentresult.status) { // add
         studentresult.sr_id = this.student_resultId
         // this.student_resutlItems.push(studentresult)
@@ -61,7 +64,6 @@ export default {
     async editStudentResult (item) {
       const temp = await axios.get('http://localhost:8081/student_result/result_get/' + item.sr_id)
       this.selectedItem = { ...temp.data[0] }
-      console.log(temp)
       this.oid = this.selectedItem.sr_id
       this.selectedItem.status = true
       this.$nextTick(() => {

@@ -9,12 +9,10 @@
             <form class="form-signin">
               <div class="form-label-group">
                 <input class="form-control" placeholder="Username" required autofocus>
-                <label for="email">Username</label>
                 <p id="demo2" class="active text-danger"></p>
               </div>
               <div class="form-label-group">
                 <input type= "password" class="form-control" placeholder="Password" required>
-                <label for="password">Password</label>
                 <p id="demo3" class="active text-danger"></p>
               </div>
               <div>

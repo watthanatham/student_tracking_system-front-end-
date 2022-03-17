@@ -18,7 +18,7 @@ const routes = [
   {
     path: '/courselist',
     name: 'courselist',
-    component: () => import('../views/Courselist.vue')
+    component: () => import('../views/Courselist/Courselist.vue')
   },
   {
     path: '/coursestructure',

@@ -12,13 +12,13 @@
           <CoursestructureForm
             :subject="selectedItem"
             ref="coursestructureForm"
-            @save="saveSubject"
+            @save="saveCourseStructure"
           ></CoursestructureForm>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          <b-table :items="subjectItems" :fields="fields" class="tablecourse">
+          <b-table :items="courseItems" :fields="fields" class="tablecourse">
             <template #cell(st_edit)="{ item }">
               <b-button @click="editSubject(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
             </template>
@@ -41,44 +41,44 @@ export default {
     CoursestructureForm
   },
   methods: {
-    async getSubjects () {
+    async getCourseStructure () {
       const id = this.$store.state.course_id
       await axios.get('http://localhost:8081/subject_type/' + id).then(data => {
-        this.subjectItems = data.data
+        this.courseItems = data.data
       })
     },
-    async saveSubject (subject) {
-      if (subject.st_id < 0) { // add
-        subject.st_id = this.subjectId
-        this.subjectItems.push(subject)
-        this.subjectId++
-        await axios.post('http://localhost:8081/subject_type', subject)
-        this.getSubjects()
+    async saveCourseStructure (course) {
+      if (course.st_id < 0) { // add
+        course.st_id = this.subjectId
+        this.courseItems.push(course)
+        this.courseId++
+        await axios.post('http://localhost:8081/subject_type', course)
+        this.getCourseStructure()
       } else { // save
-        const index = this.subjectItems.findIndex((item) => {
-          return subject.st_id === item.st_id
+        const index = this.courseItems.findIndex((item) => {
+          return course.st_id === item.st_id
         })
-        this.subjectItems.splice(index, 1, subject)
-        await axios.put('http://localhost:8081/subject_type/' + subject.st_id, subject)
-        this.getSubjects()
+        this.courseItems.splice(index, 1, course)
+        await axios.put('http://localhost:8081/subject_type/' + course.st_id, course)
+        this.getCourseStructure()
       }
     },
-    editSubject (item) {
+    editCourse (item) {
       // this.selectedItem = JSON.parse(JSON.stringify(item))
       this.selectedItem = { ...item }
       this.$nextTick(() => {
         this.$refs.coursestructureForm.show()
       })
     },
-    async deleteSubject (subject) {
+    async deleteCourse (subject) {
       console.log(subject)
       if (confirm(`คุณต้องการจะลบข้อมูลหมวดวิชา ${subject.st_name} หรือไม่`)) {
-        const index = this.subjectItems.findIndex(function (item) {
+        const index = this.courseItems.findIndex(function (item) {
           return subject.st_id === item.st_id
         })
-        this.subjectItems.splice(index, 1)
+        this.courseItems.splice(index, 1)
         await axios.delete('http://localhost:8081/subject_type/' + subject.st_id)
-        this.getSubjects()
+        this.getCourseStructure()
       }
     }
   },
@@ -89,13 +89,13 @@ export default {
         { key: 'st_credit', label: 'หน่วยกิต' },
         { key: 'st_edit', label: 'แก้ไข' }
       ],
-      subjectItems: [
+      courseItems: [
       ],
       selectedItem: null
     }
   },
   mounted () {
-    this.getSubjects()
+    this.getCourseStructure()
   }
 }
 </script>

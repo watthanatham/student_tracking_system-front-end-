@@ -1,20 +1,14 @@
 <template>
   <div>
-    <!-- <b-nav class="mt-4">
-      <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
-      <b-nav-item to="/subject_type">หมวดวิชา</b-nav-item>
-      <b-nav-item to="/modulesubject">โมดูลวิชา</b-nav-item>
-      <b-nav-item to="/subject">วิชา</b-nav-item>
-    </b-nav> -->
     <b-container fluid>
       <b-row>
-        <!-- <b-col class="text-right">
-          <SubjectForm
-            :subject="selectedItem"
-            ref="subjectForm"
-            @save="saveSubject"
-          ></SubjectForm>
-        </b-col> -->
+        <b-col class="text-right">
+          <CourseForm
+            :course="selectedItem"
+            ref="courseForm"
+            @save="saveForm"
+          ></CourseForm>
+        </b-col>
       </b-row>
       <b-row>
         <b-col>
@@ -27,10 +21,10 @@
 </template>
 <script>
 import axios from 'axios'
-// import SubjectForm from './SubjectForm.vue'
+import CourseForm from './CourseForm.vue'
 export default {
   components: {
-    // SubjectForm
+    CourseForm
   },
   methods: {
     selectedCourse (item, index, evt) {
@@ -42,20 +36,18 @@ export default {
         this.courseItems = data.data
       })
     },
-    async saveSubject (subject) {
+    async saveForm (course) {
       // add
-      subject.sub_id = this.subjectId
-      this.courseItems.push(subject)
-      this.subjectId++
-      await axios.post('http://localhost:8081/subject', subject)
+      await axios.post('http://localhost:8081/course', course)
       this.getCourses()
     }
   },
   data () {
     return {
       fields: [
-        { key: 'course_id', label: 'ลำดับ' },
-        { key: 'course_name', label: 'ชื่อหลักสูตร' }
+        { key: 'course_id', label: 'รหัสหลักสูตร' },
+        { key: 'course_name', label: 'ชื่อหลักสูตร' },
+        { key: 'course_totalcredit', label: 'หน่วยกิตรวม' }
       ],
       courseItems: [
       ],

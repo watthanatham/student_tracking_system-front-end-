@@ -8,16 +8,16 @@
     </b-nav>
     <b-container fluid>
       <b-row>
-        <b-col class="text-left">
+        <b-col>
           <SubjectForm
             :subject="selectedItem"
             ref="SubjectForm"
             @save="saveSubject"
-            class="ml-10"
+            class="mr-10"
           ></SubjectForm>
           <SubjectImport
           @save="getSubjects"
-          class="mr-10">
+          class="ml-10">
           </SubjectImport>
         </b-col>
       </b-row>

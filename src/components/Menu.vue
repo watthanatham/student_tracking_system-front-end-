@@ -4,8 +4,7 @@
       <b-nav vertical>
       <!-- <b-nav-item to="/subjectform">Subject Form</b-nav-item> -->
       <!-- <b-nav-item to="/studentform">Student Form</b-nav-item> -->
-
-      <br>
+        <br>
         <b-nav-item to="/" ><b-icon icon="house"></b-icon> หน้าแรก</b-nav-item>
         <b-nav-item to="/courselist"><b-icon icon="collection"></b-icon> หลักสูตร</b-nav-item>
         <b-nav-item to="/student"><b-icon icon="people"></b-icon> ข้อมูลนิสิต</b-nav-item>

@@ -1,11 +1,5 @@
 <template>
   <div>
-    <b-nav class="mt-4">
-      <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
-      <b-nav-item to="/subject_type">หมวดวิชา</b-nav-item>
-      <b-nav-item to="/modulesubject">โมดูลวิชา</b-nav-item>
-      <b-nav-item to="/subject">วิชา</b-nav-item>
-    </b-nav>
     <b-dropdown
       id="dropdown-1"
       :text="selectLabel"
@@ -16,17 +10,7 @@
       <b-dropdown-item v-else v-for="item in select_module" :key="item.value" @click="select(item)">{{ item.text }}</b-dropdown-item>
     </b-dropdown>
     <b-button @click="getModules" variant="primary"><i class="fa fa-search"></i> ค้นหา</b-button>
-    <b-button variant="info" class="ml-2" to="/moduleinspect"><i class="fa fa-list-alt"></i> ตรวจสอบข้อมูลของนิสิต</b-button>
     <b-container fluid>
-      <b-row>
-        <b-col class="text-right">
-          <ModuleForm
-            :module="selectedItem"
-            ref="ModuleForm"
-            @save="saveModule"
-          ></ModuleForm>
-        </b-col>
-      </b-row>
       <b-row>
         <b-col>
           <b-table
@@ -44,17 +28,16 @@
 </template>
 <script>
 import axios from 'axios'
-import ModuleForm from './ModuleForm.vue'
 export default {
   components: {
-    ModuleForm
   },
   data () {
     return {
       loading: false,
       fields: [
-        { key: 'sub_id', label: 'รหัสวิชา' },
-        { key: 'sub_name_thai', label: 'ชื่อวิชา' }
+        { key: 'sub_name_thai', label: 'ชื่อวิชา' },
+        { key: 'a', label: 'จำนวนนิสิตที่ผ่านแล้ว' },
+        { key: 'b', label: 'จำนวนนิสิตที่ไม่ผ่าน' }
       ],
       moduleItems: [],
       select_module: [],
@@ -68,15 +51,15 @@ export default {
       this.selectData = item
       this.selectLabel = this.selectData.text
     },
-    async getModules () {
-      const cid = this.$store.state.course_id
-      const mid = this.selectData.value
-      await axios
-        .get('http://localhost:8081/model_subject/' + cid + '/' + mid)
-        .then((data) => {
-          this.moduleItems = data.data
-        })
-    },
+    // async getModules () {
+    //   const cid = this.$store.state.course_id
+    //   const mid = this.selectData.value
+    //   await axios
+    //     .get('http://localhost:8081/model_subject/' + cid + '/' + mid)
+    //     .then((data) => {
+    //       this.moduleItems = data.data
+    //     })
+    // },
     async selectModule () {
       this.loading = true
       const cid = this.$store.state.course_id
@@ -86,16 +69,6 @@ export default {
         this.loading = false
       })
       this.select_module.unshift({ text: 'เลือกโมดูล', value: null })
-    },
-    async saveModule (module) {
-      if (module.module_id < 0) {
-        module.course_id = this.$store.state.course_id
-        this.moduleItems.push(module)
-        this.moduleId++
-        console.log(module)
-        await axios.post('http://localhost:8081/model_subject/', module)
-        this.getModules()
-      }
     }
   },
   mounted () {

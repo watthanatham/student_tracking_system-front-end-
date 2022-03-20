@@ -105,6 +105,11 @@ const routes = [
     path: '/loginbeforescreen',
     name: 'Login Before Screen',
     component: () => import('../views/Screenbeforelogin/screenbeforelogin.vue')
+  },
+  {
+    path: '/moduleinspect',
+    name: 'Module Inspect',
+    component: () => import('../views/Modulesubject/ModuleInspect.vue')
   }
 ]
 

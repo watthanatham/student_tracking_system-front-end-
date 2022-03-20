@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     course_id: '',
-    sub_id: ''
+    sub_id: '',
+    module_id: ''
   },
   mutations: {
     setCourseId (state, id) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     setSubId (state, id) {
       state.sub_id = id
+    },
+    setModuleId (state, id) {
+      state.module_id = id
     }
   },
   actions: {
@@ -22,6 +26,9 @@ export default new Vuex.Store({
     },
     setSub ({ commit }, id) {
       commit('setSubId', id)
+    },
+    setModule ({ commit }, id) {
+      commit('setModuleId', id)
     }
   },
   modules: {

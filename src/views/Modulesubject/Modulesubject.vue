@@ -6,20 +6,35 @@
       <b-nav-item to="/modulesubject">โมดูลวิชา</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
-    <b-dropdown id="dropdown-1" text="เลือกโมดูล" variant="outline-primary" class="m-md-2">
-      <b-dropdown-item href="#">โมดูล 1</b-dropdown-item>
-      <b-dropdown-item href="#">โมดูล 2</b-dropdown-item>
-      <b-dropdown-item href="#">โมดูล 3</b-dropdown-item>
-      <b-dropdown-item href="#">โมดูล 4</b-dropdown-item>
-      <b-dropdown-item href="#">โมดูล 5</b-dropdown-item>
-      <b-dropdown-item href="#">โมดูล 6</b-dropdown-item>
-      <b-dropdown-item href="#">โมดูล 7</b-dropdown-item>
+    <b-dropdown
+      id="dropdown-1"
+      :text="selectLabel"
+      variant="outline-primary"
+      class="m-md-2"
+    >
+      <b-spinner label="Spinning" v-if="loading"></b-spinner>
+      <b-dropdown-item v-else v-for="item in select_module" :key="item.value" @click="select(item)">{{ item.text }}</b-dropdown-item>
     </b-dropdown>
-    <b-button pill variant="outline-secondary">search</b-button>
+    <b-button @click="getModules" variant="primary">ค้นหา</b-button>
     <b-container fluid>
       <b-row>
+        <b-col class="text-right">
+          <ModuleForm
+            :module="selectedItem"
+            ref="ModuleForm"
+            @save="saveModule"
+          ></ModuleForm>
+        </b-col>
+      </b-row>
+      <b-row>
         <b-col>
-          <b-table striped hover :items="subjectItems" :fields="fields" class="text-left">
+          <b-table
+            striped
+            hover
+            :items="moduleItems"
+            :fields="fields"
+            class="text-left"
+          >
           </b-table>
         </b-col>
       </b-row>
@@ -28,34 +43,69 @@
 </template>
 <script>
 import axios from 'axios'
+import ModuleForm from './ModuleForm.vue'
 export default {
-  methods: {
-    async getSubjects () {
-      const id = this.$store.state.course_id
-      await axios.get('http://localhost:8081/model_subject/' + id).then(data => {
-        this.subjectItems = data.data
-      })
-    }
+  components: {
+    ModuleForm
   },
   data () {
     return {
+      loading: false,
       fields: [
         { key: 'sub_id', label: 'รหัสวิชา' },
         { key: 'sub_name_thai', label: 'ชื่อวิชา' },
         { key: 'module_name', label: 'โมดูล' }
       ],
-      subjectItems: [
-      ],
-      selectedItem: null
+      moduleItems: [],
+      select_module: [],
+      selectedItem: null,
+      selectLabel: 'เลือกโมดูล',
+      selectData: []
+    }
+  },
+  methods: {
+    select (item) {
+      this.selectData = item
+      this.selectLabel = this.selectData.text
+    },
+    async getModules () {
+      const cid = this.$store.state.course_id
+      const mid = this.selectData.value
+      await axios
+        .get('http://localhost:8081/model_subject/' + cid + '/' + mid)
+        .then((data) => {
+          this.moduleItems = data.data
+        })
+    },
+    async selectModule () {
+      this.loading = true
+      const cid = this.$store.state.course_id
+      await axios.get('http://localhost:8081/model_subject/md/' + cid).then(data => {
+        this.select_module = data.data
+        console.log(this.select_module)
+        this.loading = false
+      })
+      this.select_module.unshift({ text: 'เลือกโมดูล', value: null })
+    },
+    async saveModule (module) {
+      if (module.module_id < 0) {
+        module.course_id = this.$store.state.course_id
+        this.moduleItems.push(module)
+        this.moduleId++
+        console.log(module)
+        await axios.post('http://localhost:8081/model_subject/', module)
+        this.getModules()
+      }
     }
   },
   mounted () {
-    this.getSubjects()
+    // this.getModules()
+    this.selectModule()
   }
 }
 </script>
 <style>
-.tableModule{
+.tableModule {
   text-align: center;
   margin-inline-end: 10px;
   background-color: whitesmoke;

@@ -22,7 +22,7 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col>
+        <b-col style="padding:0">
           <b-table striped hover :items="subjectItems" :fields="fields" class="tableSubject" @row-clicked="selectedSubject">
             <template #cell(sub_edit)="{ item }">
               <b-button @click="editSubject(item)" variant="warning"><i class="fas fa-edit"></i></b-button>

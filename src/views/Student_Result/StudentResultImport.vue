@@ -14,7 +14,7 @@
           <div >
             <vue-csv-import
               v-model="csv"
-              :map-fields="['sr_id','stu_id', 'sub_id', 'sr_year', 'sr_term', 'sr_grade']"
+              :map-fields="['stu_id', 'sub_id', 'sr_year', 'sr_term', 'sr_grade']"
             >
               <template slot="error"> <p class="text-danger">ไม่สามารถอ่านข้อมูลได้ กรุณาอัพโหลดใหม่อีกครั้ง</p></template>
 
@@ -151,7 +151,7 @@ export default {
       var studentResult = []
       this.csv.forEach((item) => {
         studentResult.push([
-          item.sr_id, item.stu_id, item.sub_id, item.sr_year, item.sr_term, item.sr_grade
+          item.stu_id, item.sub_id, item.sr_year, item.sr_term, item.sr_grade
         ])
       })
       await axios.post('http://localhost:8081/student_result/import', studentResult)

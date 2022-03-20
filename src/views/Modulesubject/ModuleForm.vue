@@ -1,60 +1,60 @@
 <template>
   <div>
-    <b-button @click="addNew" variant="primary"><i class="far fa-plus-square"></i> เพิ่มข้อมูลหมวดวิชา</b-button>
+    <b-button @click="addNew" variant="primary"><i class="far fa-plus-square"></i> เพิ่มข้อมูลโมดูล</b-button>
     <b-modal
-      id="modal-course"
-      ref="modalCourse"
-      title="ข้อมูลหมวดวิชา"
+      id="modal-module"
+      ref="modalModule"
+      title="ข้อมูลโมดูล"
       @show="showModal"
       @hidden="resetModal"
       @ok="handleOk"
     >
       <b-form @submit.stop.prevent="submit" @reset.stop.prevent="reset">
         <b-form-group
-          id="form-group-course-code"
-          label="หัวข้อ"
-          label-for="course-code"
+          id="form-group-module-name"
+          label="ชื่อโมดูล"
+          label-for="module-name"
         >
           <b-form-input
             type="text"
-            id="course-code"
-            v-model="form.st_name"
+            id="module-name"
+            v-model="form.module_name"
           >
           </b-form-input>
         </b-form-group>
         <b-form-group
-          id="form-group-course-cerdit"
-          label="หน่วยกิต"
-          label-for="course-credit-credit"
+          id="form-group-module-credit"
+          label="หน่วยกิตโมดูล"
+          label-for="module-credit-credit"
         >
           <b-form-input
             type="number"
-            id="course-credit-credit"
-            v-model="form.st_credit"
+            id="module-credit-credit"
+            v-model="form.module_credit"
           >
           </b-form-input>
         </b-form-group>
       </b-form>
-      <!-- <b-card>
+      <b-card>
         <pre>
         {{ form }}
       </pre
         >
-      </b-card> -->
+      </b-card>
     </b-modal>
   </div>
 </template>
 <script>
 export default {
   props: {
-    course: Object
+    module: Object
   },
   data () {
     return {
       form: {
-        st_id: -1,
-        st_name: '',
-        st_credit: 0,
+        module_id: -1,
+        module_name: '',
+        module_credit: 0,
         course_id: ''
       },
       isAddNew: false
@@ -70,25 +70,24 @@ export default {
     },
     show () {
       if (!this.isAddNew) {
-        this.form = { ...this.course }
-        this.id = this.course.st_id
+        this.form = { ...this.module }
+        this.id = this.module.module_id
       }
-      this.$refs.modalCourse.show()
+      this.$refs.modalModule.show()
     },
     submit () {
       console.log(this.form)
-      const course = JSON.parse(JSON.stringify(this.form))
-      course.st_credit = parseFloat(course.st_credit)
-      course.st_id = (this.form.st_id === -1) ? -1 : this.id
-      console.log(course)
-      this.$emit('save', course)
+      const module = JSON.parse(JSON.stringify(this.form))
+      module.module_id = (this.form.module_id === -1) ? -1 : this.id
+      console.log(module)
+      this.$emit('save', module)
       this.reset()
     },
     reset () {
       this.form = {
-        st_id: -1,
-        st_name: '',
-        st_credit: 0,
+        module_id: -1,
+        module_name: '',
+        module_credit: 0,
         course_id: this.$store.state.course_id
       }
     },
@@ -97,9 +96,9 @@ export default {
         this.reset()
       } else {
         // edit
-        this.form.st_id = this.course.id
-        this.form.st_name = this.course.st_name
-        this.form.st_credit = this.course.st_credit
+        this.form.module_id = this.module.module_id
+        this.form.module_name = this.module.module_name
+        this.form.module_credit = this.module.module_credit
         this.form.course_id = this.$store.state.course_id
       }
     },
@@ -111,7 +110,7 @@ export default {
       // if (!this.validateForm) return
       this.submit()
       this.$nextTick(() => {
-        this.$bvModal.hide('modal-course')
+        this.$bvModal.hide('modal-module')
       })
     }
   }

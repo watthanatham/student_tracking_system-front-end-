@@ -49,7 +49,7 @@ export default {
     },
     async saveCourseStructure (course) {
       if (course.st_id < 0) { // add
-        course.st_id = this.subjectId
+        course.st_id = this.courseId
         this.courseItems.push(course)
         this.courseId++
         await axios.post('http://localhost:8081/subject_type', course)

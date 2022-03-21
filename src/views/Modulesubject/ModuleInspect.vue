@@ -2,14 +2,23 @@
   <div>
     <b-dropdown
       id="dropdown-1"
-      :text="selectLabel"
+      :text="selectModuleLabel"
       variant="outline-primary"
       class="m-md-2"
     >
       <b-spinner label="Spinning" v-if="loading"></b-spinner>
       <b-dropdown-item v-else v-for="item in select_module" :key="item.value" @click="select(item)">{{ item.text }}</b-dropdown-item>
     </b-dropdown>
-    <b-button @click="getModules" variant="primary"><i class="fa fa-search"></i> ค้นหา</b-button>
+    <!-- <b-dropdown
+      id="dropdown-1"
+      :text="selectSeriesLabel"
+      variant="outline-primary"
+      class="m-md-2"
+    >
+      <b-spinner label="Spinning" v-if="loading"></b-spinner>
+      <b-dropdown-item v-else v-for="item in select_module" :key="item.value" @click="select(item)">{{ item.text }}</b-dropdown-item>
+    </b-dropdown> -->
+    <b-button @click="getModuleReports" variant="primary"><i class="fa fa-search"></i> ค้นหา</b-button>
     <b-container fluid>
       <b-row>
         <b-col>
@@ -35,31 +44,34 @@ export default {
     return {
       loading: false,
       fields: [
+        { key: 'sub_id', label: 'รหัสวิชา' },
         { key: 'sub_name_thai', label: 'ชื่อวิชา' },
-        { key: 'a', label: 'จำนวนนิสิตที่ผ่านแล้ว' },
-        { key: 'b', label: 'จำนวนนิสิตที่ไม่ผ่าน ' }
+        { key: 'series', label: 'ชั้นปี' },
+        { key: 'pass', label: 'จำนวนนิสิตที่ผ่าน' },
+        { key: 'fail', label: 'จำนวนนิสิตที่ไม่ผ่าน' }
       ],
       submoduleItems: [],
       select_module: [],
       selectedItem: null,
-      selectLabel: 'เลือกโมดูล',
+      selectModuleLabel: 'เลือกโมดูล',
+      selectSeriesLabel: 'เลือกชั้นปี',
       selectData: []
     }
   },
   methods: {
     select (item) {
       this.selectData = item
-      this.selectLabel = this.selectData.text
+      this.selectModuleLabel = this.selectData.text
     },
-    // async getModules () {
-    //   const cid = this.$store.state.course_id
-    //   const mid = this.selectData.value
-    //   await axios
-    //     .get('http://localhost:8081/model_subject/' + cid + '/' + mid)
-    //     .then((data) => {
-    //       this.submoduleItems = data.data
-    //     })
-    // },
+    async getModuleReports () {
+      const cid = this.$store.state.course_id
+      const mid = this.selectData.value
+      await axios
+        .get('http://localhost:8081/model_subject/inspect' + cid + '/' + mid)
+        .then((data) => {
+          this.submoduleItems = data.data
+        })
+    },
     async selectModule () {
       this.loading = true
       const cid = this.$store.state.course_id
@@ -72,7 +84,7 @@ export default {
     }
   },
   mounted () {
-    // this.getModules()
+    // this.getModuleReports()
     this.selectModule()
   }
 }

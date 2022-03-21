@@ -110,6 +110,11 @@ const routes = [
     path: '/moduleinspect',
     name: 'Module Inspect',
     component: () => import('../views/Modulesubject/ModuleInspect.vue')
+  },
+  {
+    path: '/studymodule',
+    name: 'Module Overview Result',
+    component: () => import('../views/Study_results/Study_module.vue')
   }
 ]
 

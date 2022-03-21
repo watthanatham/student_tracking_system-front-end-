@@ -1,8 +1,8 @@
 <template>
   <div>
     <b-nav class="mt-4">
-      <b-nav-item to="/subjectstudyResult">วิชาหน่วยกิตที่ต้องเก็บ</b-nav-item>
-      <b-nav-item to="/">โมดูล</b-nav-item>
+      <b-nav-item to="/studyResult">วิชาหน่วยกิตที่ต้องเก็บ</b-nav-item>
+      <b-nav-item to="/studymodule">โมดูล</b-nav-item>
     </b-nav>
     <b-dropdown
       id="dropdown-1"

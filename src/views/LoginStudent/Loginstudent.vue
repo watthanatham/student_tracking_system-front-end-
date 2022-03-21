@@ -4,7 +4,7 @@
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body">
-            <b-img src="https://itdang2009.com/wp-content/uploads/2020/03/%E0%B8%9B%E0%B8%81-7.jpg" width="390px" height="185%" class="pt-0 pd-2" ></b-img>
+            <b-img src="https://itdang2009.com/wp-content/uploads/2020/03/%E0%B8%9B%E0%B8%81-7.jpg" width="405px" height="185%" class="pt-0 pd-2" ></b-img>
             <h5 class="card-title text-center"><b>นิสิต</b></h5>
             <form class="form-signin">
               <div class="form-label-group">

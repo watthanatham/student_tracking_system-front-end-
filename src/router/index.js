@@ -94,12 +94,12 @@ const routes = [
   {
     path: '/loginteacher',
     name: 'Login Teacher',
-    component: () => import('../components/LoginTeacher/Loginteacher.vue')
+    component: () => import('../views/LoginTeacher/Loginteacher.vue')
   },
   {
     path: '/loginstudent',
     name: 'Login Student',
-    component: () => import('../components/LoginStudent/Loginstudent.vue')
+    component: () => import('../views/LoginStudent/Loginstudent.vue')
   },
   {
     path: '/loginbeforescreen',

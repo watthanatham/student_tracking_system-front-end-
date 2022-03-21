@@ -16,7 +16,7 @@
           <b-table
             striped
             hover
-            :items="moduleItems"
+            :items="submoduleItems"
             :fields="fields"
             class="text-left"
           >
@@ -37,9 +37,9 @@ export default {
       fields: [
         { key: 'sub_name_thai', label: 'ชื่อวิชา' },
         { key: 'a', label: 'จำนวนนิสิตที่ผ่านแล้ว' },
-        { key: 'b', label: 'จำนวนนิสิตที่ไม่ผ่าน' }
+        { key: 'b', label: 'จำนวนนิสิตที่ไม่ผ่าน ' }
       ],
-      moduleItems: [],
+      submoduleItems: [],
       select_module: [],
       selectedItem: null,
       selectLabel: 'เลือกโมดูล',
@@ -57,7 +57,7 @@ export default {
     //   await axios
     //     .get('http://localhost:8081/model_subject/' + cid + '/' + mid)
     //     .then((data) => {
-    //       this.moduleItems = data.data
+    //       this.submoduleItems = data.data
     //     })
     // },
     async selectModule () {

@@ -98,7 +98,9 @@ export default {
         { text: 'C', value: 'C' },
         { text: 'D+', value: 'D+' },
         { text: 'D', value: 'D' },
-        { text: 'F', value: 'F' }
+        { text: 'F', value: 'F' },
+        { text: 'W', value: 'W' },
+        { text: 'กำลังศึกษา', value: '-' }
       ],
       studentResult_term: [
         { text: 'เลือกเทอมการศึกษา', value: null },

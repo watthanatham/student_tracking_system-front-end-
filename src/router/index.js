@@ -102,7 +102,7 @@ const routes = [
     component: () => import('../views/LoginStudent/Loginstudent.vue')
   },
   {
-    path: 'loginscreen',
+    path: '/loginscreen',
     name: 'Login Screen',
     component: () => import('../views/Screenbeforelogin/screenbeforelogin.vue')
   },

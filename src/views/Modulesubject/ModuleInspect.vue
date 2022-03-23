@@ -7,18 +7,36 @@
       class="m-md-2"
     >
       <b-spinner label="Spinning" v-if="loading"></b-spinner>
-      <b-dropdown-item v-else v-for="item in select_module" :key="item.value" @click="select(item)">{{ item.text }}</b-dropdown-item>
+      <b-dropdown-item
+        v-else
+        v-for="item in select_module"
+        :key="item.value"
+        @click="select(item)"
+        >{{ item.text }}</b-dropdown-item
+      >
     </b-dropdown>
-    <!-- <b-dropdown
+    <b-dropdown
       id="dropdown-1"
       :text="selectSeriesLabel"
       variant="outline-primary"
       class="m-md-2"
+      ref="dropdown"
     >
       <b-spinner label="Spinning" v-if="loading"></b-spinner>
-      <b-dropdown-item v-else v-for="item in select_module" :key="item.value" @click="select(item)">{{ item.text }}</b-dropdown-item>
-    </b-dropdown> -->
-    <b-button @click="getModuleReports" variant="primary"><i class="fa fa-search"></i> ค้นหา</b-button>
+      <div style="height: 250px; overflow-y: auto" v-else>
+        <b-dropdown-item
+          v-for="i in getNumbers(dateYear.min, dateYear.max)"
+          :key="i"
+          @click="selectYear(i)"
+          :class="'year' + i"
+          :style="{'background-color': (i === dateYear.select) ? '#e9ecef' : ''}"
+          >{{ i }}</b-dropdown-item
+        >
+      </div>
+    </b-dropdown>
+    <b-button @click="getModuleReports" variant="primary"
+      ><i class="fa fa-search"></i> ค้นหา</b-button
+    >
     <b-container fluid>
       <b-row>
         <b-col>
@@ -38,8 +56,7 @@
 <script>
 import axios from 'axios'
 export default {
-  components: {
-  },
+  components: {},
   data () {
     return {
       loading: false,
@@ -55,19 +72,43 @@ export default {
       selectedItem: null,
       selectModuleLabel: 'เลือกโมดูล',
       selectSeriesLabel: 'เลือกชั้นปี',
-      selectData: []
+      selectData: [],
+      selectSeries: [],
+      dateYear: {
+        min: 60,
+        max: 80,
+        select: 0
+      }
     }
   },
   methods: {
+    getNumbers (start, stop) {
+      return new Array(stop + 1 - start).fill(start).map((n, i) => n + i)
+    },
     select (item) {
       this.selectData = item
       this.selectModuleLabel = this.selectData.text
     },
+    selectYear (item) {
+      this.loading = true
+      this.selectSeries = item
+      this.selectSeriesLabel = this.selectSeries.text
+      this.dateYear.select = item
+      this.scroll(item)
+    },
+    scroll (id) {
+      this.$nextTick(() => {
+        this.$refs.dropdown.$el.querySelector('.year' + id).scrollIntoView()
+      })
+      // console.log(this.$refs)
+      // console.log(document.getElementById('year' + id))
+    },
     async getModuleReports () {
       const cid = this.$store.state.course_id
       const mid = this.selectData.value
+      const stu = this.selectSeries.value
       await axios
-        .get('http://localhost:8081/model_subject/inspect' + cid + '/' + mid)
+        .get('http://localhost:8081/model_subject/inspect' + cid + '/' + mid + '/' + stu)
         .then((data) => {
           this.submoduleItems = data.data
         })
@@ -75,17 +116,24 @@ export default {
     async selectModule () {
       this.loading = true
       const cid = this.$store.state.course_id
-      await axios.get('http://localhost:8081/model_subject/md/' + cid).then(data => {
-        this.select_module = data.data
-        console.log(this.select_module)
-        this.loading = false
-      })
+      await axios
+        .get('http://localhost:8081/model_subject/md/' + cid)
+        .then((data) => {
+          this.select_module = data.data
+          console.log(this.select_module)
+          this.loading = false
+        })
       this.select_module.unshift({ text: 'เลือกโมดูล', value: null })
     }
   },
   mounted () {
     // this.getModuleReports()
     this.selectModule()
+    var date = new Date()
+    var year = date.getFullYear() + 543 + ''
+    var yearNow = year.slice(2, 4)
+    this.dateYear.select = Number(yearNow)
+    this.scroll(this.dateYear.select)
   }
 }
 </script>

@@ -4,17 +4,14 @@
       <b-nav-item to="/studyResult">วิชาหน่วยกิตที่ต้องเก็บ</b-nav-item>
       <b-nav-item to="/studymodule">โมดูล</b-nav-item>
     </b-nav>
-    <b-dropdown
-      id="dropdown-1"
-      :text="selectModuleLabel"
-      variant="outline-primary"
-      class="m-md-2"
-    >
-      <b-spinner label="Spinning" v-if="loading"></b-spinner>
-      <b-dropdown-item v-else v-for="item in select_module" :key="item.value" @click="select(item)">{{ item.text }}</b-dropdown-item>
-    </b-dropdown>
-    <b-button @click="getModuleOverview" variant="primary"><i class="fa fa-search"></i> ค้นหา</b-button>
     <b-container fluid>
+      <b-row>
+        <b-col>
+          <b-button variant="info" class="ml-2" to="/studycheckmoduleresult"
+            ><i class="fa fa-list-alt"></i> ตรวจสอบข้อมูลของนิสิต</b-button
+          >
+        </b-col>
+      </b-row>
       <b-row>
         <b-col>
           <b-table
@@ -33,8 +30,7 @@
 <script>
 import axios from 'axios'
 export default {
-  components: {
-  },
+  components: {},
   data () {
     return {
       loading: false,
@@ -46,36 +42,20 @@ export default {
       submoduleItems: [],
       select_module: [],
       selectedItem: null,
-      selectModuleLabel: 'เลือกโมดูล',
       selectData: []
     }
   },
   methods: {
-    select (item) {
-      this.selectData = item
-      this.selectModuleLabel = this.selectData.text
-    },
     async getModuleOverview () {
       await axios
         .get('http://localhost:8081/study_check_module')
         .then((data) => {
           this.submoduleItems = data.data
         })
-    },
-    async selectModule () {
-      this.loading = true
-      // const cid = this.$store.state.course_id
-      await axios.get('http://localhost:8081/model_subject/md/1').then(data => {
-        this.select_module = data.data
-        console.log(this.select_module)
-        this.loading = false
-      })
-      this.select_module.unshift({ text: 'เลือกโมดูล', value: null })
     }
   },
   mounted () {
     this.getModuleOverview()
-    this.selectModule()
   }
 }
 </script>

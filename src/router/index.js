@@ -115,6 +115,11 @@ const routes = [
     path: '/studymodule',
     name: 'Module Overview Result',
     component: () => import('../views/Study_results/Study_module.vue')
+  },
+  {
+    path: '/studycheckmoduleresult',
+    name: 'Study Check Module Result',
+    component: () => import('../views/Study_results/Study_module_result.vue')
   }
 ]
 

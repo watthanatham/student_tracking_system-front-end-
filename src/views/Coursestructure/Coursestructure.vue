@@ -10,7 +10,7 @@
       <b-row>
         <b-col class="text-right">
           <CoursestructureForm
-            :subject="selectedItem"
+            :coursetype="selectedItem"
             ref="coursestructureForm"
             @save="saveCourseStructure"
           ></CoursestructureForm>
@@ -20,10 +20,10 @@
         <b-col>
           <b-table :items="courseItems" :fields="fields" class="tablecourse">
             <template #cell(st_edit)="{ item }">
-              <b-button @click="editSubject(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
+              <b-button @click="editCourse(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
             </template>
             <template #cell(st_del)="{ item }">
-              <b-button @click="deleteSubject(item)" variant="danger"
+              <b-button @click="deleteCourse(item)" variant="danger"
                 ><i class="fas fa-trash-alt"></i></b-button
               >
             </template>
@@ -54,7 +54,7 @@ export default {
         this.courseId++
         await axios.post('http://localhost:8081/subject_type', course)
         this.getCourseStructure()
-      } else { // save
+      } else { // edit
         const index = this.courseItems.findIndex((item) => {
           return course.st_id === item.st_id
         })
@@ -63,27 +63,30 @@ export default {
         this.getCourseStructure()
       }
     },
-    editCourse (item) {
-      // this.selectedItem = JSON.parse(JSON.stringify(item))
-      this.selectedItem = { ...item }
+    async editCourse (item) {
+      console.log(item)
+      const temp = await axios.put('http://localhost:8081/subject_type/' + item.st_id)
+      this.selectedItem = { ...temp.data[0] }
+      this.oid = this.selectedItem.st_id
       this.$nextTick(() => {
         this.$refs.coursestructureForm.show()
       })
-    },
-    async deleteCourse (subject) {
-      console.log(subject)
-      if (confirm(`คุณต้องการจะลบข้อมูลหมวดวิชา ${subject.st_name} หรือไม่`)) {
-        const index = this.courseItems.findIndex(function (item) {
-          return subject.st_id === item.st_id
-        })
-        this.courseItems.splice(index, 1)
-        await axios.delete('http://localhost:8081/subject_type/' + subject.st_id)
-        this.getCourseStructure()
-      }
     }
+    // async deleteCourse (subject) {
+    //   console.log(subject)
+    //   if (confirm(`คุณต้องการจะลบข้อมูลหมวดวิชา ${subject.st_name} หรือไม่`)) {
+    //     const index = this.courseItems.findIndex(function (item) {
+    //       return subject.st_id === item.st_id
+    //     })
+    //     this.courseItems.splice(index, 1)
+    //     await axios.delete('http://localhost:8081/subject_type/' + subject.st_id)
+    //     this.getCourseStructure()
+    //   }
+    // }
   },
   data () {
     return {
+      oid: '',
       fields: [
         { key: 'st_name', label: 'หัวข้อ' },
         { key: 'st_credit', label: 'หน่วยกิต' },

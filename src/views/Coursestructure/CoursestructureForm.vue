@@ -97,7 +97,7 @@ export default {
         this.reset()
       } else {
         // edit
-        this.form.st_id = this.course.id
+        // this.form.st_id = this.st_id
         this.form.st_name = this.course.st_name
         this.form.st_credit = this.course.st_credit
         this.form.course_id = this.$store.state.course_id

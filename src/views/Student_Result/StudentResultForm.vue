@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button @click="addNew" variant="primary"><i class="far fa-plus-square"></i> เพิ่มข้อมูลผลการเรียน</b-button>
+    <b-button @click="addNew" variant="primary" class="ADD"><b-icon icon="plus-square-fill"></b-icon> เพิ่มข้อมูลผลการเรียน</b-button>
     <b-modal
       id="modal-studentResult"
       ref="modalstudentResult"
@@ -173,4 +173,8 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+.ADD {
+  margin-block-start: 10px;
+}
+</style>

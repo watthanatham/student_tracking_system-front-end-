@@ -10,7 +10,7 @@
       <b-row>
         <b-col class="text-right">
           <CoursestructureForm
-            :coursetype="selectedItem"
+            :course="selectedItem"
             ref="coursestructureForm"
             @save="saveCourseStructure"
           ></CoursestructureForm>
@@ -45,6 +45,7 @@ export default {
       const id = this.$store.state.course_id
       await axios.get('http://localhost:8081/subject_type/' + id).then(data => {
         this.courseItems = data.data
+        console.log(data.data)
       })
     },
     async saveCourseStructure (course) {
@@ -64,9 +65,10 @@ export default {
       }
     },
     async editCourse (item) {
-      console.log(item)
-      const temp = await axios.put('http://localhost:8081/subject_type/' + item.st_id)
+      console.log(item.st_id)
+      const temp = await axios.get('http://localhost:8081/subject_type/search_id/' + item.st_id)
       this.selectedItem = { ...temp.data[0] }
+      console.log(temp.data[0])
       this.oid = this.selectedItem.st_id
       this.$nextTick(() => {
         this.$refs.coursestructureForm.show()

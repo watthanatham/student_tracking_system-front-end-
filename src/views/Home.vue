@@ -12,6 +12,9 @@ export default {
   name: 'Home',
   components: {
     HelloWorld
+  },
+  mounted () {
+    console.log(this.$store.state.auth.data)
   }
 }
 </script>

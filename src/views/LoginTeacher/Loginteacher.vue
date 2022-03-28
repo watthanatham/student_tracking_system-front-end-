@@ -1,29 +1,46 @@
 <template>
-     <div class="container">
+  <div class="container">
     <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body">
-            <b-img src="https://itdang2009.com/wp-content/uploads/2020/03/%E0%B8%9B%E0%B8%81-7.jpg" width="405px" height="185%" class="pt-0 pd-2" ></b-img>
+            <!-- <b-img
+              src="https://itdang2009.com/wp-content/uploads/2020/03/%E0%B8%9B%E0%B8%81-7.jpg"
+              width="405px"
+              height="185%"
+              class="pt-0 pd-2"
+            ></b-img> -->
             <h5 class="card-title text-center"><b>บุคคลากร</b></h5>
             <form class="form-signin">
               <div class="form-label-group">
-                <input class="form-control" placeholder="Username" required autofocus>
+                <input
+                  class="form-control"
+                  placeholder="Username"
+                  v-model="form.staff_username"
+                  required
+                  autofocus
+                />
                 <p id="demo2" class="active text-danger"></p>
               </div>
               <div class="form-label-group">
-                <input type= "password" class="form-control" placeholder="Password" required>
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  v-model="form.staff_password"
+                  required
+                />
                 <p id="demo3" class="active text-danger"></p>
               </div>
               <div>
-                <b-button
-                  class="btn btn-lg btn-dark btn-block text-uppercase"
+                <b-button class="btn btn-lg btn-dark btn-block text-uppercase"
+                @click="onSubmit"
                   >เข้าสู่ระบบ</b-button
                 >
                 <!-- &nbsp; -->
                 <!-- <br> -->
-                <b-button
-                  class="btn btn-lg btn-light btn-block text-uppercase"
+                <b-button class="btn btn-lg btn-light btn-block text-uppercase"
+                @click="onReset"
                   >ยกเลิก</b-button
                 >
               </div>
@@ -37,7 +54,28 @@
 <script>
 export default {
   data () {
-    return {}
+    return {
+      form: {
+        staff_username: '',
+        staff_password: ''
+      },
+      show: true
+    }
+  },
+  methods: {
+    onSubmit (event) {
+      event.preventDefault()
+      this.$store.dispatch('auth/login', this.form)
+    },
+    onReset (event) {
+      event.preventDefault()
+      this.form.staff_username = ''
+      this.form.staff_password = ''
+      this.show = false
+      this.$nextTick(() => {
+        this.show = true
+      })
+    }
   }
 }
 </script>
@@ -50,13 +88,13 @@ export default {
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(105, 105, 104, 0.473);
 }
-.btn-dark{
+.btn-dark {
   border: 2;
-  background-image: linear-gradient(to left, #353533,#504d4d);
+  background-image: linear-gradient(to left, #353533, #504d4d);
 }
-.btn-dark:hover{
+.btn-dark:hover {
   border: 2;
-  background-image: linear-gradient(to right, #757976,#929190);
+  background-image: linear-gradient(to right, #757976, #929190);
 }
 .card-signin {
   border: 5;

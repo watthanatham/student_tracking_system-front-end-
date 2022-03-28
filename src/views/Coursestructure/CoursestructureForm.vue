@@ -71,7 +71,8 @@ export default {
     show () {
       if (!this.isAddNew) {
         this.form = { ...this.course }
-        this.id = this.course.st_id
+        this.id = this.form.st_id
+        console.log(this.form)
       }
       this.$refs.modalCourse.show()
     },

@@ -11,7 +11,7 @@
         <b-nav-item to="/studyResult">(นิสิต) Study results</b-nav-item>
         <b-nav-item to="/train_hours">(นิสิต) สหกิจ</b-nav-item>
         <b-nav-item to="/about"><b-icon icon="gear"></b-icon> จัดการผู้ใช้งาน</b-nav-item>
-        <b-nav-item to="/loginbeforescreen"><b-icon icon="box-arrow-left"></b-icon> ออกจากระบบ</b-nav-item>
+        <b-nav-item to="/loginscreen" @click="logout ()"><b-icon icon="box-arrow-left"></b-icon> ออกจากระบบ</b-nav-item>
         <b-nav-item to="/loginscreen"><b-icon icon="box-arrow-right"></b-icon> เข้าสู่ระบบ</b-nav-item>
     </b-nav>
 </div>
@@ -21,6 +21,11 @@
 export default {
   data () {
     return {
+    }
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch('auth/logout')
     }
   }
 }

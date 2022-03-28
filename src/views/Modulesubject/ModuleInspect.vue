@@ -92,24 +92,23 @@ export default {
     selectYear (item) {
       this.loading = true
       this.selectSeries = item
-      this.selectSeriesLabel = this.selectSeries.text
+      this.selectSeriesLabel = this.selectSeries + ''
       this.dateYear.select = item
       this.scroll(item)
+      this.loading = false
     },
     scroll (id) {
-      this.$nextTick(() => {
-        this.$refs.dropdown.$el.querySelector('.year' + id).scrollIntoView()
-      })
-      // console.log(this.$refs)
-      // console.log(document.getElementById('year' + id))
+      this.$refs.dropdown.$el.querySelector('.year' + id).scrollIntoView()
     },
     async getModuleReports () {
       const cid = this.$store.state.course_id
       const mid = this.selectData.value
-      const stu = this.selectSeries.value
+      const stu = this.selectSeries
+      console.log(mid)
       await axios
-        .get('http://localhost:8081/model_subject/inspect' + cid + '/' + mid + '/' + stu)
+        .get('http://localhost:8081/model_subject/inspect/' + cid + '/' + mid + '/' + stu)
         .then((data) => {
+          console.log(data.data)
           this.submoduleItems = data.data
         })
     },
@@ -133,7 +132,9 @@ export default {
     var year = date.getFullYear() + 543 + ''
     var yearNow = year.slice(2, 4)
     this.dateYear.select = Number(yearNow)
-    this.scroll(this.dateYear.select)
+    setTimeout(() => {
+      this.scroll(this.dateYear.select)
+    }, 1500)
   }
 }
 </script>

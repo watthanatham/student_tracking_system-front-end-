@@ -1,54 +1,58 @@
 import { AUTH_LOGIN, AUTH_LOGOUT } from '../mutation-types'
 import router from '../../router'
 import { loginAuth } from '../../services/auth'
-// import jwtDecode from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
 
 export default {
   namespaced: true,
   state: () => ({
-    staff: JSON.parse(localStorage.getItem('staff'))
-    // staffData: jwtDecode(localStorage.getItem('token'))
+    staff: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
+    // staff: JSON.parse(localStorage.getItem('staff')) || null,
+    // staffData: jwtDecode(localStorage.getItem('token')) || null
+    staffData: localStorage.getItem('token') ? jwtDecode(localStorage.getItem('token')) : null
   }),
   mutations: {
     [AUTH_LOGIN] (state, payload) { // payload เป็นกล่องที่ใส่ของเข้ามา
-      state.staff = payload
+      state.user = payload
     },
     [AUTH_LOGOUT] (state) {
-      state.staff = null
+      state.user = null
     }
   },
   actions: {
-    async login ({ commit }, payload) { // commit ดึง object ของ context มา
+    async login ({ commit }, payload) {
       console.log(payload)
       try {
-        let type = payload.staff_username
-        if (typeof type === 'number') {
+        const check = payload.username
+        console.log(check)
+        let type
+        if (check.match(/[0-9]{8}$/g)) {
           type = 'student'
         } else {
           type = 'staff'
         }
-        const res = await loginAuth(payload.staff_username, payload.staff_password, type) // เรียกฟังก์ชั่น Login
-        const staff = res.data.staff
+        console.log(type)
+        const res = await loginAuth(payload.username, payload.password, type)
+        const user = res.data.user
         const token = res.data.token
         localStorage.setItem('token', token)
-        localStorage.setItem('staff', JSON.stringify(staff))
+        localStorage.setItem('user', JSON.stringify(user))
 
-        console.log(res)
         router.push('/')
-        commit(AUTH_LOGIN, staff)
+        commit(AUTH_LOGIN, user)
       } catch (e) {
         console.log('Error')
       }
     },
     logout ({ commit }) {
       localStorage.removeItem('token')
-      localStorage.removeItem('staff')
+      localStorage.removeItem('user')
       commit(AUTH_LOGOUT)
     }
   },
   getters: {
     isLogin (state, getters) {
-      return state.staff != null
+      return state.user != null
     }
   }
 }

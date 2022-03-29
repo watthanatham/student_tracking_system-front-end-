@@ -15,7 +15,9 @@
               <div class="form-label-group">
                 <input
                   class="form-control"
+                  type="number"
                   placeholder="Username"
+                  v-model="form.username"
                   required
                   autofocus
                 />
@@ -26,18 +28,20 @@
                   type="password"
                   class="form-control"
                   placeholder="Password"
+                  v-model="form.password"
                   required
                 />
                 <p id="demo3" class="active text-danger"></p>
               </div>
               <div>
                 <b-button class="btn btn-lg btn-dark btn-block text-uppercase"
-                @click="loginSystem"
+                @click="onSubmit"
                   >เข้าสู่ระบบ</b-button
                 >
                 <!-- &nbsp; -->
                 <!-- <br> -->
                 <b-button class="btn btn-lg btn-light btn-block text-uppercase"
+                @click="onReset"
                   >ยกเลิก</b-button
                 >
               </div>
@@ -49,21 +53,29 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
 export default {
   data () {
     return {
-      login: {
-        staff_username: '',
-        staff_password: ''
-      }
+      form: {
+        username: '',
+        password: ''
+      },
+      show: true
     }
   },
   methods: {
-    async loginSystem () {
-      await axios
-        .post('http://localhost:8081/staff/login', this.login)
-        .then((response) => console.log(response))
+    onSubmit (event) {
+      event.preventDefault()
+      this.$store.dispatch('auth/login', this.form)
+    },
+    onReset (event) {
+      event.preventDefault()
+      this.form.username = ''
+      this.form.password = ''
+      this.show = false
+      this.$nextTick(() => {
+        this.show = true
+      })
     }
   }
 }

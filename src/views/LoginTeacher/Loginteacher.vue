@@ -15,8 +15,9 @@
               <div class="form-label-group">
                 <input
                   class="form-control"
+                  type="text"
                   placeholder="Username"
-                  v-model="form.staff_username"
+                  v-model="form.username"
                   required
                   autofocus
                 />
@@ -27,7 +28,7 @@
                   type="password"
                   class="form-control"
                   placeholder="Password"
-                  v-model="form.staff_password"
+                  v-model="form.password"
                   required
                 />
                 <p id="demo3" class="active text-danger"></p>
@@ -56,8 +57,8 @@ export default {
   data () {
     return {
       form: {
-        staff_username: '',
-        staff_password: ''
+        username: '',
+        password: ''
       },
       show: true
     }
@@ -69,8 +70,8 @@ export default {
     },
     onReset (event) {
       event.preventDefault()
-      this.form.staff_username = ''
-      this.form.staff_password = ''
+      this.form.username = ''
+      this.form.password = ''
       this.show = false
       this.$nextTick(() => {
         this.show = true

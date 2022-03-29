@@ -13,8 +13,24 @@
         </b-col>
       </b-row>
       <b-row>
+        <b-col lg="4" class="my-1" >
+          <b-form-group>
+          <b-input-group size="md">
+            <b-form-input
+              id="filter-input"
+              v-model="filter"
+              type="search"
+              placeholder=" ค้นหาข้อมูลข้อมูลวิชา">
+            </b-form-input>
+
+            <b-input-group-append>
+              <b-button :active="!filter" @click="filter = ''" variant="primary">Clear</b-button>
+            </b-input-group-append>
+          </b-input-group>
+          </b-form-group>
+        </b-col>
         <b-col>
-          <b-table striped hover :items="student_resutlItems" :fields="fields" class="text-left">
+          <b-table striped hover :items="student_resutlItems" :filter="filter" :fields="fields" class="text-left">
             <template #cell(stu_edit)="{ item }">
               <b-button @click="editStudentResult(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
             </template>
@@ -95,9 +111,9 @@ export default {
         { key: 'stu_edit', label: 'แก้ไข' },
         { key: 'stu_del', label: 'ลบข้อมูล' }
       ],
-      student_resutlItems: [
-      ],
-      selectedItem: null
+      student_resutlItems: [],
+      selectedItem: null,
+      filter: null
     }
   },
   mounted () {

@@ -192,7 +192,7 @@ code {
   text-align: left;
 }
 .buttonImport {
-  margin-right: -915px;
+  margin-right: -555px;
   margin-block-start: -69px;
 }
 </style>

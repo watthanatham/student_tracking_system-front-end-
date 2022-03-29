@@ -22,8 +22,30 @@
         </b-col>
       </b-row>
       <b-row>
+        <b-col lg="4" class="my-1" >
+          <b-form-group>
+          <b-input-group size="md">
+            <b-form-input
+              id="filter-input"
+              v-model="filter"
+              type="search"
+              placeholder=" ค้นหาข้อมูลข้อมูลวิชา">
+            </b-form-input>
+
+            <b-input-group-append>
+              <b-button :active="!filter" @click="filter = ''" variant="primary">Clear</b-button>
+            </b-input-group-append>
+          </b-input-group>
+          </b-form-group>
+        </b-col>
         <b-col style="padding:0">
-          <b-table striped hover :items="subjectItems" :fields="fields" class="tableSubject" @row-clicked="selectedSubject">
+          <b-table  striped
+                    hover
+                  :filter="filter"
+                  :items="subjectItems"
+                  :fields="fields"
+                  class="tableSubject"
+                  @row-clicked="selectedSubject">
             <template #cell(sub_edit)="{ item }">
               <b-button @click="editSubject(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
             </template>
@@ -104,9 +126,9 @@ export default {
         { key: 'sub_edit', label: 'แก้ไข' },
         { key: 'sub_del', label: 'ลบข้อมูล' }
       ],
-      subjectItems: [
-      ],
-      selectedItem: null
+      subjectItems: [],
+      selectedItem: null,
+      filter: null
     }
   },
   mounted () {
@@ -122,5 +144,8 @@ tableSubject{
   & tr {
     cursor: pointer;
   }
+}
+.my-1 {
+  margin-inline-start: 770px;
 }
 </style>

@@ -14,7 +14,27 @@
       </b-row>
       <b-row>
         <b-col>
+          <b-col lg="3" class="my-0" >
+          <b-form-group>
+          <b-input-group size="md">
+            <b-form-input
+              id="filter-input"
+              v-model="filter"
+              type="search"
+              placeholder=" ค้นหาข้อมูลนิสิต">
+            </b-form-input>
+
+            <b-input-group-append>
+              <b-button :active="!filter" @click="filter = ''" variant="primary">Clear</b-button>
+            </b-input-group-append>
+          </b-input-group>
+          </b-form-group>
+          </b-col>
           <b-table
+            :current-page="currentPage"
+            :per-page="perPage"
+            :filter="filter"
+            @filtered="onFiltered"
             striped
             hover
             :items="studentItems"
@@ -32,6 +52,16 @@
               ></b-button>
             </template>
           </b-table>
+          <b-col sm="7" md="6" class="my-1">
+              <b-pagination
+                v-model="currentPage"
+                :total-rows="totalRows"
+                :per-page="perPage"
+                align="fill"
+                size="sm"
+                class="my-0">
+              </b-pagination>
+          </b-col>
         </b-col>
       </b-row>
     </b-container>
@@ -107,6 +137,12 @@ export default {
       } else {
         this.makeToast('ปรับปรุงไม่สำเร็จ', 'ไม่สามารถลบข้อมูลของ ' + student.stu_firstname + 'danger')
       }
+    },
+    onFiltered (filteredItems) {
+      console.log(filteredItems)
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      this.totalRows = filteredItems.length
+      this.currentPage = 1
     }
   },
   data () {
@@ -119,6 +155,10 @@ export default {
         { key: 'stu_edit', label: 'แก้ไข' },
         { key: 'stu_del', label: 'ลบข้อมูล' }
       ],
+      totalRows: 1,
+      currentPage: 1,
+      perPage: 10,
+      filter: null,
       studentItems: [],
       selectedItem: null
     }
@@ -133,5 +173,8 @@ export default {
   text-align: center;
   margin-inline-end: 300px;
   background-color: whitesmoke;
+}
+.my-0 {
+  margin-inline-start: 848px;
 }
 </style>

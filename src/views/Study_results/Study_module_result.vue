@@ -1,8 +1,8 @@
 <template>
   <div>
     <b-nav class="mt-4">
-      <b-nav-item to="/studyResult">วิชาหน่วยกิตที่ต้องเก็บ</b-nav-item>
-      <b-nav-item to="/studymodule">โมดูล</b-nav-item>
+      <b-nav-item to="/studyResult">ตรวจสอบหมวดวิชา</b-nav-item>
+      <b-nav-item to="/studymodule">ตรวจสอบโมดูล</b-nav-item>
     </b-nav>
     <b-dropdown
       id="dropdown-1"
@@ -58,8 +58,9 @@ export default {
     async getSubjectbyModule () {
       // const cid = this.$store.state.course_id
       const mid = this.selectData.value
+      const stu = this.$store.state.auth.userData.stu_id
       await axios
-        .get('http://localhost:8081/study_check_module/check_result/' + mid)
+        .get('http://localhost:8081/study_check_module/check_result/' + mid + '/' + stu)
         .then((data) => {
           this.resultItems = data.data
         })
@@ -67,7 +68,8 @@ export default {
     async selectModule () {
       this.loading = true
       // const cid = this.$store.state.course_id
-      await axios.get('http://localhost:8081/model_subject/md/1').then(data => {
+      const mid = this.$store.state.auth.userData.course_id
+      await axios.get('http://localhost:8081/model_subject/md/' + mid).then(data => {
         this.select_module = data.data
         console.log(this.select_module)
         this.loading = false

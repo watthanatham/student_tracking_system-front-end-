@@ -1,8 +1,8 @@
 <template>
   <div>
     <b-nav class="mt-4">
-      <b-nav-item to="/studyResult">วิชาหน่วยกิตที่ต้องเก็บ</b-nav-item>
-      <b-nav-item to="/studymodule">โมดูล</b-nav-item>
+      <b-nav-item to="/studyResult">ตรวจสอบหมวดวิชา</b-nav-item>
+      <b-nav-item to="/studymodule">ตรวจสอบโมดูล</b-nav-item>
     </b-nav>
     <b-dropdown
       id="dropdown-1"
@@ -31,7 +31,8 @@ export default {
   methods: {
     async getStudyResult () {
       const tid = this.selectData.value
-      await axios.get('http://localhost:8081/study_results/' + tid).then(data => {
+      const stu = this.$store.state.auth.userData.stu_id
+      await axios.get('http://localhost:8081/study_results/' + tid + '/' + stu).then(data => {
         this.subjecttypeItems = data.data
       })
     },
@@ -41,8 +42,9 @@ export default {
     },
     async selectType () {
       // change fixed course id when dev login system
+      const tid = this.$store.state.auth.userData.course_id
       this.loading = true
-      await axios.get('http://localhost:8081/subject_type/st/1').then(data => {
+      await axios.get('http://localhost:8081/subject_type/st/' + tid).then(data => {
         this.select_type = data.data
         console.log(this.select_type)
         this.loading = false

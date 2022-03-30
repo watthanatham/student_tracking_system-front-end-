@@ -1,8 +1,8 @@
 <template>
   <div>
     <b-nav class="mt-4">
-      <b-nav-item to="/studyResult">วิชาหน่วยกิตที่ต้องเก็บ</b-nav-item>
-      <b-nav-item to="/studymodule">โมดูล</b-nav-item>
+      <b-nav-item to="/studyResult">ตรวจสอบหมวดวิชา</b-nav-item>
+      <b-nav-item to="/studymodule">ตรวจสอบโมดูล</b-nav-item>
     </b-nav>
     <b-container fluid>
       <b-row>
@@ -47,8 +47,9 @@ export default {
   },
   methods: {
     async getModuleOverview () {
+      const stu = this.$store.state.auth.userData.stu_id
       await axios
-        .get('http://localhost:8081/study_check_module')
+        .get('http://localhost:8081/study_check_module/' + stu)
         .then((data) => {
           this.submoduleItems = data.data
         })

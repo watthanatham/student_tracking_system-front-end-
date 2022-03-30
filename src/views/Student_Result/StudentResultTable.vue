@@ -20,7 +20,7 @@
               id="filter-input"
               v-model="filter"
               type="search"
-              placeholder=" ค้นหาข้อมูลข้อมูลวิชา">
+              placeholder=" ค้นหาข้อมูลนิสิต">
             </b-form-input>
 
             <b-input-group-append>

@@ -14,7 +14,7 @@ export default {
     HelloWorld
   },
   mounted () {
-    console.log(this.$store.state.auth.data)
+    console.log(this.$store.state.auth.userData)
   }
 }
 </script>

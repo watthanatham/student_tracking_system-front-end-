@@ -26,6 +26,10 @@ export default {
   methods: {
     logout () {
       this.$store.dispatch('auth/logout')
+    },
+    checkMenu () {
+      const type = this.$store.state.auth.staff
+      console.log(type)
     }
   }
 }

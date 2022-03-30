@@ -91,16 +91,16 @@ export default {
 }
 .btn-dark {
   border: 2;
-  background-image: linear-gradient(to left, #353533, #504d4d);
+  background-image: linear-gradient(to left, #2cb34e, #2cb34e);
 }
 .btn-dark:hover {
   border: 2;
-  background-image: linear-gradient(to right, #757976, #929190);
+  background-image: linear-gradient(to right, #269c44, #269c44);
 }
 .card-signin {
   border: 5;
   border-radius: 1rem;
-  box-shadow: 0 1.5rem 1rem 1 rgba(241, 245, 241, 0.1);
+  box-shadow: 0 1.5rem 1rem 1 rgba(0, 255, 0, 0.1);
 }
 .card-signin .card-title {
   margin-top: 1rem;

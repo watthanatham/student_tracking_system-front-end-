@@ -91,11 +91,11 @@ export default {
 }
 .btn-dark {
   border: 2;
-  background-image: linear-gradient(to left, #353533, #504d4d);
+  background-image: linear-gradient(to left, #2cb34e, #2cb34e);
 }
 .btn-dark:hover {
   border: 2;
-  background-image: linear-gradient(to right, #757976, #929190);
+  background-image: linear-gradient(to right, #269c44, #269c44);
 }
 .card-signin {
   border: 5;

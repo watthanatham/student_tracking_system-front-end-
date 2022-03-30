@@ -6,17 +6,17 @@ import jwtDecode from 'jwt-decode'
 export default {
   namespaced: true,
   state: () => ({
-    staff: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
+    user: localStorage.getItem('user') ? localStorage.getItem('user') : null,
     // staff: JSON.parse(localStorage.getItem('staff')) || null,
-    // staffData: jwtDecode(localStorage.getItem('token')) || null
-    staffData: localStorage.getItem('token') ? jwtDecode(localStorage.getItem('token')) : null
+    // userData: jwtDecode(localStorage.getItem('token')) || null
+    userData: localStorage.getItem('token') ? jwtDecode(localStorage.getItem('token')) : null
   }),
   mutations: {
-    [AUTH_LOGIN] (state, payload) { // payload เป็นกล่องที่ใส่ของเข้ามา
-      state.user = payload
+    [AUTH_LOGIN] (state) { // payload เป็นกล่องที่ใส่ของเข้ามา
+      state.userData = jwtDecode(localStorage.getItem('token'))
     },
     [AUTH_LOGOUT] (state) {
-      state.user = null
+      state.userData = null
     }
   },
   actions: {
@@ -39,7 +39,7 @@ export default {
         localStorage.setItem('user', JSON.stringify(user))
 
         router.push('/')
-        commit(AUTH_LOGIN, user)
+        commit(AUTH_LOGIN)
       } catch (e) {
         console.log('Error')
       }

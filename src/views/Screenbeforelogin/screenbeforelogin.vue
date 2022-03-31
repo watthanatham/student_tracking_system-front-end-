@@ -4,22 +4,22 @@
       <div class="col-sm-5 col-md-5 col-lg-8 mx-auto">
         <div class="card card-screenlogin my-5">
           <div class="card-body">
-            <b-img src="assets/infor.png" width="665px" height="185%" class="pt-0 pd-2" ></b-img>
-            <h5 class="card-title text-center"><b>Welcome to the Ai branch system <br> เข้าสู่ระบบ</b></h5>
+            <b-img src="https://pbs.twimg.com/media/DM7uSQnVAAEZKra.jpg" width="669px" height="400%" class="pt-0 pd-2" ></b-img>
+            <h5 class="card-title text-center"><b> <br>Welcome to the Ai branch system<br> </b></h5>
               <div>
-                <ul class="nav navbar-nav flex-row float-left">
+                <ul class="nav navbar-nav flex-col float-center">
                   <li class="nav-item">
-                    <router-link  class="btn btn-lg btn-primary btn-block text-uppercase" to="/loginteacher">บุคคลากร</router-link>
+                    <router-link  class="btn btn-lg btn-success btn-block text-uppercase" to="/loginteacher">เข้าสู่ระบบ</router-link>
                   </li>
                 </ul>
               </div>
-              <div>
+              <!-- <div>
                  <ul class="nav navbar-nav flex-row float-right">
                     <li class="nav-item">
                       <router-link class="btn btn-lg btn-success btn-block text-uppercase" to="/loginstudent">นิสิต</router-link>
                     </li>
                  </ul>
-              </div>
+              </div> -->
           </div>
         </div>
       </div>

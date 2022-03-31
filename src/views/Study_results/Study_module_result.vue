@@ -22,7 +22,7 @@
             hover
             :items="resultItems"
             :fields="fields"
-            class="text-left"
+            class="text-center"
           >
           </b-table>
         </b-col>

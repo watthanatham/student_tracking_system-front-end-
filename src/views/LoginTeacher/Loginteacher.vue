@@ -10,7 +10,7 @@
               height="185%"
               class="pt-0 pd-2"
             ></b-img> -->
-            <h5 class="card-title text-center"><b>บุคคลากร</b></h5>
+            <h5 class="card-title text-center"><b>เข้าสู่ระบบ</b></h5>
             <form class="form-signin">
               <div class="form-label-group">
                 <input

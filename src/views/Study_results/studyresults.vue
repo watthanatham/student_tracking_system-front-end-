@@ -8,17 +8,15 @@
       id="dropdown-1"
       :text="selectLabel"
       variant="outline-primary"
-      class="m-md-2"
-    >
+      class="m-md-2">
       <b-spinner label="Spinning" v-if="loading"></b-spinner>
       <b-dropdown-item v-else v-for="item in select_type" :key="item.value" @click="select(item)">{{ item.text }}</b-dropdown-item>
     </b-dropdown>
     <b-button @click="getStudyResult" variant="primary"><i class="fa fa-search"></i> ค้นหา</b-button>
-    <b-container fluid>
+    <b-container class="tablestudy">
       <b-row>
         <b-col>
-          <b-table :items="subjecttypeItems" :fields="fields" class="tableStudyresult">
-          </b-table>
+          <b-table :items="subjecttypeItems" :fields="fields" class="tableStudyresult"></b-table>
         </b-col>
       </b-row>
     </b-container>
@@ -75,10 +73,12 @@ export default {
 }
 </script>
 <style>
-/* .tableStudyresult{
+.tableStudyresult {
   text-align: center;
-  width: 1331px;
-  margin-inline-end: 300px;
+  width: 1200px;
   background-color: whitesmoke;
-} */
+}
+.tablestudy {
+  margin-block-end: 50px;
+}
 </style>

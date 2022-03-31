@@ -146,6 +146,6 @@ tableSubject{
   }
 }
 .my-1 {
-  margin-inline-start: 770px;
+  margin-inline-start: 757px;
 }
 </style>

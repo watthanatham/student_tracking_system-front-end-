@@ -4,7 +4,7 @@
       <div class="col-sm-5 col-md-5 col-lg-8 mx-auto">
         <div class="card card-screenlogin my-5">
           <div class="card-body">
-            <b-img src="https://pbs.twimg.com/media/DM7uSQnVAAEZKra.jpg" width="669px" height="400%" class="pt-0 pd-2" ></b-img>
+            <b-img src="../../assets/AI.png" width="550px" height="150%" class="ml-5 mr-5" ></b-img>
             <h5 class="card-title text-center"><b> <br>Welcome to the Ai branch system<br> </b></h5>
               <div>
                 <ul class="nav navbar-nav flex-col float-center">

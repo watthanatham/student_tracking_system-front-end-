@@ -4,13 +4,13 @@
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body">
-            <!-- <b-img
-              src="https://itdang2009.com/wp-content/uploads/2020/03/%E0%B8%9B%E0%B8%81-7.jpg"
-              width="405px"
-              height="185%"
-              class="pt-0 pd-2"
-            ></b-img> -->
-            <h5 class="card-title text-center"><b>เข้าสู่ระบบ</b></h5>
+            <b-img
+              src="../../assets/AI.png"
+              width="300px"
+              height="80px"
+              class="ml-5 mr-5 mb-4"
+            ></b-img>
+            <!-- <h5 class="card-title text-center"><b>เข้าสู่ระบบ</b></h5> -->
             <form class="form-signin">
               <div class="form-label-group">
                 <input
@@ -34,14 +34,16 @@
                 <p id="demo3" class="active text-danger"></p>
               </div>
               <div>
-                <b-button class="btn btn-lg btn-dark btn-block text-uppercase"
-                @click="onSubmit"
+                <b-button
+                  class="btn btn-lg btn-dark btn-block text-uppercase"
+                  @click="onSubmit"
                   >เข้าสู่ระบบ</b-button
                 >
                 <!-- &nbsp; -->
                 <!-- <br> -->
-                <b-button class="btn btn-lg btn-light btn-block text-uppercase"
-                @click="onReset"
+                <b-button
+                  class="btn btn-lg btn-light btn-block text-uppercase"
+                  @click="onReset"
                   >ยกเลิก</b-button
                 >
               </div>

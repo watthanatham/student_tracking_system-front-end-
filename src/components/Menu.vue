@@ -1,6 +1,6 @@
 <template>
   <div>
-      <b-navbar toggleable="lg" type="success" variant="info">
+      <b-navbar toggleable="lg" type="success" class="">
         <b-navbar-brand >
           <b-img class="navbar-img" src="../assets/AI.png" ></b-img>
         </b-navbar-brand>

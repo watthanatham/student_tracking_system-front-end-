@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -16,23 +17,28 @@ const routes = [
     component: () => import('../views/About.vue')
   },
   {
+    // teacher
     path: '/courselist',
     name: 'courselist',
+    meta: { requiresAuth: true },
     component: () => import('../views/Courselist/Courselist.vue')
   },
-  {
+  { // teacher
     path: '/coursestructure',
     name: 'coursestructure',
+    meta: { requiresAuth: true },
     component: () => import('../views/Coursestructure/Coursestructure.vue')
   },
-  {
+  { // teacher
     path: '/student',
     name: 'Student',
+    meta: { requiresAuth: true },
     component: () => import('../views/Student/StudentTable.vue')
   },
-  {
+  { // teacher
     path: '/subject',
     name: 'subject',
+    meta: { requiresAuth: true },
     component: () => import('../views/Subject/SubjectTable.vue')
   },
   {
@@ -45,19 +51,22 @@ const routes = [
     name: 'studentForm',
     component: () => import('../views/Student/StudentForm.vue')
   },
-  {
+  { // teacher
     path: '/subject_type',
     name: 'subjecttype',
+    meta: { requiresAuth: true },
     component: () => import('../views/SubjectType/Subjecttype.vue')
   },
-  {
+  { // teacher
     path: '/modulesubject',
     name: 'Module Subject',
+    meta: { requiresAuth: true },
     component: () => import('../views/Modulesubject/Modulesubject.vue')
   },
-  {
+  { // teacher
     path: '/student_result',
     name: 'studentresult',
+    meta: { requiresAuth: true },
     component: () => import('../views/Student_Result/StudentResultTable')
   },
   {
@@ -97,18 +106,14 @@ const routes = [
     component: () => import('../views/LoginTeacher/Loginteacher.vue')
   },
   {
-    path: '/loginstudent',
-    name: 'Login Student',
-    component: () => import('../views/LoginStudent/Loginstudent.vue')
-  },
-  {
     path: '/',
     name: 'Login Screen',
     component: () => import('../views/Screenbeforelogin/screenbeforelogin.vue')
   },
-  {
+  { // teacher
     path: '/moduleinspect',
     name: 'Module Inspect',
+    meta: { requiresAuth: true },
     component: () => import('../views/Modulesubject/ModuleInspect.vue')
   },
   {
@@ -120,6 +125,12 @@ const routes = [
     path: '/studycheckmoduleresult',
     name: 'Study Check Module Result',
     component: () => import('../views/Study_results/Study_module_result.vue')
+  },
+  { // teacher
+    path: '/module_report',
+    name: 'Module Report',
+    meta: { requiresAuth: true },
+    component: () => import('../views/Modulesubject/ModuleReport.vue')
   }
 ]
 
@@ -127,6 +138,18 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.state.auth.userData.type === 'staff') {
+      next()
+      return
+    }
+    next('/home')
+  } else {
+    next()
+  }
 })
 
 export default router

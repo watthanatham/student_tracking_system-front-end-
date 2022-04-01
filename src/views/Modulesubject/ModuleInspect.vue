@@ -46,6 +46,7 @@
             :items="submoduleItems"
             :fields="fields"
             class="text-left"
+            @row-clicked="selectReport"
           >
           </b-table>
         </b-col>
@@ -82,6 +83,18 @@ export default {
     }
   },
   methods: {
+    selectReport (item, index, evt) {
+      console.log(item.sub_id)
+      const mid = this.selectData.value
+      const stu = this.selectSeries
+      this.$store.commit('setSubId', item.sub_id)
+      this.$store.commit('setStuYear', stu)
+      this.$store.commit('setModuleId', mid)
+      console.log(this.selectSeries)
+      console.log(this.selectData.value)
+      console.log(this.$store.state)
+      this.$router.push({ path: '/module_report' })
+    },
     getNumbers (start, stop) {
       return new Array(stop + 1 - start).fill(start).map((n, i) => n + i)
     },
@@ -138,10 +151,13 @@ export default {
   }
 }
 </script>
-<style>
-.tableModule {
+<style lang="scss">
+tableModule {
   text-align: center;
   margin-inline-end: 10px;
   background-color: whitesmoke;
+  & tr {
+    cursor: pointer;
+  }
 }
 </style>

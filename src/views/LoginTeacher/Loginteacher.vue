@@ -35,7 +35,8 @@
               </div>
               <div>
                 <b-button
-                  class="btn btn-lg btn-dark btn-block text-uppercase"
+                variant="success"
+                  class="btn btn-lg btn-block text-uppercase"
                   @click="onSubmit"
                   >เข้าสู่ระบบ</b-button
                 >
@@ -82,7 +83,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 /* body {
   background: linear-gradient(to right, #8d8a8a, #c0c0c4);
 } */
@@ -92,11 +93,11 @@ export default {
   box-shadow: 0 0.5rem 1rem 0 rgba(105, 105, 104, 0.473);
 }
 .btn-dark {
-  border: 2;
+  border: 2px;
   background-image: linear-gradient(to left, #2cb34e, #2cb34e);
 }
 .btn-dark:hover {
-  border: 2;
+  border: 2px;
   background-image: linear-gradient(to right, #269c44, #269c44);
 }
 .card-signin {

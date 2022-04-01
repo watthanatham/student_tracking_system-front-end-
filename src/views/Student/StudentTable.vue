@@ -89,6 +89,7 @@ export default {
     async getStudents () {
       await axios.get('http://localhost:8081/student').then((data) => {
         this.studentItems = data.data
+        this.totalRows = data.data.length
       })
     },
     save (status) {

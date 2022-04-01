@@ -29,7 +29,7 @@ export default {
   methods: {
     async getStudyResult () {
       const tid = this.selectData.value
-      const stu = this.$store.state.auth.userData.stu_id
+      const stu = this.$store.state.auth.userData.id
       await axios.get('http://localhost:8081/study_results/' + tid + '/' + stu).then(data => {
         this.subjecttypeItems = data.data
       })

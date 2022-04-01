@@ -58,7 +58,8 @@ export default {
     async getSubjectbyModule () {
       // const cid = this.$store.state.course_id
       const mid = this.selectData.value
-      const stu = this.$store.state.auth.userData.stu_id
+      const stu = this.$store.state.auth.userData.id
+      console.log(stu)
       await axios
         .get('http://localhost:8081/study_check_module/check_result/' + mid + '/' + stu)
         .then((data) => {

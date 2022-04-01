@@ -1,6 +1,6 @@
 <template>
-  <b-container fluid>
-    <b-row>
+  <b-container fluid style="padding: 0">
+    <b-row class="nav-sticky">
         <b-col v-if='this.$route.path !== "/" && this.$route.path !== "/loginteacher" && this.$route.path !== "/loginstudent"'><Menu /></b-col>
     </b-row>
     <b-row>
@@ -20,3 +20,18 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .nav-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    & > .col {
+      padding: 0px;
+    }
+    & , .row {
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+  }
+</style>

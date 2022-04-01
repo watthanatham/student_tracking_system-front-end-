@@ -5,8 +5,8 @@
       รายละเอียดของทางสาขา
       <a href="https://www.informatics.buu.ac.th/2020/" target="_blank" rel="noopener">ดูข้อมูลเพิ่มเติม</a>.
     </p>
-    <b-button v-b-toggle.collapse-2 class="m-1" variant="dark">หลักสูตรแผนการเรียน</b-button>
-    <b-button v-b-toggle.collapse-3 class="m-1" variant="dark">อาจารย์ผู้สอนของสาขา</b-button>
+    <b-button variant="dark" v-b-toggle.collapse-2 class="m-1" >หลักสูตรแผนการเรียน</b-button>
+    <b-button variant="dark" v-b-toggle.collapse-3 class="m-1" >อาจารย์ผู้สอนของสาขา</b-button>
     <b-button v-b-toggle.collapse-4 class="m-1" variant="dark">การสอบวัดคุณสมบัติโมดูล</b-button>
     <b-button v-b-toggle.collapse-5 class="m-1" variant="dark">อนาคตหลังสำเร็จการศึกษา</b-button>
       <b-collapse id="collapse-2">
@@ -74,5 +74,11 @@ li {
 }
 a {
   color: blue;
+}
+</style>
+
+<style lang="scss">
+.btn-dark {
+  border: 2px;
 }
 </style>

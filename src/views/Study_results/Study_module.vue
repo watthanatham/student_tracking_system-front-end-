@@ -47,7 +47,8 @@ export default {
   },
   methods: {
     async getModuleOverview () {
-      const stu = this.$store.state.auth.userData.stu_id
+      const stu = this.$store.state.auth.userData.id
+      console.log(stu)
       await axios
         .get('http://localhost:8081/study_check_module/' + stu)
         .then((data) => {

@@ -9,17 +9,10 @@
               <div>
                 <ul class="nav navbar-nav flex-col float-center">
                   <li class="nav-item">
-                    <router-link  class="btn btn-lg btn-success btn-block text-uppercase" to="/loginteacher">เข้าสู่ระบบ</router-link>
+                    <router-link  class="btn btn-lg btn-success btn-block text-uppercase" to="/login">เข้าสู่ระบบ</router-link>
                   </li>
                 </ul>
               </div>
-              <!-- <div>
-                 <ul class="nav navbar-nav flex-row float-right">
-                    <li class="nav-item">
-                      <router-link class="btn btn-lg btn-success btn-block text-uppercase" to="/loginstudent">นิสิต</router-link>
-                    </li>
-                 </ul>
-              </div> -->
           </div>
         </div>
       </div>

@@ -40,14 +40,14 @@ api.interceptors.response.use(
           console.log('Session expire')
           store.dispatch('auth/logout')
           router.replace({
-            path: '/loginteacher',
+            path: '/login',
             query: { redirect: router.currentRoute.fullPath }
           })
           break
 
         case 403:
           router.replace({
-            path: '/loginteacher',
+            path: '/login',
             query: { redirect: router.currentRoute.fullPath }
           })
           break
@@ -57,7 +57,7 @@ api.interceptors.response.use(
         case 502:
           setTimeout(() => {
             router.replace({
-              path: '/loginteacher',
+              path: '/login',
               query: {
                 redirect: router.currentRoute.fullPath
               }

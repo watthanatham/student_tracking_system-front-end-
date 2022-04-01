@@ -101,9 +101,9 @@ const routes = [
     component: () => import('../views/Subject/SubjectImport.vue')
   },
   {
-    path: '/loginteacher',
-    name: 'Login Teacher',
-    component: () => import('../views/LoginTeacher/Loginteacher.vue')
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login/Login.vue')
   },
   {
     path: '/',

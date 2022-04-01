@@ -3,13 +3,13 @@
     <b-navbar toggleable="lg" type="warning " class="navbarhead" style="">
         <!-- Right aligned nav items -->
         <b-navbar-brand href="#" >
-        <b-img class="navbar-img" src="../assets/AI.png" ></b-img>
+        <b-img class="navbar-img" src="../assets/AI-v2.png" ></b-img>
       </b-navbar-brand>
        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-navbar-nav class="ml-auto">
-          <b-list-group-item class="d-flex align-items-auto">
-            <span class="ml-auto"> {{ user.username }} </span>
-          </b-list-group-item>
+          <!-- <b-list-group-item class="p"> -->
+            <span class="pr-5 txt"> {{ user.firstname }}  {{ user.lastname }} </span>
+          <!-- </b-list-group-item> -->
         </b-navbar-nav>
     </b-navbar>
       <b-navbar toggleable="lg" type="primary " class="navbarmenu">
@@ -71,23 +71,26 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  .txt {
+    color: white;
+  }
   .nav-link{
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     text-align: right;
   }
   .nav-link:hover{
     color:rgb(255, 255, 255);
-    background-color: rgb(63, 58, 58);
+    background-color: rgb(134, 134, 134);
   }
   .navbar-img {
     width: 300px;
   }
   .navbarhead {
-    background-color: #1565C0;
+    background-color: #00396b;
   }
   .navbarmenu {
-    background-color: #FBC02D;
+    background-color: #1b2432;
   }
   .wrapper {
     position: sticky;

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <b-nav class="mt-4">
+  <div fluid style="padding: 0px">
+    <b-nav class="mt-3">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
       <b-nav-item to="/subject_type">หมวดวิชา</b-nav-item>
       <b-nav-item to="/modulesubject">โมดูลวิชา</b-nav-item>

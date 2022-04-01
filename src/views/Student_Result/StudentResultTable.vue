@@ -2,18 +2,7 @@
   <div>
     <b-container>
       <b-row>
-        <b-col class="text-right">
-          <StudentResultForm
-            :studentResult="selectedItem"
-            ref="StudentResultForm"
-            @save="saveStudentResult"
-            class="mr-10"
-          ></StudentResultForm>
-          <StudentResultImport @save="getStudentResults" class="ml-10"></StudentResultImport>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col lg="4" class="my-1" >
+        <b-col lg="4" class="my-3" >
           <b-form-group>
           <b-input-group size="md">
             <b-form-input
@@ -29,6 +18,17 @@
           </b-input-group>
           </b-form-group>
         </b-col>
+        <b-col class="text-right">
+          <StudentResultForm
+            :studentResult="selectedItem"
+            ref="StudentResultForm"
+            @save="saveStudentResult"
+            class="mr-10"
+          ></StudentResultForm>
+          <StudentResultImport @save="getStudentResults" class="ml-10"></StudentResultImport>
+        </b-col>
+      </b-row>
+      <b-row>
         <b-col>
           <b-table striped hover :items="student_resutlItems" :filter="filter" :fields="fields" class="text-left">
             <template #cell(stu_edit)="{ item }">

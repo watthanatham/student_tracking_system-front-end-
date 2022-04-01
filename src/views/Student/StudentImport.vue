@@ -190,7 +190,7 @@ code {
   text-align: left;
 }
 .buttonexcel{
-  margin-right: -645px;
+  margin-right: -350px;
   margin-block-start: -69px;
 }
 </style>

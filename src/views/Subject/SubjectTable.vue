@@ -7,22 +7,8 @@
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
     <b-container fluid>
-      <b-row>
-        <b-col>
-          <SubjectForm
-            :subject="selectedItem"
-            ref="SubjectForm"
-            @save="saveSubject"
-            class="mr-10"
-          ></SubjectForm>
-          <SubjectImport
-          @save="getSubjects"
-          class="ml-10">
-          </SubjectImport>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col lg="4" class="my-1" >
+        <b-row>
+        <b-col lg="4" class="textsearchsubject" >
           <b-form-group>
           <b-input-group size="md">
             <b-form-input
@@ -38,21 +24,34 @@
           </b-input-group>
           </b-form-group>
         </b-col>
+        <b-col>
+          <SubjectForm
+            :subject="selectedItem"
+            ref="SubjectForm"
+            @save="saveSubject"
+            class="mr-10"
+          ></SubjectForm>
+          <SubjectImport
+          @save="getSubjects"
+          class="ml-10">
+          </SubjectImport>
+        </b-col>
+      </b-row>
+      <b-row>
         <b-col style="padding:0">
           <b-table  striped
                     hover
-                  :filter="filter"
-                  :items="subjectItems"
-                  :fields="fields"
-                  class="tableSubject"
+                    :filter="filter"
+                    :items="subjectItems"
+                    :fields="fields"
+                    class="tableSubject"
                   @row-clicked="selectedSubject">
             <template #cell(sub_edit)="{ item }">
               <b-button @click="editSubject(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
             </template>
             <template #cell(sub_del)="{ item }">
               <b-button @click="deleteSubject(item)" variant="danger"
-                ><i class="fas fa-trash-alt"></i></b-button
-              >
+                ><i class="fas fa-trash-alt"></i></b-button>
             </template>
           </b-table>
         </b-col>
@@ -137,15 +136,19 @@ export default {
 }
 </script>
 <style lang="scss">
-tableSubject{
-  text-align: center;
+.tableSubject{
+  // text-align: center;
   margin-inline-end: 300px;
+  margin-top: -30px;
   background-color: whitesmoke;
   & tr {
     cursor: pointer;
   }
 }
-.my-1 {
-  margin-inline-start: 757px;
+// .my-1 {
+//   margin-inline-start: 757px;
+// }
+.textsearchsubject {
+  margin-block-start: 20PX;
 }
 </style>

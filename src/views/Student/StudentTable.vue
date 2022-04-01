@@ -2,19 +2,7 @@
   <div>
     <b-container fluid>
       <b-row>
-        <b-col class="text-right">
-          <StudentForm
-            :student="selectedItem"
-            ref="StudentForm"
-            @save="saveStudent"
-            class="mr-10"
-          ></StudentForm>
-          <StudentImport @save="getStudents" class="ml-10"> </StudentImport>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col>
-          <b-col lg="3" class="my-0" >
+         <b-col lg="3" class="textsearch" >
           <b-form-group>
           <b-input-group size="md">
             <b-form-input
@@ -29,7 +17,19 @@
             </b-input-group-append>
           </b-input-group>
           </b-form-group>
-          </b-col>
+        </b-col>
+        <b-col class="text-right">
+          <StudentForm
+            :student="selectedItem"
+            ref="StudentForm"
+            @save="saveStudent"
+            class="mr-10"
+          ></StudentForm>
+          <StudentImport @save="getStudents" class="ml-10"> </StudentImport>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
           <b-table
             :current-page="currentPage"
             :per-page="perPage"
@@ -52,7 +52,7 @@
               ></b-button>
             </template>
           </b-table>
-          <b-col sm="7" md="6" class="my-1">
+          <b-col sm="1" md="6" class="my-1">
               <b-pagination
                 v-model="currentPage"
                 :total-rows="totalRows"
@@ -175,7 +175,7 @@ export default {
   margin-inline-end: 300px;
   background-color: whitesmoke;
 }
-.my-0 {
-  margin-inline-start: 848px;
+.textsearch {
+  margin-block-start: 17px;
 }
 </style>

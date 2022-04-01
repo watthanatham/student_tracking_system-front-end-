@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HelloWorld msg="ข่าวสารทางสาขา"/>
+    <HelloWorld/>
   </div>
 </template>
 

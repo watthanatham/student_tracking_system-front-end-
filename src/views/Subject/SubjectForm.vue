@@ -75,12 +75,12 @@
           ></b-form-select>
         </b-form-group>
       </b-form>
-      <b-card>
+      <!-- <b-card>
         <pre>
         {{ form }}
       </pre
         >
-      </b-card>
+      </b-card> -->
     </b-modal>
   </div>
 </template>

@@ -5,10 +5,10 @@
       รายละเอียดของทางสาขา
       <a href="https://www.informatics.buu.ac.th/2020/" target="_blank" rel="noopener">ดูข้อมูลเพิ่มเติม</a>.
     </p>
-    <b-button v-b-toggle.collapse-2 class="m-1">หลักสูตรแผนการเรียน</b-button>
-    <b-button v-b-toggle.collapse-3 class="m-1">อาจารย์ผู้สอนของสาขา</b-button>
-    <b-button v-b-toggle.collapse-4 class="m-1">การสอบวัดคุณสมบัติโมดูล</b-button>
-    <b-button v-b-toggle.collapse-5 class="m-1">อนาคตหลังสำเร็จการศึกษา</b-button>
+    <b-button v-b-toggle.collapse-2 class="m-1" variant="dark">หลักสูตรแผนการเรียน</b-button>
+    <b-button v-b-toggle.collapse-3 class="m-1" variant="dark">อาจารย์ผู้สอนของสาขา</b-button>
+    <b-button v-b-toggle.collapse-4 class="m-1" variant="dark">การสอบวัดคุณสมบัติโมดูล</b-button>
+    <b-button v-b-toggle.collapse-5 class="m-1" variant="dark">อนาคตหลังสำเร็จการศึกษา</b-button>
       <b-collapse id="collapse-2">
         <a href="https://www.informatics.buu.ac.th/2020/wp-content/uploads/2021/11/%E0%B9%81%E0%B8%9C%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%99%E0%B8%95%E0%B8%B2%E0%B8%A1%E0%B9%82%E0%B8%84%E0%B8%A3%E0%B8%87%E0%B8%AA%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%AB%E0%B8%A5%E0%B8%B1%E0%B8%81%E0%B8%AA%E0%B8%B9%E0%B8%95%E0%B8%A3-2564.pdf" target="_blank" rel="noopener">-โครงสร้างหลักสูตร 2564</a>
         <br>

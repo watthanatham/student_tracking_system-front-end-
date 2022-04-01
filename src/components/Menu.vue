@@ -1,11 +1,22 @@
 <template>
   <div>
-      <b-navbar toggleable="lg" type="success" class="">
-        <b-navbar-brand >
-          <b-img class="navbar-img" src="../assets/AI.png" ></b-img>
-        </b-navbar-brand>
+    <b-navbar toggleable="lg" type="warning " class="navbarhead">
+        <!-- Right aligned nav items -->
+        <b-navbar-brand href="#" >
+        <b-img class="navbar-img" src="../assets/AI.png" ></b-img>
+      </b-navbar-brand>
+       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item href="#"></b-nav-item>
+          <b-list-group-item class="d-flex align-items-auto">
+            <span class="ml-auto">อาจารย์ประจำสาขา</span>
+          </b-list-group-item>
+        </b-navbar-nav>
+    </b-navbar>
+      <b-navbar toggleable="lg" type="primary " class="navbarmenu">
         <b-container class="bv-example-row">
-            <b-navbar-nav>
+          <b-row align-h="center">
+            <b-navbar-nav class="ml-center">
             <b-nav-item to="/home"><b-icon icon="house"></b-icon> หน้าแรก</b-nav-item>
             <b-nav-item to="/courselist" v-if="(this.$store.state.auth.userData.staff_username === 'admin')"><b-icon icon="collection"></b-icon> หลักสูตร</b-nav-item>
             <b-nav-item to="/student"    v-if="(this.$store.state.auth.userData.staff_username === 'admin')"><b-icon icon="people"></b-icon> ข้อมูลนิสิต</b-nav-item>
@@ -14,6 +25,7 @@
             <b-nav-item to="/" @click="logout ()"><b-icon icon="box-arrow-left"></b-icon> ออกจากระบบ</b-nav-item>
             <!-- <b-nav-item to="/"><b-icon icon="box-arrow-right"></b-icon> เข้าสู่ระบบ</b-nav-item> -->
             </b-navbar-nav>
+          </b-row>
         </b-container>
       </b-navbar>
 </div>
@@ -57,8 +69,8 @@ export default {
 
 <style>
   .nav-link{
-    color: rgb(0, 0, 0);
-    text-align: left;
+    color: rgb(255, 251, 251);
+    text-align: right;
   }
   .nav-link:hover{
     color:rgb(0, 0, 0);
@@ -66,5 +78,11 @@ export default {
   }
   .navbar-img {
     width: 300px;
+  }
+  .navbarhead {
+    background-color: #607D8B;
+  }
+  .navbarmenu {
+    background-color: #1565C0;
   }
 </style>

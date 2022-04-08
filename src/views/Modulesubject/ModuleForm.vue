@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button @click="addNew" variant="primary"><i class="far fa-plus-square"></i> เพิ่มข้อมูลโมดูล</b-button>
+    <b-button @click="addNew" variant="primary"><b-icon icon="plus-square-fill"></b-icon> เพิ่มข้อมูลโมดูล</b-button>
     <b-modal
       id="modal-module"
       ref="modalModule"

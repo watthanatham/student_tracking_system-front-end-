@@ -2,20 +2,30 @@
   <div>
     <b-container>
       <b-row>
-        <b-col lg="4" class="my-3" >
+        <b-col lg="4" class="my-3">
           <b-form-group>
-          <b-input-group size="md">
-            <b-form-input
-              id="filter-input"
-              v-model="filter"
-              type="search"
-              placeholder=" ค้นหาข้อมูลนิสิต">
-            </b-form-input>
+            <b-input-group size="md">
+              <b-form-input
+                id="filter-input"
+                v-model="filter"
+                type="search"
+                placeholder=" ค้นหาข้อมูลนิสิต"
+              >
+              </b-form-input>
 
-            <b-input-group-append>
-              <b-button :active="!filter" @click="filter = ''" variant="primary">Clear</b-button>
-            </b-input-group-append>
-          </b-input-group>
+              <b-input-group-append>
+                <b-button
+                  :active="!filter"
+                  @click="filter = ''"
+                  variant="primary"
+                  style="margin-right: 5px"
+                  >Clear</b-button
+                >
+              </b-input-group-append>
+              <b-button to="/subject" variant="info"
+                ><b-icon icon="arrow-left-square"></b-icon> ย้อนกลับ</b-button
+              >
+            </b-input-group>
           </b-form-group>
         </b-col>
         <b-col class="text-right">
@@ -25,36 +35,46 @@
             @save="saveStudentResult"
             class="mr-10"
           ></StudentResultForm>
-          <StudentResultImport @save="getStudentResults" class="ml-10"></StudentResultImport>
+          <StudentResultImport
+            @save="getStudentResults"
+            class="ml-10"
+          ></StudentResultImport>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          <b-table striped
-                   hover
-                  :current-page="currentPage"
-                  :per-page="perPage"
-                  @filtered="onFiltered"
-                  :items="student_resutlItems"
-                  :filter="filter"
-                  :fields="fields" class="text-left">
+          <b-table
+            striped
+            hover
+            :current-page="currentPage"
+            :per-page="perPage"
+            @filtered="onFiltered"
+            :items="student_resutlItems"
+            :filter="filter"
+            :fields="fields"
+            class="text-left"
+          >
             <template #cell(stu_edit)="{ item }">
-              <b-button @click="editStudentResult(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
+              <b-button @click="editStudentResult(item)" variant="warning"
+                ><i class="fas fa-edit"></i
+              ></b-button>
             </template>
             <template #cell(stu_del)="{ item }">
               <b-button @click="deleteStudentResult(item)" variant="danger"
-                ><i class="fas fa-trash-alt"></i></b-button>
+                ><i class="fas fa-trash-alt"></i
+              ></b-button>
             </template>
           </b-table>
           <b-col sm="1" md="6" class="my-1">
-              <b-pagination
-                v-model="currentPage"
-                :total-rows="totalRows"
-                :per-page="perPage"
-                align="fill"
-                size="sm"
-                class="my-0">
-              </b-pagination>
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="totalRows"
+              :per-page="perPage"
+              align="fill"
+              size="sm"
+              class="my-0"
+            >
+            </b-pagination>
           </b-col>
         </b-col>
       </b-row>
@@ -74,20 +94,27 @@ export default {
     async getStudentResults () {
       const courseId = this.$store.state.course_id
       const subId = this.$store.state.sub_id
-      await axios.get('http://localhost:8081/student_result/' + courseId + '/' + subId).then(data => {
-        this.student_resutlItems = data.data
-        this.totalRows = data.data.length
-      })
+      await axios
+        .get('http://localhost:8081/student_result/' + courseId + '/' + subId)
+        .then((data) => {
+          this.student_resutlItems = data.data
+          this.totalRows = data.data.length
+        })
     },
     async saveStudentResult (studentresult) {
-      if (!studentresult.status) { // add
+      if (!studentresult.status) {
+        // add
         studentresult.sr_id = this.student_resultId
         // this.student_resutlItems.push(studentresult)
         this.student_resultId++
         await axios.post('http://localhost:8081/student_result', studentresult)
         this.getStudentResults()
-      } else { // edit
-        await axios.put('http://localhost:8081/student_result/' + studentresult.sr_id, studentresult)
+      } else {
+        // edit
+        await axios.put(
+          'http://localhost:8081/student_result/' + studentresult.sr_id,
+          studentresult
+        )
         this.getStudentResults()
         // const index = this.student_resutlItems.findIndex((item) => {
         //   return studentresult.sr_id === item.sr_id
@@ -96,7 +123,9 @@ export default {
       }
     },
     async editStudentResult (item) {
-      const temp = await axios.get('http://localhost:8081/student_result/result_get/' + item.sr_id)
+      const temp = await axios.get(
+        'http://localhost:8081/student_result/result_get/' + item.sr_id
+      )
       this.selectedItem = { ...temp.data[0] }
       this.oid = this.selectedItem.sr_id
       this.selectedItem.status = true
@@ -106,12 +135,18 @@ export default {
     },
     async deleteStudentResult (studentresult) {
       console.log(studentresult)
-      if (confirm(`คุณต้องการจะลบข้อมูลนิสิต ${studentresult.stu_firstname} หรือไม่`)) {
+      if (
+        confirm(
+          `คุณต้องการจะลบข้อมูลนิสิต ${studentresult.stu_firstname} หรือไม่`
+        )
+      ) {
         const index = this.student_resutlItems.findIndex(function (item) {
           return studentresult.sr_id === item.sr_id
         })
         this.student_resutlItems.splice(index, 1)
-        await axios.delete('http://localhost:8081/student_result/' + studentresult.sr_id)
+        await axios.delete(
+          'http://localhost:8081/student_result/' + studentresult.sr_id
+        )
         this.getStudentResults()
       }
     },

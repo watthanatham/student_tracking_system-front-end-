@@ -15,7 +15,7 @@
               id="filter-input"
               v-model="filter"
               type="search"
-              placeholder=" ค้นหาข้อมูลข้อมูลวิชา">
+              placeholder=" ค้นหาข้อมูลวิชา">
             </b-form-input>
 
             <b-input-group-append>
@@ -158,7 +158,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 .tableSubject{
   // text-align: center;
   margin-inline-end: 300px;
@@ -172,6 +172,6 @@ export default {
 //   margin-inline-start: 757px;
 // }
 .textsearchsubject {
-  margin-block-start: 20PX;
+  margin-block-start: 20px;
 }
 </style>

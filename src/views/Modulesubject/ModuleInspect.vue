@@ -35,7 +35,11 @@
       </div>
     </b-dropdown>
     <b-button @click="getModuleReports" variant="primary"
+    style="margin-right: 5px"
       ><i class="fa fa-search"></i> ค้นหา</b-button
+    >
+    <b-button to="/modulesubject" variant="info"
+      ><b-icon icon="arrow-left-square"></b-icon> ย้อนกลับ</b-button
     >
     <b-container fluid>
       <b-row>

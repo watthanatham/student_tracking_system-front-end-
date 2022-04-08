@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <div class="mt-2">
+    <div>
+      <b-button to="/moduleinspect" variant="info" class="ml-3"
+        ><b-icon icon="arrow-left-square"></b-icon> ย้อนกลับ</b-button>
+    </div>
     <b-container fluid>
       <b-row>
         <b-col>
@@ -9,6 +13,7 @@
             :items="reportItems"
             :fields="fields"
             class="text-left"
+            style="margin-top: 10px"
           >
           </b-table>
         </b-col>
@@ -39,7 +44,16 @@ export default {
       const year = this.$store.state.stu_year
       const mid = this.$store.state.module_id
       await axios
-        .get('http://localhost:8081/model_subject/module_report/' + year + '/' + cid + '/' + mid + '/' + subId)
+        .get(
+          'http://localhost:8081/model_subject/module_report/' +
+            year +
+            '/' +
+            cid +
+            '/' +
+            mid +
+            '/' +
+            subId
+        )
         .then((data) => {
           console.log(data.data)
           this.reportItems = data.data

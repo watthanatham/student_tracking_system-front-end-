@@ -30,7 +30,14 @@
       </b-row>
       <b-row>
         <b-col>
-          <b-table striped hover :items="student_resutlItems" :filter="filter" :fields="fields" class="text-left">
+          <b-table striped
+                   hover
+                  :current-page="currentPage"
+                  :per-page="perPage"
+                  @filtered="onFiltered"
+                  :items="student_resutlItems"
+                  :filter="filter"
+                  :fields="fields" class="text-left">
             <template #cell(stu_edit)="{ item }">
               <b-button @click="editStudentResult(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
             </template>
@@ -39,6 +46,16 @@
                 ><i class="fas fa-trash-alt"></i></b-button>
             </template>
           </b-table>
+          <b-col sm="1" md="6" class="my-1">
+              <b-pagination
+                v-model="currentPage"
+                :total-rows="totalRows"
+                :per-page="perPage"
+                align="fill"
+                size="sm"
+                class="my-0">
+              </b-pagination>
+          </b-col>
         </b-col>
       </b-row>
     </b-container>
@@ -59,6 +76,7 @@ export default {
       const subId = this.$store.state.sub_id
       await axios.get('http://localhost:8081/student_result/' + courseId + '/' + subId).then(data => {
         this.student_resutlItems = data.data
+        this.totalRows = data.data.length
       })
     },
     async saveStudentResult (studentresult) {
@@ -96,6 +114,12 @@ export default {
         await axios.delete('http://localhost:8081/student_result/' + studentresult.sr_id)
         this.getStudentResults()
       }
+    },
+    onFiltered (filteredItems) {
+      console.log(filteredItems)
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      this.totalRows = filteredItems.length
+      this.currentPage = 1
     }
   },
   data () {
@@ -111,6 +135,9 @@ export default {
         { key: 'stu_edit', label: 'แก้ไข' },
         { key: 'stu_del', label: 'ลบข้อมูล' }
       ],
+      totalRows: 1,
+      currentPage: 1,
+      perPage: 5,
       student_resutlItems: [],
       selectedItem: null,
       filter: null

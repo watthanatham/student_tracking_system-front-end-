@@ -1,7 +1,7 @@
 <template>
   <b-container fluid style="padding: 0">
     <b-row class="nav-sticky">
-        <b-col v-if='this.$route.path !== "/" && this.$route.path !== "/loginteacher" && this.$route.path !== "/loginstudent"'><Menu /></b-col>
+        <b-col v-if='this.$route.path !== "/" && this.$route.path !== "/login"'><Menu /></b-col>
     </b-row>
     <b-row>
       <b-col>

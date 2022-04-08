@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-nav class="mt-4">
+    <b-nav class="mt-3">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
       <b-nav-item to="/subject_type">หมวดวิชา</b-nav-item>
       <b-nav-item to="/modulesubject">โมดูลวิชา</b-nav-item>
@@ -41,6 +41,9 @@
         <b-col style="padding:0">
           <b-table  striped
                     hover
+                    :current-page="currentPage"
+                    :per-page="perPage"
+                    @filtered="onFiltered"
                     :filter="filter"
                     :items="subjectItems"
                     :fields="fields"
@@ -54,6 +57,16 @@
                 ><i class="fas fa-trash-alt"></i></b-button>
             </template>
           </b-table>
+          <b-col sm="1" md="6" class="my-1">
+              <b-pagination
+                v-model="currentPage"
+                :total-rows="totalRows"
+                :per-page="perPage"
+                align="fill"
+                size="sm"
+                class="my-0">
+              </b-pagination>
+          </b-col>
         </b-col>
       </b-row>
     </b-container>
@@ -78,6 +91,7 @@ export default {
       const id = this.$store.state.course_id
       await axios.get('http://localhost:8081/subject/' + id).then(data => {
         this.subjectItems = data.data
+        this.totalRows = data.data.length
       })
     },
     async saveSubject (subject) {
@@ -110,6 +124,12 @@ export default {
         await axios.delete('http://localhost:8081/subject/' + subject.sub_id)
         this.getSubjects()
       }
+    },
+    onFiltered (filteredItems) {
+      console.log(filteredItems)
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      this.totalRows = filteredItems.length
+      this.currentPage = 1
     }
   },
   data () {
@@ -125,6 +145,9 @@ export default {
         { key: 'sub_edit', label: 'แก้ไข' },
         { key: 'sub_del', label: 'ลบข้อมูล' }
       ],
+      totalRows: 1,
+      currentPage: 1,
+      perPage: 5,
       subjectItems: [],
       selectedItem: null,
       filter: null

@@ -182,7 +182,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .buttonaddnew {
   margin-block-start: 15px;
   /* margin-right: -435px; */

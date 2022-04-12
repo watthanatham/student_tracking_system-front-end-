@@ -157,7 +157,7 @@ export default {
       ],
       totalRows: 1,
       currentPage: 1,
-      perPage: 10,
+      perPage: 8,
       filter: null,
       studentItems: [],
       selectedItem: null
@@ -168,7 +168,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 .tableStudent {
   text-align: center;
   margin-inline-end: 300px;

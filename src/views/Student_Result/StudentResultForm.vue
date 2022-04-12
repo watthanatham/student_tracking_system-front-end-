@@ -173,7 +173,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .ADD {
   margin-block-start: 10px;
 }

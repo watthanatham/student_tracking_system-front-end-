@@ -2,7 +2,7 @@
   <div>
     <b-navbar toggleable="lg" type="warning " class="navbarhead" style="">
         <!-- Right aligned nav items -->
-        <b-navbar-brand href="#" >
+        <b-navbar-brand href="/home" >
         <b-img class="navbar-img" src="../assets/AI-v2.png" ></b-img>
       </b-navbar-brand>
        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

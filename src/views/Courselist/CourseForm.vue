@@ -129,7 +129,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .buttonSub {
   margin-block-start: 10px;
   margin-left: 765px;

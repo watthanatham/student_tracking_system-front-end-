@@ -79,12 +79,12 @@
           ></b-form-select>
         </b-form-group>
       </b-form>
-      <b-card>
+      <!-- <b-card>
         <pre>
         {{ form }}
       </pre
         >
-      </b-card>
+      </b-card> -->
     </b-modal>
   </div>
 </template>
@@ -163,6 +163,7 @@ export default {
         this.form.stu_username = this.student.stu_username
         this.form.stu_password = this.student.stu_password
         this.form.course_id = this.student.course_id
+        // this.form.course_name = this.student.course_name
       }
     },
     resetModal (evt) {

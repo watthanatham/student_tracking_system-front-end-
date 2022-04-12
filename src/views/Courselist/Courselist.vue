@@ -59,7 +59,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 .tablecoursecourse{
   text-align: center;
   margin-inline-end: 300px;

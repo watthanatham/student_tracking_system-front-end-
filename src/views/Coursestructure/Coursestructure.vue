@@ -2,6 +2,7 @@
   <div>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
+      <b-nav-item to="/module_structure">โครงสร้างโมดูล</b-nav-item>
       <b-nav-item to="/subject_type">หมวดวิชา</b-nav-item>
       <b-nav-item to="/moduleSubject">โมดูลวิชา</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
@@ -18,7 +19,7 @@
       </b-row>
       <b-row>
         <b-col>
-          <b-table :items="courseItems" :fields="fields" class="tablecourse">
+          <b-table striped hover :items="courseItems" :fields="fields" class="tablecourse">
             <template #cell(st_edit)="{ item }">
               <b-button @click="editCourse(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
             </template>
@@ -53,7 +54,7 @@ export default {
         course.st_id = this.courseId
         this.courseItems.push(course)
         this.courseId++
-        await axios.post('http://localhost:8081/subject_type', course)
+        await axios.post('http://localhost:8081/model_subject/', course)
         this.getCourseStructure()
       } else { // edit
         const index = this.courseItems.findIndex((item) => {

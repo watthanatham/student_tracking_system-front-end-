@@ -131,6 +131,12 @@ const routes = [
     name: 'Module Report',
     meta: { requiresAuth: true },
     component: () => import('../views/Modulesubject/ModuleReport.vue')
+  },
+  { // teacher
+    path: '/module_structure',
+    name: 'Module Structure',
+    meta: { requiresAuth: true },
+    component: () => import('../views/Modulesubject/ModuleStructure.vue')
   }
 ]
 

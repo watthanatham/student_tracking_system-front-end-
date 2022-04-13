@@ -2,8 +2,9 @@
   <div fluid style="padding: 0px">
     <b-nav class="mt-3">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
+      <b-nav-item to="/module_structure">โครงสร้างโมดูล</b-nav-item>
       <b-nav-item to="/subject_type">หมวดวิชา</b-nav-item>
-      <b-nav-item to="/modulesubject">โมดูลวิชา</b-nav-item>
+      <b-nav-item to="/moduleSubject">โมดูลวิชา</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
     <b-dropdown
@@ -20,11 +21,6 @@
     <b-container fluid>
       <b-row>
         <b-col class="text-right">
-          <ModuleForm
-            :module="selectedItem"
-            ref="ModuleForm"
-            @save="saveModule"
-          ></ModuleForm>
         </b-col>
       </b-row>
       <b-row>
@@ -44,10 +40,8 @@
 </template>
 <script>
 import axios from 'axios'
-import ModuleForm from './ModuleForm.vue'
 export default {
   components: {
-    ModuleForm
   },
   data () {
     return {

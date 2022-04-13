@@ -35,12 +35,12 @@
           </b-form-input>
         </b-form-group>
       </b-form>
-      <b-card>
+      <!-- <b-card>
         <pre>
         {{ form }}
       </pre
         >
-      </b-card>
+      </b-card> -->
     </b-modal>
   </div>
 </template>
@@ -79,7 +79,7 @@ export default {
       console.log(this.form)
       const module = JSON.parse(JSON.stringify(this.form))
       module.module_id = (this.form.module_id === -1) ? -1 : this.id
-      console.log(module)
+      // console.log(module)
       this.$emit('save', module)
       this.reset()
     },
@@ -96,7 +96,7 @@ export default {
         this.reset()
       } else {
         // edit
-        this.form.module_id = this.module.module_id
+        // this.form.module_id = this.module.module_id
         this.form.module_name = this.module.module_name
         this.form.module_credit = this.module.module_credit
         this.form.course_id = this.$store.state.course_id

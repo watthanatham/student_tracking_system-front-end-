@@ -5,8 +5,8 @@
       รายละเอียดของทางสาขา
       <a href="https://www.informatics.buu.ac.th/2020/" target="_blank" rel="noopener">ดูข้อมูลเพิ่มเติม</a>.
     </p>
-    <b-button variant="dark" v-b-toggle.collapse-2 class="m-1" >หลักสูตรแผนการเรียน</b-button>
-    <b-button variant="dark" v-b-toggle.collapse-3 class="m-1" >อาจารย์ผู้สอนของสาขา</b-button>
+    <b-button variant="dark" v-b-toggle.collapse-2 class="m-1" >แผนการเรียน</b-button>
+    <b-button variant="dark" v-b-toggle.collapse-3 class="m-1" >อาจารย์ผู้สอน</b-button>
     <b-button v-b-toggle.collapse-4 class="m-1" variant="dark">การสอบวัดคุณสมบัติโมดูล</b-button>
     <b-button v-b-toggle.collapse-5 class="m-1" variant="dark">อนาคตหลังสำเร็จการศึกษา</b-button>
       <b-collapse id="collapse-2">
@@ -36,6 +36,7 @@
 นักวางแผนการประยุกต์ใช้ปัญญาประดิษฐ์และข้อมูลดิจิทัลผู้เชี่ยวชาญและให้คําปรึกษาด้านการจัดการเกี่ยวกับการประยุกต์ใช้ปัญญาประดิษฐ์และเทคโนโลยีข้อมูลดิจิทัลนักวิเคราะห์ข้อมูลในภาคอุตสาหกรรมที่ขับเคลื่อนด้วยข้อมูลผู้ประกอบการอิสระด้านการประยุกต์ใช้ปัญญาประดิษฐ์และข้อมูลดิจิทัล
 บริษัท Start UP ด้านดิจิทัล เพื่อรับงานวิเคราะห์และออกแบบระบบงานสารสนเทศอัจฉริยะ รวมถึงเป็น Design House, Intelligent Product Design, และ System Integration ส่วนของ Smart Technology ให้ลูกค้า หรือ Software House ทั่วไป
       </b-collapse>
+      <button @click="showAlert">Hello world</button>
   </div>
 </template>
 
@@ -55,6 +56,11 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  methods: {
+    showAlert () {
+      this.$swal('Hello Vue world!!!')
+    }
   }
 }
 </script>

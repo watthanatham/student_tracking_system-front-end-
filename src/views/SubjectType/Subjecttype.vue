@@ -3,10 +3,19 @@
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
       <b-nav-item to="/module_structure">โครงสร้างโมดูล</b-nav-item>
-      <b-nav-item to="/subject_type">หมวดวิชา</b-nav-item>
-      <b-nav-item to="/moduleSubject">โมดูลวิชา</b-nav-item>
+      <b-nav-item to="/subject_type">รายวิชา</b-nav-item>
+      <b-nav-item to="/moduleSubject">โมดูล</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
+    <b-dropdown
+      id="dropdown-1"
+      :text="selectLabel"
+      variant="outline-primary"
+      class="m-md-2">
+      <b-spinner label="Spinning" v-if="loading"></b-spinner>
+      <b-dropdown-item v-else v-for="item in select_type" :key="item.value" @click="select(item)">{{ item.text }}</b-dropdown-item>
+    </b-dropdown>
+    <b-button @click="getSubjects" variant="primary"><i class="fa fa-search"></i> ค้นหา</b-button>
     <b-container fluid>
       <b-row>
         <b-col>
@@ -23,39 +32,47 @@ import axios from 'axios'
 export default {
   methods: {
     async getSubjects () {
-      const id = this.$store.state.course_id
-      await axios.get('http://localhost:8081/type_subject/' + id).then(data => {
+      const cid = this.$store.state.course_id
+      const tid = this.selectData.value
+      await axios.get('http://localhost:8081/type_subject/' + cid + '/' + tid).then(data => {
         this.subjecttypeItems = data.data
       })
+    },
+    select (item) {
+      this.selectData = item
+      this.selectLabel = this.selectData.text
+    },
+    async selectType () {
+      // change fixed course id when dev login system
+      const id = this.$store.state.course_id
+      this.loading = true
+      await axios.get('http://localhost:8081/subject_type/st/' + id).then(data => {
+        this.select_type = data.data
+        console.log(this.select_type)
+        this.loading = false
+      })
+      this.select_type.unshift({ text: 'เลือกหมวดวิชา', value: null })
     }
   },
   data () {
     return {
+      loading: false,
       fields: [
         { key: 'sub_id', label: 'รหัสวิชา' },
         { key: 'sub_name_thai', label: 'ชื่อวิชา' },
-        { key: 'sub_credit', label: 'หน่วยกิต' },
-        { key: 'st_name', label: 'หมวดวิชา' }
+        { key: 'sub_credit', label: 'หน่วยกิต' }
       ],
       subjecttypeItems: [
-        {
-          sub_id: 1,
-          sub_name_thai: 'ม็อก',
-          sub_credit: 2,
-          st_name: 'ศึกษาทั่วไป'
-        },
-        {
-          sub_id: 2,
-          sub_name_thai: 'ม็อก',
-          sub_credit: 3,
-          st_name: 'ศึกษาทั่วไป'
-        }
       ],
+      select_type: [],
+      selectLabel: 'เลือกหมวดวิชา',
+      selectData: [],
       selectedItem: null
     }
   },
   mounted () {
-    this.getSubjects()
+    // this.getSubjects()
+    this.selectType()
   }
 }
 </script>

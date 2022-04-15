@@ -42,6 +42,18 @@ export default {
     CoursestructureForm
   },
   methods: {
+    addSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'เพิ่มข้อมูลสำเร็จ'
+      })
+    },
+    editSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'แก้ไขข้อมูลสำเร็จ'
+      })
+    },
     async getCourseStructure () {
       const id = this.$store.state.course_id
       await axios.get('http://localhost:8081/subject_type/' + id).then(data => {
@@ -54,8 +66,9 @@ export default {
         course.st_id = this.courseId
         this.courseItems.push(course)
         this.courseId++
-        await axios.post('http://localhost:8081/model_subject/', course)
+        await axios.post('http://localhost:8081/subject_type/', course)
         this.getCourseStructure()
+        this.addSuccess()
       } else { // edit
         const index = this.courseItems.findIndex((item) => {
           return course.st_id === item.st_id
@@ -63,6 +76,7 @@ export default {
         this.courseItems.splice(index, 1, course)
         await axios.put('http://localhost:8081/subject_type/' + course.st_id, course)
         this.getCourseStructure()
+        this.editSuccess()
       }
     },
     async editCourse (item) {

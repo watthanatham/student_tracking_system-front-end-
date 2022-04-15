@@ -91,6 +91,30 @@ export default {
     StudentResultImport
   },
   methods: {
+    addSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'เพิ่มข้อมูลผลการเรียนสำเร็จ'
+      })
+    },
+    editSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'แก้ไขข้อมูลสำเร็จ'
+      })
+    },
+    delSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'ลบข้อมูลสำเร็จ'
+      })
+    },
+    delError () {
+      this.$swal({
+        icon: 'error',
+        title: 'ลบข้อมูลไม่สำเร็จ'
+      })
+    },
     async getStudentResults () {
       const courseId = this.$store.state.course_id
       const subId = this.$store.state.sub_id
@@ -109,6 +133,7 @@ export default {
         this.student_resultId++
         await axios.post('http://localhost:8081/student_result', studentresult)
         this.getStudentResults()
+        this.addSuccess()
       } else {
         // edit
         await axios.put(
@@ -116,6 +141,7 @@ export default {
           studentresult
         )
         this.getStudentResults()
+        this.editSuccess()
         // const index = this.student_resutlItems.findIndex((item) => {
         //   return studentresult.sr_id === item.sr_id
         // })
@@ -148,6 +174,9 @@ export default {
           'http://localhost:8081/student_result/' + studentresult.sr_id
         )
         this.getStudentResults()
+        this.delSuccess()
+      } else {
+        this.delError()
       }
     },
     onFiltered (filteredItems) {

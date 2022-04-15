@@ -42,6 +42,18 @@ export default {
     ModuleForm
   },
   methods: {
+    editSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'แก้ไขข้อมูลสำเร็จ'
+      })
+    },
+    addSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'เพิ่มข้อมูลสำเร็จ'
+      })
+    },
     async getModuleItems () {
       const id = this.$store.state.course_id
       await axios.get('http://localhost:8081/model_subject/all/' + id).then(data => {
@@ -56,6 +68,7 @@ export default {
         this.moduleId++
         await axios.post('http://localhost:8081/model_subject/', module)
         this.getModuleItems()
+        this.addSuccess()
       } else { // edit
         const index = this.moduleItems.findIndex((item) => {
           console.log(module)
@@ -64,6 +77,7 @@ export default {
         this.moduleItems.splice(index, 1, module)
         await axios.put('http://localhost:8081/model_subject/' + module.module_id, module)
         this.getModuleItems()
+        this.editSuccess()
       }
     },
     async editModule (item) {

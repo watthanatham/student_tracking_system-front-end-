@@ -8,21 +8,27 @@
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
     <b-container fluid>
-        <b-row>
-        <b-col lg="4" class="textsearchsubject" >
+      <b-row>
+        <b-col lg="4" class="textsearchsubject">
           <b-form-group>
-          <b-input-group size="md">
-            <b-form-input
-              id="filter-input"
-              v-model="filter"
-              type="search"
-              placeholder=" ค้นหาข้อมูลวิชา">
-            </b-form-input>
+            <b-input-group size="md">
+              <b-form-input
+                id="filter-input"
+                v-model="filter"
+                type="search"
+                placeholder=" ค้นหาข้อมูลวิชา"
+              >
+              </b-form-input>
 
-            <b-input-group-append>
-              <b-button :active="!filter" @click="filter = ''" variant="primary">Clear</b-button>
-            </b-input-group-append>
-          </b-input-group>
+              <b-input-group-append>
+                <b-button
+                  :active="!filter"
+                  @click="filter = ''"
+                  variant="primary"
+                  >Clear</b-button
+                >
+              </b-input-group-append>
+            </b-input-group>
           </b-form-group>
         </b-col>
         <b-col>
@@ -32,41 +38,48 @@
             @save="saveSubject"
             class="mr-10"
           ></SubjectForm>
-          <SubjectImport
-          @save="getSubjects"
-          class="ml-10">
-          </SubjectImport>
+          <SubjectImport @save="getSubjects" class="ml-10"> </SubjectImport>
         </b-col>
       </b-row>
       <b-row>
-        <b-col style="padding:0">
-          <b-table  striped
-                    hover
-                    :current-page="currentPage"
-                    :per-page="perPage"
-                    @filtered="onFiltered"
-                    :filter="filter"
-                    :items="subjectItems"
-                    :fields="fields"
-                    class="tableSubject"
-                  @row-clicked="selectedSubject">
+        <b-col>
+          <b-table
+            striped
+            hover
+            :current-page="currentPage"
+            :per-page="perPage"
+            @filtered="onFiltered"
+            :filter="filter"
+            :items="subjectItems"
+            :fields="fields"
+            class="tableSubject"
+          >
             <template #cell(sub_edit)="{ item }">
-              <b-button @click="editSubject(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
+              <b-button @click="editSubject(item)" variant="warning"
+                ><i class="fas fa-edit"></i
+              ></b-button>
             </template>
             <template #cell(sub_del)="{ item }">
               <b-button @click="deleteSubject(item)" variant="danger"
-                ><i class="fas fa-trash-alt"></i></b-button>
+                ><i class="fas fa-trash-alt"></i
+              ></b-button>
+            </template>
+            <template #cell(sub_inspect)="{ item }">
+              <b-button @click="selectedSubject(item)" variant="info"
+                ><i class="fa fa-search"></i
+              ></b-button>
             </template>
           </b-table>
           <b-col sm="1" md="6" class="my-1">
-              <b-pagination
-                v-model="currentPage"
-                :total-rows="totalRows"
-                :per-page="perPage"
-                align="fill"
-                size="sm"
-                class="my-0">
-              </b-pagination>
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="totalRows"
+              :per-page="perPage"
+              align="fill"
+              size="sm"
+              class="my-0"
+            >
+            </b-pagination>
           </b-col>
         </b-col>
       </b-row>
@@ -83,6 +96,30 @@ export default {
     SubjectImport
   },
   methods: {
+    addSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'เพิ่มข้อมูลวิชาสำเร็จ'
+      })
+    },
+    editSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'แก้ไขข้อมูลวิชาสำเร็จ'
+      })
+    },
+    delSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'ลบข้อมูลวิชาสำเร็จ'
+      })
+    },
+    delError () {
+      this.$swal({
+        icon: 'error',
+        title: 'ลบข้อมูลไม่สำเร็จ'
+      })
+    },
     selectedSubject (item, index, evt) {
       console.log(item.sub_id)
       this.$store.dispatch('setSub', item.sub_id)
@@ -90,23 +127,32 @@ export default {
     },
     async getSubjects () {
       const id = this.$store.state.course_id
-      await axios.get('http://localhost:8081/subject/' + id).then(data => {
+      await axios.get('http://localhost:8081/subject/' + id).then((data) => {
         this.subjectItems = data.data
         this.totalRows = data.data.length
       })
     },
     async saveSubject (subject) {
-      if (!subject.status) { // add
+      if (!subject.status) {
+        // add
         // this.subjectItems.push(subject)
         await axios.post('http://localhost:8081/subject', subject)
         this.getSubjects()
-      } else { // save
-        await axios.put('http://localhost:8081/subject/' + subject.sub_id, subject)
+        this.addSuccess()
+      } else {
+        // save
+        await axios.put(
+          'http://localhost:8081/subject/' + subject.sub_id,
+          subject
+        )
         this.getSubjects()
+        this.editSuccess()
       }
     },
     async editSubject (item) {
-      const temp = await axios.get('http://localhost:8081/subject/sub/' + item.sub_id)
+      const temp = await axios.get(
+        'http://localhost:8081/subject/sub/' + item.sub_id
+      )
       this.selectedItem = { ...temp.data[0] }
       console.log(temp)
       this.oid = this.selectedItem.sub_id
@@ -117,13 +163,18 @@ export default {
     },
     async deleteSubject (subject) {
       console.log(subject)
-      if (confirm(`คุณต้องการจะลบข้อมูลวิชา ${subject.sub_name_thai} หรือไม่`)) {
+      if (
+        confirm(`คุณต้องการจะลบข้อมูลวิชา ${subject.sub_name_thai} หรือไม่`)
+      ) {
         const index = this.subjectItems.findIndex(function (item) {
           return subject.sub_id === item.sub_id
         })
         this.subjectItems.splice(index, 1)
         await axios.delete('http://localhost:8081/subject/' + subject.sub_id)
         this.getSubjects()
+        this.delSuccess()
+      } else {
+        this.delError()
       }
     },
     onFiltered (filteredItems) {
@@ -144,7 +195,8 @@ export default {
         { key: 'st_name', label: 'หมวดวิชา' },
         { key: 'module_name', label: 'โมดูล' },
         { key: 'sub_edit', label: 'แก้ไข' },
-        { key: 'sub_del', label: 'ลบข้อมูล' }
+        { key: 'sub_del', label: 'ลบข้อมูล' },
+        { key: 'sub_inspect', label: 'ตรวจสอบผลการเรียน' }
       ],
       totalRows: 1,
       currentPage: 1,
@@ -160,8 +212,8 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-.tableSubject{
-  // text-align: center;
+.tableSubject {
+  text-align: left;
   margin-inline-end: 300px;
   margin-top: -30px;
   background-color: whitesmoke;

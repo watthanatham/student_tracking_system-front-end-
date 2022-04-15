@@ -53,7 +53,7 @@ export default {
       moduleItems: [],
       select_module: [],
       selectedItem: null,
-      selectLabel: 'เลือกโมดูล',
+      selectLabel: 'กรุณาเลือกเลือกโมดูล',
       selectData: []
     }
   },

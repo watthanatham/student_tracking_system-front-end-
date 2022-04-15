@@ -50,8 +50,12 @@
             :items="submoduleItems"
             :fields="fields"
             class="text-left"
-            @row-clicked="selectReport"
           >
+          <template #cell(module_inspect)="{ item }">
+              <b-button @click="selectReport(item)" variant="info"
+                ><i class="fa fa-search"></i
+              ></b-button>
+            </template>
           </b-table>
         </b-col>
       </b-row>
@@ -70,13 +74,14 @@ export default {
         { key: 'sub_name_thai', label: 'ชื่อวิชา' },
         { key: 'series', label: 'ชั้นปี' },
         { key: 'pass', label: 'จำนวนนิสิตที่ผ่าน' },
-        { key: 'fail', label: 'จำนวนนิสิตที่ไม่ผ่าน' }
+        { key: 'fail', label: 'จำนวนนิสิตที่ไม่ผ่าน' },
+        { key: 'module_inspect', label: 'ตรวจสอบรายชื่อนิสิตที่ไม่ผ่าน' }
       ],
       submoduleItems: [],
       select_module: [],
       selectedItem: null,
-      selectModuleLabel: 'เลือกโมดูล',
-      selectSeriesLabel: 'เลือกชั้นปี',
+      selectModuleLabel: 'กรุณาเลือกโมดูล',
+      selectSeriesLabel: 'กรุณาเลือกชั้นปี',
       selectData: [],
       selectSeries: [],
       dateYear: {

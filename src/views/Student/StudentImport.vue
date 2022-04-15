@@ -105,13 +105,11 @@ export default {
     }
   },
   methods: {
-    makeToast (title, message, variant = 'success', append = false) {
-      this.toastCount++
-      this.$bvToast.toast(message, {
-        title: 'ข้อมูลนิสิต',
-        variant: variant,
-        autoHideDelay: 3000,
-        appendToast: append
+    addSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'เพิ่มข้อมูลนิสิตสำเร็จ',
+        text: 'กดปุ่ม F5 เพื่อรีเฟรชข้อมูล'
       })
     },
     addNew () {
@@ -154,7 +152,7 @@ export default {
         ])
       })
       await axios.post('http://localhost:8081/student/import', arr)
-      this.makeToast('เพิ่มสำเร็จ', 'ข้อมูลถูกเพิ่มแล้ว')
+      this.addSuccess()
     }
   },
   mounted () {

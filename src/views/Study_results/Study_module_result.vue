@@ -46,7 +46,7 @@ export default {
       resultItems: [],
       select_module: [],
       selectedItem: null,
-      selectLabel: 'เลือกโมดูล',
+      selectLabel: 'กรุณาเลือกโมดูล',
       selectData: []
     }
   },

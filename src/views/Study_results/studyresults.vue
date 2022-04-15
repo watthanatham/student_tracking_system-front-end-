@@ -61,7 +61,7 @@ export default {
       subjecttypeItems: [
       ],
       select_type: [],
-      selectLabel: 'เลือกหมวดวิชา',
+      selectLabel: 'กรุณาเลือกหมวดวิชา',
       selectData: [],
       selectedItem: null
     }

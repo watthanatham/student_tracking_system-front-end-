@@ -27,6 +27,12 @@ export default {
     CourseForm
   },
   methods: {
+    addSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'เพิ่มข้อมูลหลักสูตร'
+      })
+    },
     selectedCourse (item, index, evt) {
       this.$store.dispatch('setCourse', item.course_id)
       this.$router.push({ path: '/coursestructure' })
@@ -40,6 +46,7 @@ export default {
       // add
       await axios.post('http://localhost:8081/course', course)
       this.getCourses()
+      this.addSuccess()
     }
   },
   data () {

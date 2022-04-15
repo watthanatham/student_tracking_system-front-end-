@@ -77,13 +77,28 @@ export default {
     StudentImport
   },
   methods: {
-    makeToast (title, message, variant = 'success', append = false) {
-      this.toastCount++
-      this.$bvToast.toast(message, {
-        title: 'ข้อมูลนิสิต',
-        variant: variant,
-        autoHideDelay: 3000,
-        appendToast: append
+    addSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'เพิ่มข้อมูลนิสิตสำเร็จ'
+      })
+    },
+    editSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'แก้ไขข้อมูลนิสิตสำเร็จ'
+      })
+    },
+    delSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'ลบข้อมูลนิสิตสำเร็จ'
+      })
+    },
+    delError () {
+      this.$swal({
+        icon: 'error',
+        title: 'ลบข้อมูลไม่สำเร็จ'
       })
     },
     async getStudents () {
@@ -101,7 +116,7 @@ export default {
         // add
         await axios.post('http://localhost:8081/student', student)
         this.getStudents()
-        this.makeToast('เพิ่มสำเร็จ', 'ข้อมูลของ ' + student.stu_firstname + '  ถูกเพิ่มแล้ว')
+        this.addSuccess()
       } else {
         // save
         await axios.put(
@@ -109,7 +124,7 @@ export default {
           student
         )
         this.getStudents()
-        this.makeToast('แก้ไขสำเร็จ', 'ข้อมูลของ ' + student.stu_firstname + '  ถูกแก้ไขแล้ว')
+        this.editSuccess()
       }
     },
     async editStudent (item) {
@@ -134,9 +149,9 @@ export default {
         this.studentItems.splice(index, 1)
         await axios.delete('http://localhost:8081/student/' + student.stu_id)
         this.getStudents()
-        this.makeToast('ลบสำเร็จ', 'ข้อมูลของ ' + student.stu_firstname + '  ถูกลบแล้ว')
+        this.delSuccess()
       } else {
-        this.makeToast('ปรับปรุงไม่สำเร็จ', 'ไม่สามารถลบข้อมูลของ ' + student.stu_firstname + 'danger')
+        this.delError()
       }
     },
     onFiltered (filteredItems) {

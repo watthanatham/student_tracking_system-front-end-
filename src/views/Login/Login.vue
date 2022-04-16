@@ -5,18 +5,18 @@
         <div class="card card-signin my-5">
           <div class="card-body">
             <b-img
-              src="../../assets/AI.png"
-              width="300px"
+              src="../../assets/user-icon.png"
+              width="85px"
               height="80px"
-              class="ml-5 mr-5 mb-4"
+              style="margin-left: 155px"
             ></b-img>
             <!-- <h5 class="card-title text-center"><b>เข้าสู่ระบบ</b></h5> -->
-            <form class="form-signin">
+            <form class="form-signin" style="padding-top: 20px">
               <div class="form-label-group">
                 <input
                   class="form-control"
                   type="text"
-                  placeholder="Username"
+                  placeholder="ชื่อบัญชีผู้ใช้"
                   v-model="form.username"
                   required
                   autofocus
@@ -27,7 +27,7 @@
                 <input
                   type="password"
                   class="form-control"
-                  placeholder="Password"
+                  placeholder="รหัสผ่าน"
                   v-model="form.password"
                   required
                 />
@@ -111,5 +111,8 @@ export default {
   font-weight: 400;
   font-size: 1.5rem;
   color: #0c0b0b;
+}
+.hd {
+  font-size: 180%;
 }
 </style>

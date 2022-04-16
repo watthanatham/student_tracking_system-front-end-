@@ -3,16 +3,12 @@
     <b-nav class="mt-4">
       <b-nav-item to="/studyResult">ตรวจสอบหมวดวิชา</b-nav-item>
       <b-nav-item to="/studymodule">ตรวจสอบโมดูล</b-nav-item>
+      <b-button variant="info" style="margin-left:600px" to="/studycheckmoduleresult"
+        ><i class="fa fa-list-alt"></i> ตรวจสอบข้อมูลของนิสิต</b-button
+      >
     </b-nav>
     <b-container fluid>
-      <b-row>
-        <b-col>
-          <b-button variant="info" class="ml-2" to="/studycheckmoduleresult"
-            ><i class="fa fa-list-alt"></i> ตรวจสอบข้อมูลของนิสิต</b-button
-          >
-        </b-col>
-      </b-row>
-      <b-row>
+      <b-row style="padding-top: 10px">
         <b-col>
           <b-table
             striped

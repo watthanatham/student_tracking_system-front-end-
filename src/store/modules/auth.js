@@ -16,7 +16,6 @@ export default {
   }),
   mutations: {
     [AUTH_LOGIN] (state) {
-      // payload เป็นกล่องที่ใส่ของเข้ามา
       state.userData = jwtDecode(localStorage.getItem('token'))
     },
     [AUTH_LOGOUT] (state) {

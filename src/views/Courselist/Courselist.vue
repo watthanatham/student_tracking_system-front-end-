@@ -1,18 +1,30 @@
 <template>
   <div>
-    <b-container fluid>
+    <b-container fluid style="padding:0px">
       <b-row>
         <b-col class="text-right">
           <CourseForm
             :course="selectedItem"
             ref="courseForm"
             @save="saveForm"
+            style="margin-bottom: 0px"
           ></CourseForm>
         </b-col>
       </b-row>
       <b-row>
-        <b-col>
-          <b-table striped hover :items="courseItems" :fields="fields" class="tablecoursecourse" @row-clicked="selectedCourse">
+        <b-col style="padding-top: 0px">
+          <b-table
+            striped
+            hover
+            :items="courseItems"
+            :fields="fields"
+            class="tablecoursecourse"
+          >
+          <template #cell(course_inspect)="{ item }">
+              <b-button @click="selectedCourse(item)" variant="info"
+                ><i class="fa fa-search"></i
+              ></b-button>
+            </template>
           </b-table>
         </b-col>
       </b-row>
@@ -38,7 +50,7 @@ export default {
       this.$router.push({ path: '/coursestructure' })
     },
     async getCourses () {
-      await axios.get('http://localhost:8081/course').then(data => {
+      await axios.get('http://localhost:8081/course').then((data) => {
         this.courseItems = data.data
       })
     },
@@ -54,10 +66,10 @@ export default {
       fields: [
         { key: 'course_id', label: 'รหัสหลักสูตร' },
         { key: 'course_name', label: 'ชื่อหลักสูตร' },
-        { key: 'course_totalcredit', label: 'หน่วยกิตรวม' }
+        { key: 'course_totalcredit', label: 'หน่วยกิตรวม' },
+        { key: 'course_inspect', label: 'ตรวจสอบข้อมูล' }
       ],
-      courseItems: [
-      ],
+      courseItems: [],
       selectedItem: null
     }
   },
@@ -67,7 +79,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-.tablecoursecourse{
+.tablecoursecourse {
   text-align: center;
   margin-inline-end: 300px;
   margin-block-start: 40px;

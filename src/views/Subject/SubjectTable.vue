@@ -7,7 +7,7 @@
       <b-nav-item to="/moduleSubject">โมดูล</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
-    <b-container fluid>
+    <b-container fluid style="padding:0px">
       <b-row>
         <b-col lg="4" class="textsearchsubject">
           <b-form-group>

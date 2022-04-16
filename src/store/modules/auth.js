@@ -42,6 +42,7 @@ export default {
         commit(AUTH_LOGIN)
       } catch (e) {
         console.log('Error')
+        alert('ล็อกอินไม่สำเร็จ บัญชีผู้ใช้หรือรหัสผ่านของคุณไม่ถูกต้อง')
       }
     },
     logout ({ commit }) {

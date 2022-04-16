@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="warning " class="navbarhead" style="">
+    <b-navbar toggleable="lg" type="warning " class="navbarhead">
         <!-- Right aligned nav items -->
         <b-navbar-brand href="/home" >
         <b-img class="navbar-img" src="../assets/AI-v2.png" ></b-img>

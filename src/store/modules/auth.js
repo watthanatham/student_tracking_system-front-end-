@@ -2,6 +2,7 @@ import { AUTH_LOGIN, AUTH_LOGOUT } from '../mutation-types'
 import router from '../../router'
 import { loginAuth } from '../../services/auth'
 import jwtDecode from 'jwt-decode'
+import Swal from 'sweetalert2'
 
 export default {
   namespaced: true,
@@ -9,10 +10,13 @@ export default {
     user: localStorage.getItem('user') ? localStorage.getItem('user') : null,
     // staff: JSON.parse(localStorage.getItem('staff')) || null,
     // userData: jwtDecode(localStorage.getItem('token')) || null
-    userData: localStorage.getItem('token') ? jwtDecode(localStorage.getItem('token')) : null
+    userData: localStorage.getItem('token')
+      ? jwtDecode(localStorage.getItem('token'))
+      : null
   }),
   mutations: {
-    [AUTH_LOGIN] (state) { // payload เป็นกล่องที่ใส่ของเข้ามา
+    [AUTH_LOGIN] (state) {
+      // payload เป็นกล่องที่ใส่ของเข้ามา
       state.userData = jwtDecode(localStorage.getItem('token'))
     },
     [AUTH_LOGOUT] (state) {
@@ -38,11 +42,13 @@ export default {
         localStorage.setItem('token', token)
         localStorage.setItem('user', JSON.stringify(user))
 
+        // Swal.fire('ล็อกอินสำเร็จ', '', 'success')
+
         router.push('/home')
         commit(AUTH_LOGIN)
       } catch (e) {
         console.log('Error')
-        alert('ล็อกอินไม่สำเร็จ บัญชีผู้ใช้หรือรหัสผ่านของคุณไม่ถูกต้อง')
+        Swal.fire('ล็อกอินไม่สำเร็จ', 'บัญชีผู้ใช้หรีอรหัสผ่านของคุณไม่ถูกต้อง', 'error')
       }
     },
     logout ({ commit }) {

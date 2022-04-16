@@ -200,7 +200,7 @@ export default {
 </script>
 <style>
 .buttonSub {
-  margin-block-start: -100px;
-  margin-left: 810px;
+  margin-block-start: -105px;
+  margin-left: 965px;
 }
 </style>

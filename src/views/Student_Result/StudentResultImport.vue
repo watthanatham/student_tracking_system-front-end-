@@ -39,7 +39,7 @@
                 </template>
 
                 <template slot="next" slot-scope="{ load }">
-                  <b-button variant="info" @click.prevent="load"
+                  <b-button variant="info" @click.prevent="load" @click="guideImport"
                     ><b-icon icon="list-check"></b-icon> ตรวจสอบข้อมูล</b-button
                   >
                 </template>
@@ -121,6 +121,13 @@ export default {
     }
   },
   methods: {
+    guideImport () {
+      this.$swal({
+        icon: 'info',
+        title: 'ข้อแนะนำ',
+        text: 'เรียงตามลำดับ : รหัสนิสิต | รหัสวิชา | ปีการศึกษา | เทอม | ผลการเรียน '
+      })
+    },
     addSuccess () {
       this.$swal({
         icon: 'success',
@@ -175,6 +182,7 @@ export default {
         studentResult
       )
       console.log(studentResult)
+      this.$emit('save')
       this.addSuccess()
     }
   },

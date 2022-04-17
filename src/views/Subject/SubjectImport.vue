@@ -26,7 +26,7 @@
               </template>
 
               <template slot="next" slot-scope="{ load }">
-                <b-button variant="info" @click.prevent="load"><b-icon icon="list-check"></b-icon> ตรวจสอบข้อมูล</b-button>
+                <b-button variant="info" @click.prevent="load" @click="guideImport"><b-icon icon="list-check"></b-icon> ตรวจสอบข้อมูล</b-button>
               </template>
 
               <template slot="submit" slot-scope="{ submit }">
@@ -106,13 +106,17 @@ export default {
     }
   },
   methods: {
-    makeToast (title, message, variant = 'success', append = false) {
-      this.toastCount++
-      this.$bvToast.toast(message, {
-        title: 'ข้อมูลวิชา',
-        variant: variant,
-        autoHideDelay: 3000,
-        appendToast: append
+    guideImport () {
+      this.$swal({
+        icon: 'info',
+        title: 'ข้อแนะนำ',
+        text: 'เรียงตามลำดับ : รหัสวิชา | รหัสหมวดวิชา | รหัสโมดูล | รหัสหลักสูตร | ชื่อภาษาไทย | ชื่อภาษาอังกฤษ | หน่วยกิต'
+      })
+    },
+    addSuccess () {
+      this.$swal({
+        icon: 'success',
+        title: 'เพิ่มข้อมูลสำเร็จ'
       })
     },
     addNew () {
@@ -156,7 +160,8 @@ export default {
       })
       await axios.post('http://localhost:8081/subject/import', subjects)
       console.log(subjects)
-      this.makeToast('เพิ่มสำเร็จ', 'ข้อมูลถูกเพิ่มแล้ว')
+      this.addSuccess()
+      this.$emit('save')
     }
   },
   mounted () {

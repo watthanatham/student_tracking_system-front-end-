@@ -25,7 +25,7 @@
               </template>
 
               <template slot="next" slot-scope="{ load }" class="col-10">
-                <b-button variant="info" @click.prevent="load"><b-icon icon="list-check"></b-icon> ตรวจสอบข้อมูล</b-button>
+                <b-button variant="info" @click.prevent="load" @click="guideImport"><b-icon icon="list-check"></b-icon> ตรวจสอบข้อมูล</b-button>
               </template>
 
               <template slot="submit" slot-scope="{ submit }">
@@ -105,11 +105,17 @@ export default {
     }
   },
   methods: {
+    guideImport () {
+      this.$swal({
+        icon: 'info',
+        title: 'ข้อแนะนำ',
+        text: 'เรียงตามลำดับ : รหัสนิสิต | รหัสหลักสูตร | ชื่อ | นามสกุล | บัญชีผู้ใช้ | รหัสผ่าน'
+      })
+    },
     addSuccess () {
       this.$swal({
         icon: 'success',
-        title: 'เพิ่มข้อมูลนิสิตสำเร็จ',
-        text: 'กดปุ่ม F5 เพื่อรีเฟรชข้อมูล'
+        title: 'เพิ่มข้อมูลนิสิตสำเร็จ'
       })
     },
     addNew () {
@@ -152,6 +158,7 @@ export default {
         ])
       })
       await axios.post('http://localhost:8081/student/import', arr)
+      this.$emit('save')
       this.addSuccess()
     }
   },

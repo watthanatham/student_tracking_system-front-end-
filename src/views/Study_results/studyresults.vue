@@ -8,7 +8,7 @@
       id="dropdown-1"
       :text="selectLabel"
       variant="outline-primary"
-      class="m-md-2">
+      class="m-md-3">
       <b-spinner label="Spinning" v-if="loading"></b-spinner>
       <b-dropdown-item v-else v-for="item in select_type" :key="item.value" @click="select(item)">{{ item.text }}</b-dropdown-item>
     </b-dropdown>

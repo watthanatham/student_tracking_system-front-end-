@@ -81,7 +81,7 @@ export default {
   }
   .nav-link:hover{
     color:rgb(255, 255, 255);
-    background-color: rgb(134, 134, 134);
+    background-color: #2f3d55;
   }
   .navbar-img {
     width: 300px;

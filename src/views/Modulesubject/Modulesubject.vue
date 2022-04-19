@@ -31,8 +31,23 @@
             :items="moduleItems"
             :fields="fields"
             class="text-left"
+            :current-page="currentPage"
+            @filtered="onFiltered"
+            :per-page="perPage"
+            :filter="filter"
           >
           </b-table>
+          <b-col sm="1" md="6" class="my-1">
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="totalRows"
+              :per-page="perPage"
+              align="fill"
+              size="sm"
+              class="my-0"
+            >
+            </b-pagination>
+          </b-col>
         </b-col>
       </b-row>
     </b-container>
@@ -54,7 +69,11 @@ export default {
       select_module: [],
       selectedItem: null,
       selectLabel: 'กรุณาเลือกเลือกโมดูล',
-      selectData: []
+      selectData: [],
+      filter: null,
+      perPage: 5,
+      currentPage: 1,
+      totalRows: 1
     }
   },
   methods: {
@@ -69,6 +88,7 @@ export default {
         .get('http://localhost:8081/model_subject/' + cid + '/' + mid)
         .then((data) => {
           this.moduleItems = data.data
+          this.totalRows = data.data.length
         })
     },
     async selectModule () {
@@ -90,6 +110,11 @@ export default {
         await axios.post('http://localhost:8081/model_subject/', module)
         this.getModules()
       }
+    },
+    onFiltered (filteredItems) {
+      console.log(filteredItems)
+      this.totalRows = filteredItems.length
+      this.currentPage = 1
     }
   },
   mounted () {
@@ -98,7 +123,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped lang="scss">
 .tableModule {
   text-align: center;
   margin-inline-end: 10px;

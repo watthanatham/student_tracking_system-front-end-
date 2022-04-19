@@ -17,8 +17,8 @@
           <b-row align-h="center">
             <b-navbar-nav class="ml-center">
             <b-nav-item to="/home"><b-icon icon="house"></b-icon> หน้าแรก |</b-nav-item>
-            <b-nav-item to="/courselist" v-if="(this.$store.state.auth.userData.username === 'admin')"><b-icon icon="collection"></b-icon> หลักสูตร |</b-nav-item>
-            <b-nav-item to="/student"    v-if="(this.$store.state.auth.userData.username === 'admin')"><b-icon icon="people"></b-icon> ข้อมูลนิสิต |</b-nav-item>
+            <b-nav-item to="/courselist" v-if="(this.$store.state.auth.userData.username === 'admin' || this.$store.state.auth.userData.username === 'user')"><b-icon icon="collection"></b-icon> หลักสูตร |</b-nav-item>
+            <b-nav-item to="/student"    v-if="(this.$store.state.auth.userData.username === 'admin' || this.$store.state.auth.userData.username === 'user')"><b-icon icon="people"></b-icon> ข้อมูลนิสิต |</b-nav-item>
             <b-nav-item to="/studyResult" v-else-if="(this.$store.state.auth.userData.username.match(/[0-9]{8}$/g))"><b-icon icon="list-check"></b-icon> ตรวจสอบผลการเรียน |</b-nav-item>
             <b-nav-item to="/about"      v-if="checkUser ()"><b-icon icon="gear"></b-icon> จัดการผู้ใช้งาน</b-nav-item>
             <b-nav-item to="/" @click="logout ()"><b-icon icon="box-arrow-left"></b-icon> ออกจากระบบ</b-nav-item>

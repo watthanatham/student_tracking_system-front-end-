@@ -19,8 +19,19 @@
     <b-container fluid>
       <b-row>
         <b-col>
-          <b-table striped hover :items="subjecttypeItems" :fields="fields" class="tabletypesubject">
+          <b-table striped hover :items="subjecttypeItems" :fields="fields" :current-page="currentPage" :per-page="perPage" @filtered="onFiltered" :filter="filter"
+          class="tabletypesubject">
           </b-table>
+          <b-col sm="1" md="6" class="my-1">
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="totalRows"
+              :per-page="perPage"
+              align="fill"
+              size="sm"
+              class="my-0">
+            </b-pagination>
+          </b-col>
         </b-col>
       </b-row>
     </b-container>
@@ -36,6 +47,7 @@ export default {
       const tid = this.selectData.value
       await axios.get('http://localhost:8081/type_subject/' + cid + '/' + tid).then(data => {
         this.subjecttypeItems = data.data
+        this.totalRows = data.data.length
       })
     },
     select (item) {
@@ -52,6 +64,11 @@ export default {
         this.loading = false
       })
       this.select_type.unshift({ text: 'เลือกหมวดวิชา', value: null })
+    },
+    onFiltered (filteredItems) {
+      console.log(filteredItems)
+      this.totalRows = filteredItems.length
+      this.currentPage = 1
     }
   },
   data () {
@@ -62,12 +79,15 @@ export default {
         { key: 'sub_name_thai', label: 'ชื่อวิชา' },
         { key: 'sub_credit', label: 'หน่วยกิต' }
       ],
-      subjecttypeItems: [
-      ],
+      subjecttypeItems: [],
       select_type: [],
       selectLabel: 'กรุณาเลือกหมวดวิชา',
       selectData: [],
-      selectedItem: null
+      selectedItem: null,
+      perPage: 5,
+      totalRows: 1,
+      currentPage: 1,
+      filter: null
     }
   },
   mounted () {

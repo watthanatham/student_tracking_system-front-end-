@@ -50,6 +50,10 @@
             :items="submoduleItems"
             :fields="fields"
             class="text-left"
+            :current-page="currentPage"
+            @filtered="onFiltered"
+            :per-page="perPage"
+            :filter="filter"
           >
           <template #cell(module_inspect)="{ item }">
               <b-button @click="selectReport(item)" variant="info"
@@ -57,6 +61,17 @@
               ></b-button>
             </template>
           </b-table>
+          <b-col sm="1" md="6" class="my-1">
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="totalRows"
+              :per-page="perPage"
+              align="fill"
+              size="sm"
+              class="my-0"
+            >
+            </b-pagination>
+          </b-col>
         </b-col>
       </b-row>
     </b-container>
@@ -77,6 +92,10 @@ export default {
         { key: 'fail', label: 'จำนวนนิสิตที่ไม่ผ่าน' },
         { key: 'module_inspect', label: 'ตรวจสอบรายชื่อนิสิตที่ไม่ผ่าน' }
       ],
+      filter: null,
+      perPage: 5,
+      currentPage: 1,
+      totalRows: 1,
       submoduleItems: [],
       select_module: [],
       selectedItem: null,
@@ -132,6 +151,7 @@ export default {
         .then((data) => {
           console.log(data.data)
           this.submoduleItems = data.data
+          this.totalRows = data.data.length
         })
     },
     async selectModule () {
@@ -145,6 +165,11 @@ export default {
           this.loading = false
         })
       this.select_module.unshift({ text: 'เลือกโมดูล', value: null })
+    },
+    onFiltered (filteredItems) {
+      console.log(filteredItems)
+      this.totalRows = filteredItems.length
+      this.currentPage = 1
     }
   },
   mounted () {

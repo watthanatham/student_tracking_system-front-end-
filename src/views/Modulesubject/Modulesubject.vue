@@ -123,7 +123,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped lang="scss">
 .tableModule {
   text-align: center;
   margin-inline-end: 10px;

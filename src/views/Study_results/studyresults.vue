@@ -16,7 +16,26 @@
     <b-container class="tablestudy">
       <b-row>
         <b-col>
-          <b-table :items="subjecttypeItems" :fields="fields" class="tableStudyresult"></b-table>
+          <b-table
+            :items="subjecttypeItems"
+            :fields="fields"
+            class="tableStudyresult"
+            :current-page="currentPage"
+            @filtered="onFiltered"
+            :per-page="perPage"
+            :filter="filter">
+          </b-table>
+          <b-col sm="1" md="6" class="my-1">
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="totalRows"
+              :per-page="perPage"
+              align="fill"
+              size="sm"
+              class="my-0"
+            >
+            </b-pagination>
+          </b-col>
         </b-col>
       </b-row>
     </b-container>
@@ -32,6 +51,7 @@ export default {
       const stu = this.$store.state.auth.userData.id
       await axios.get('http://localhost:8081/study_results/' + tid + '/' + stu).then(data => {
         this.subjecttypeItems = data.data
+        this.totalRows = data.data.length
       })
     },
     select (item) {
@@ -48,6 +68,11 @@ export default {
         this.loading = false
       })
       this.select_type.unshift({ text: 'เลือกหมวดวิชา', value: null })
+    },
+    onFiltered (filteredItems) {
+      console.log(filteredItems)
+      this.totalRows = filteredItems.length
+      this.currentPage = 1
     }
   },
   data () {
@@ -58,12 +83,15 @@ export default {
         { key: 'sub_credit', label: 'หน่วยกิต' },
         { key: 'sr_grade', label: 'เกรด' }
       ],
-      subjecttypeItems: [
-      ],
+      subjecttypeItems: [],
       select_type: [],
       selectLabel: 'กรุณาเลือกหมวดวิชา',
       selectData: [],
-      selectedItem: null
+      selectedItem: null,
+      filter: null,
+      perPage: 5,
+      currentPage: 1,
+      totalRows: 1
     }
   },
   mounted () {

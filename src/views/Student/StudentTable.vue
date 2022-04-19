@@ -101,6 +101,13 @@ export default {
         title: 'ลบข้อมูลไม่สำเร็จ'
       })
     },
+    addFailed () {
+      this.$swal({
+        icon: 'error',
+        title: 'เพิ่มข้อมูลไม่สำเร็จ',
+        text: 'เนื่องจากมีข้อมูลอยู่แล้วหรือข้อมูลไม่ถูกต้อง'
+      })
+    },
     async getStudents () {
       await axios.get('http://localhost:8081/student').then((data) => {
         this.studentItems = data.data
@@ -114,9 +121,13 @@ export default {
     async saveStudent (student) {
       if (!student.status) {
         // add
-        await axios.post('http://localhost:8081/student', student)
-        this.getStudents()
-        this.addSuccess()
+        const response = await axios.post('http://localhost:8081/student', student)
+        if (!response.data.status) {
+          this.addFailed()
+        } else {
+          this.getStudents()
+          this.addSuccess()
+        }
       } else {
         // save
         await axios.put(

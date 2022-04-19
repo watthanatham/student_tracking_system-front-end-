@@ -1,46 +1,66 @@
 <template>
   <div id="app" class="container">
-    <b-button @click="addNew" variant="success" class="buttonsubject"><b-icon icon="cloud-arrow-up-fill"></b-icon> Import CSV</b-button>
+    <b-button @click="addNew" variant="success" class="buttonsubject"
+      ><b-icon icon="cloud-arrow-up-fill"></b-icon> Import CSV</b-button
+    >
     <b-modal
-    id="modal-subjectimport"
-    ref="modalSubjectImport"
-    title="เพิ่มข้อมูลวิชา"
-    @show="showModal"
-    @hidden="resetModal"
-    @ok="handleOk">
+      id="modal-subjectimport"
+      ref="modalSubjectImport"
+      title="เพิ่มข้อมูลวิชา"
+      @show="showModal"
+      @hidden="resetModal"
+      @ok="handleOk"
+    >
       <div class="container">
-      <section>
-        <div>
-          <div >
-            <vue-csv-import
-              v-model="csv"
-              :map-fields="['sub_id', 'st_id', 'module_id', 'course_id', 'sub_name_thai', 'sub_name_eng', 'sub_credit']"
-            >
-              <template slot="error"> <p class="text-danger">ไม่สามารถอ่านข้อมูลได้ กรุณาอัพโหลดใหม่อีกครั้ง</p></template>
+        <section>
+          <div>
+            <div>
+              <vue-csv-import
+                v-model="csv"
+                :map-fields="[
+                  'sub_id',
+                  'st_id',
+                  'module_id',
+                  'course_id',
+                  'sub_name_thai',
+                  'sub_name_eng',
+                  'sub_credit'
+                ]"
+              >
+                <template slot="error">
+                  <p class="text-danger">
+                    ไม่สามารถอ่านข้อมูลได้ กรุณาอัพโหลดใหม่อีกครั้ง
+                  </p></template
+                >
 
-              <template >
-                <tr>
-                  <th>รูปแบบที่กำหนด</th>
-                  <th>คอลัมน์ไฟล์</th>
-                </tr>
-              </template>
+                <template>
+                  <tr>
+                    <th>รูปแบบที่กำหนด</th>
+                    <th>คอลัมน์ไฟล์</th>
+                  </tr>
+                </template>
 
-              <template slot="next" slot-scope="{ load }">
-                <b-button variant="info" @click.prevent="load" @click="guideImport"><b-icon icon="list-check"></b-icon> ตรวจสอบข้อมูล</b-button>
-              </template>
+                <template slot="next" slot-scope="{ load }">
+                  <b-button
+                    variant="info"
+                    @click.prevent="load"
+                    @click="guideImport"
+                    ><b-icon icon="list-check"></b-icon> ตรวจสอบข้อมูล</b-button
+                  >
+                </template>
 
-              <template slot="submit" slot-scope="{ submit }">
-                <button @click.prevent="submit">send!</button>
-              </template>
-              <template slot="hasHeaders" slot-scope="{ headers }">
-                {{headers}}
-              </template>
-            </vue-csv-import>
-            <!-- <pre class="mt-15" v-if="csv"><code>{{ csv }}</code></pre> -->
+                <template slot="submit" slot-scope="{ submit }">
+                  <button @click.prevent="submit">send!</button>
+                </template>
+                <template slot="hasHeaders" slot-scope="{ headers }">
+                  {{ headers }}
+                </template>
+              </vue-csv-import>
+              <!-- <pre class="mt-15" v-if="csv"><code>{{ csv }}</code></pre> -->
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
     </b-modal>
   </div>
 </template>
@@ -119,6 +139,13 @@ export default {
         title: 'เพิ่มข้อมูลสำเร็จ'
       })
     },
+    addFailed () {
+      this.$swal({
+        icon: 'error',
+        title: 'เพิ่มข้อมูลไม่สำเร็จ',
+        text: 'เนื่องจากมีข้อมูลอยู่แล้วหรือข้อมูลไม่ถูกต้อง'
+      })
+    },
     addNew () {
       this.isAddnew = true
       this.$nextTick(() => {
@@ -155,13 +182,23 @@ export default {
       var subjects = []
       this.csv.forEach((item) => {
         subjects.push([
-          item.sub_id, item.st_id, item.module_id, item.course_id, item.sub_name_thai, item.sub_name_eng, item.sub_credit
+          item.sub_id,
+          item.st_id,
+          item.module_id,
+          item.course_id,
+          item.sub_name_thai,
+          item.sub_name_eng,
+          item.sub_credit
         ])
       })
-      await axios.post('http://localhost:8081/subject/import', subjects)
-      console.log(subjects)
-      this.addSuccess()
-      this.$emit('save')
+      const response = await axios.post('http://localhost:8081/subject/import', subjects)
+      if (!response.data.status) {
+        this.addFailed()
+        // return
+      } else {
+        this.addSuccess()
+        this.$emit('save')
+      }
     }
   },
   mounted () {

@@ -1,45 +1,65 @@
 <template>
   <div id="app" class="container">
-    <b-button @click="addNew" variant="success" class="buttonexcel"><b-icon icon="cloud-arrow-up-fill"></b-icon> Import CSV</b-button>
+    <b-button @click="addNew" variant="success" class="buttonexcel"
+      ><b-icon icon="cloud-arrow-up-fill"></b-icon> Import CSV</b-button
+    >
     <b-modal
-    id="modal-studentimport"
-    ref="modalStudentImport"
-    title="เพิ่มข้อมูลนิสิต"
-    @show="showModal"
-    @hidden="resetModal"
-    @ok="handleOk">
+      id="modal-studentimport"
+      ref="modalStudentImport"
+      title="เพิ่มข้อมูลนิสิต"
+      @show="showModal"
+      @hidden="resetModal"
+      @ok="handleOk"
+    >
       <div class="container">
-      <section>
-        <div>
+        <section>
           <div>
-            <vue-csv-import
-              v-model="csv"
-              :map-fields="['stu_id', 'course_id', 'stu_firstname', 'stu_lastname', 'stu_username', 'stu_password']">
-              <template slot="error"> <p class="text-danger">ไม่สามารถอ่านข้อมูลได้ กรุณาอัพโหลดใหม่อีกครั้ง</p></template>
+            <div>
+              <vue-csv-import
+                v-model="csv"
+                :map-fields="[
+                  'stu_id',
+                  'course_id',
+                  'stu_firstname',
+                  'stu_lastname',
+                  'stu_username',
+                  'stu_password'
+                ]"
+              >
+                <template slot="error">
+                  <p class="text-danger">
+                    ไม่สามารถอ่านข้อมูลได้ กรุณาอัพโหลดใหม่อีกครั้ง
+                  </p></template
+                >
 
-              <template slot="thead">
-                <tr>
-                  <th>รูปแบบที่กำหนด</th>
-                  <th>คอลัมน์ไฟล์</th>
-                </tr>
-              </template>
+                <template slot="thead">
+                  <tr>
+                    <th>รูปแบบที่กำหนด</th>
+                    <th>คอลัมน์ไฟล์</th>
+                  </tr>
+                </template>
 
-              <template slot="next" slot-scope="{ load }" class="col-10">
-                <b-button variant="info" @click.prevent="load" @click="guideImport"><b-icon icon="list-check"></b-icon> ตรวจสอบข้อมูล</b-button>
-              </template>
+                <template slot="next" slot-scope="{ load }" class="col-10">
+                  <b-button
+                    variant="info"
+                    @click.prevent="load"
+                    @click="guideImport"
+                    ><b-icon icon="list-check"></b-icon> ตรวจสอบข้อมูล</b-button
+                  >
+                </template>
 
-              <template slot="submit" slot-scope="{ submit }">
-                <button @click.prevent="submit">send!</button>
-              </template>
-              <template slot="hasHeaders" slot-scope="{ headers }">
-                {{headers}}
-              </template>
-            </vue-csv-import>
-            <!-- <pre class="mt-15" v-if="csv"><code>{{ csv }}</code></pre> -->
+                <template slot="submit" slot-scope="{ submit }">
+                  <button @click.prevent="submit">send!</button>
+                </template>
+                <template slot="hasHeaders" slot-scope="{ headers }">
+                  {{ headers }}
+                </template>
+              </vue-csv-import>
+              <!-- <pre class="mt-15" v-if="csv"><code>{{ csv }}</code></pre> -->
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
     </b-modal>
   </div>
 </template>
@@ -118,6 +138,13 @@ export default {
         title: 'เพิ่มข้อมูลนิสิตสำเร็จ'
       })
     },
+    addFailed () {
+      this.$swal({
+        icon: 'error',
+        title: 'เพิ่มข้อมูลไม่สำเร็จ',
+        text: 'เนื่องจากมีข้อมูลอยู่แล้วหรือข้อมูลไม่ถูกต้อง'
+      })
+    },
     addNew () {
       this.isAddnew = true
       this.$nextTick(() => {
@@ -154,12 +181,24 @@ export default {
       var arr = []
       this.csv.forEach((item) => {
         arr.push([
-          item.stu_id, item.course_id, item.stu_firstname, item.stu_lastname, item.stu_username, item.stu_password
+          item.stu_id,
+          item.course_id,
+          item.stu_firstname,
+          item.stu_lastname,
+          item.stu_username,
+          item.stu_password
         ])
       })
-      await axios.post('http://localhost:8081/student/import', arr)
-      this.$emit('save')
-      this.addSuccess()
+      const response = await axios.post(
+        'http://localhost:8081/student/import',
+        arr
+      )
+      if (!response.data.status) {
+        this.addFailed()
+      } else {
+        this.$emit('save')
+        this.addSuccess()
+      }
     }
   },
   mounted () {
@@ -194,7 +233,7 @@ code {
 #app .form {
   text-align: left;
 }
-.buttonexcel{
+.buttonexcel {
   margin-right: -350px;
   margin-block-start: -69px;
 }

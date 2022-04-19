@@ -120,6 +120,13 @@ export default {
         title: 'ลบข้อมูลไม่สำเร็จ'
       })
     },
+    addFailed () {
+      this.$swal({
+        icon: 'error',
+        title: 'เพิ่มข้อมูลไม่สำเร็จ',
+        text: 'เนื่องจากมีข้อมูลอยู่แล้วหรือข้อมูลไม่ถูกต้อง'
+      })
+    },
     selectedSubject (item, index, evt) {
       console.log(item.sub_id)
       this.$store.dispatch('setSub', item.sub_id)
@@ -134,11 +141,13 @@ export default {
     },
     async saveSubject (subject) {
       if (!subject.status) {
-        // add
-        // this.subjectItems.push(subject)
-        await axios.post('http://localhost:8081/subject', subject)
-        this.getSubjects()
-        this.addSuccess()
+        const response = await axios.post('http://localhost:8081/subject', subject)
+        if (!response.data.status) {
+          this.addFailed()
+        } else {
+          this.getSubjects()
+          this.addSuccess()
+        }
       } else {
         // save
         await axios.put(

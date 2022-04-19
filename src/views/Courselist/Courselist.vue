@@ -45,6 +45,13 @@ export default {
         title: 'เพิ่มข้อมูลหลักสูตร'
       })
     },
+    addFailed () {
+      this.$swal({
+        icon: 'error',
+        title: 'เพิ่มข้อมูลไม่สำเร็จ',
+        text: 'เนื่องจากมีข้อมูลอยู่แล้วหรือข้อมูลไม่ถูกต้อง'
+      })
+    },
     selectedCourse (item, index, evt) {
       this.$store.dispatch('setCourse', item.course_id)
       this.$router.push({ path: '/coursestructure' })
@@ -56,9 +63,13 @@ export default {
     },
     async saveForm (course) {
       // add
-      await axios.post('http://localhost:8081/course', course)
-      this.getCourses()
-      this.addSuccess()
+      const response = await axios.post('http://localhost:8081/course', course)
+      if (!response.data.status) {
+        this.addFailed()
+      } else {
+        this.getCourses()
+        this.addSuccess()
+      }
     }
   },
   data () {

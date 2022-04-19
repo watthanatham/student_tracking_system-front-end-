@@ -64,7 +64,7 @@
           label-for="student-password"
         >
           <b-form-input
-            type="text"
+            type="password"
             id="student-password"
             v-model="form.stu_password"
           >

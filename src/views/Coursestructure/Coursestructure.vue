@@ -1,5 +1,8 @@
 <template>
   <div>
+    <b-container class="pt-2">
+      <p> {{ this.course_name }} \ โครงสร้างหลักสูตร</p>
+    </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
       <b-nav-item to="/module_structure">โครงสร้างโมดูล</b-nav-item>
@@ -117,6 +120,7 @@ export default {
   },
   mounted () {
     this.getCourseStructure()
+    this.course_name = this.$store.state.course_name
   }
 }
 </script>

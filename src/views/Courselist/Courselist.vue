@@ -54,6 +54,8 @@ export default {
     },
     selectedCourse (item, index, evt) {
       this.$store.dispatch('setCourse', item.course_id)
+      this.$store.dispatch('setName', item.course_name)
+      console.log(item.course_name)
       this.$router.push({ path: '/coursestructure' })
     },
     async getCourses () {

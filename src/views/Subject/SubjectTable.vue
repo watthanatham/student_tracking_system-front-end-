@@ -1,5 +1,8 @@
 <template>
   <div>
+    <b-container class="pt-2">
+      <p>{{ this.course_name }} \ วิชา </p>
+    </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
       <b-nav-item to="/module_structure">โครงสร้างโมดูล</b-nav-item>
@@ -130,6 +133,7 @@ export default {
     selectedSubject (item, index, evt) {
       console.log(item.sub_id)
       this.$store.dispatch('setSub', item.sub_id)
+      this.$store.dispatch('setSubName', item.sub_name_thai)
       this.$router.push({ path: '/student_result' })
     },
     async getSubjects () {
@@ -216,6 +220,7 @@ export default {
   },
   mounted () {
     this.getSubjects()
+    this.course_name = this.$store.state.course_name
   }
 }
 </script>

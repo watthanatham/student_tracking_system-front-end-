@@ -1,5 +1,8 @@
 <template>
   <div>
+    <b-container class="pt-2">
+      <p>{{ this.course_name }} \ โครงสร้างโมดูล</p>
+    </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
       <b-nav-item to="/module_structure">โครงสร้างโมดูล</b-nav-item>
@@ -7,7 +10,7 @@
       <b-nav-item to="/moduleSubject">โมดูล</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
-<b-container>
+    <b-container>
       <b-row>
         <b-col class="text-right">
           <ModuleForm
@@ -19,14 +22,22 @@
       </b-row>
       <b-row>
         <b-col>
-          <b-table striped hover :items="moduleItems" :fields="fields" class="tablemodule">
+          <b-table
+            striped
+            hover
+            :items="moduleItems"
+            :fields="fields"
+            class="tablemodule"
+          >
             <template #cell(module_edit)="{ item }">
-              <b-button @click="editModule(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
+              <b-button @click="editModule(item)" variant="warning"
+                ><i class="fas fa-edit"></i
+              ></b-button>
             </template>
             <template #cell(module_del)="{ item }">
               <b-button @click="deleteModule(item)" variant="danger"
-                ><i class="fas fa-trash-alt"></i></b-button
-              >
+                ><i class="fas fa-trash-alt"></i
+              ></b-button>
             </template>
           </b-table>
         </b-col>
@@ -56,33 +67,42 @@ export default {
     },
     async getModuleItems () {
       const id = this.$store.state.course_id
-      await axios.get('http://localhost:8081/model_subject/all/' + id).then(data => {
-        this.moduleItems = data.data
-        console.log(data.data)
-      })
+      await axios
+        .get('http://localhost:8081/model_subject/all/' + id)
+        .then((data) => {
+          this.moduleItems = data.data
+          console.log(data.data)
+        })
     },
     async saveModuleStructure (module) {
-      if (module.module_id < 0) { // add
+      if (module.module_id < 0) {
+        // add
         module.module_id = this.moduleId
         this.moduleItems.push(module)
         this.moduleId++
         await axios.post('http://localhost:8081/model_subject/', module)
         this.getModuleItems()
         this.addSuccess()
-      } else { // edit
+      } else {
+        // edit
         const index = this.moduleItems.findIndex((item) => {
           console.log(module)
           return module === item.module_id
         })
         this.moduleItems.splice(index, 1, module)
-        await axios.put('http://localhost:8081/model_subject/' + module.module_id, module)
+        await axios.put(
+          'http://localhost:8081/model_subject/' + module.module_id,
+          module
+        )
         this.getModuleItems()
         this.editSuccess()
       }
     },
     async editModule (item) {
       console.log('ok')
-      const temp = await axios.get('http://localhost:8081/model_subject/search_id/' + item.module_id)
+      const temp = await axios.get(
+        'http://localhost:8081/model_subject/search_id/' + item.module_id
+      )
       this.selectedItem = { ...temp.data[0] }
       console.log(temp.data[0])
       this.oid = this.selectedItem.module_id
@@ -111,13 +131,13 @@ export default {
         { key: 'module_credit', label: 'หน่วยกิต' },
         { key: 'module_edit', label: 'แก้ไข' }
       ],
-      moduleItems: [
-      ],
+      moduleItems: [],
       selectedItem: null
     }
   },
   mounted () {
     this.getModuleItems()
+    this.course_name = this.$store.state.course_name
   }
 }
 </script>
@@ -125,7 +145,7 @@ export default {
 .mt-4 {
   margin-inline-end: 150px;
 }
-.tablemodule{
+.tablemodule {
   text-align: center;
   margin-block-start: 15px;
   background-color: whitesmoke;

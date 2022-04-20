@@ -1,5 +1,8 @@
 <template>
   <div>
+    <b-container class="pt-2">
+      <p>{{ this.course_name }} \ วิชา \ {{ this.subname }}</p>
+    </b-container>
     <b-container>
       <b-row>
         <b-col lg="4" class="my-3">
@@ -220,6 +223,8 @@ export default {
   },
   mounted () {
     this.getStudentResults()
+    this.course_name = this.$store.state.course_name
+    this.subname = this.$store.state.sub_name
   }
 }
 </script>

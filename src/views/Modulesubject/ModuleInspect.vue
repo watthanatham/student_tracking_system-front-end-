@@ -1,5 +1,8 @@
 <template>
   <div>
+    <b-container class="pt-2">
+      <p>{{ this.course_name }} \ โมดูล \ ตรวจสอบข้อมูลของนิสิต</p>
+    </b-container>
     <b-dropdown
       id="dropdown-1"
       :text="selectModuleLabel"
@@ -182,6 +185,7 @@ export default {
     setTimeout(() => {
       this.scroll(this.dateYear.select)
     }, 1500)
+    this.course_name = this.$store.state.course_name
   }
 }
 </script>

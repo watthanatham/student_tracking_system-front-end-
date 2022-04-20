@@ -1,5 +1,9 @@
 <template>
   <div>
+    <b-container>
+      <br>
+      <h2>หน้าโครงสร้างโมดูล</h2>
+    </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
       <b-nav-item to="/module_structure">โครงสร้างโมดูล</b-nav-item>
@@ -7,7 +11,7 @@
       <b-nav-item to="/moduleSubject">โมดูล</b-nav-item>
       <b-nav-item to="/subject">วิชา</b-nav-item>
     </b-nav>
-<b-container>
+  <b-container>
       <b-row>
         <b-col class="text-right">
           <ModuleForm

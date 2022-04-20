@@ -1,11 +1,14 @@
 <template>
   <div>
+    <b-container>
+      <br>
+      <h2>หน้าตรวจสอบโมดูล</h2>
+    </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/studyResult">ตรวจสอบหมวดวิชา</b-nav-item>
       <b-nav-item to="/studymodule">ตรวจสอบโมดูล</b-nav-item>
-      <b-button variant="info" style="margin-left:600px" to="/studycheckmoduleresult"
-        ><i class="fa fa-list-alt"></i> ตรวจสอบข้อมูลของนิสิต</b-button
-      >
+      <b-button variant="info" style="margin-left:620px" to="/studycheckmoduleresult"
+        ><i class="fa fa-list-alt"></i> ตรวจสอบผลการเรียน</b-button>
     </b-nav>
     <b-container fluid>
       <b-row style="padding-top: 10px">

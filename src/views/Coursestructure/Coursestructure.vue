@@ -1,5 +1,9 @@
 <template>
   <div>
+    <b-container>
+      <br>
+      <h2>หน้าโครงสร้างหลักสูตร</h2>
+    </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
       <b-nav-item to="/module_structure">โครงสร้างโมดูล</b-nav-item>

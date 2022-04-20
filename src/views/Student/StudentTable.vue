@@ -1,5 +1,9 @@
 <template>
   <div>
+    <b-container>
+      <br>
+      <h2>หน้าข้อมูลนิสิต</h2>
+    </b-container>
     <b-container fluid>
       <b-row>
          <b-col lg="3" class="textsearch" >

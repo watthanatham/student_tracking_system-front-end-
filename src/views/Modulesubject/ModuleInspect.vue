@@ -1,5 +1,9 @@
 <template>
   <div>
+    <b-container fluid>
+    <br>
+    <h5>หน้าตรวจสอบข้อมูลของนิสิต</h5>
+    </b-container>
     <b-dropdown
       id="dropdown-1"
       :text="selectModuleLabel"

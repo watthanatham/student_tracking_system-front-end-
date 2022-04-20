@@ -1,5 +1,9 @@
 <template>
   <div>
+    <b-container>
+      <br>
+      <h2>หน้าตรวจสอบผลการเรียน</h2>
+    </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/studyResult">ตรวจสอบหมวดวิชา</b-nav-item>
       <b-nav-item to="/studymodule">ตรวจสอบโมดูล</b-nav-item>

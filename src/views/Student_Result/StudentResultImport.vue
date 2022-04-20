@@ -134,6 +134,13 @@ export default {
         title: 'เพิ่มข้อมูลนิสิตสำเร็จ'
       })
     },
+    addFailed () {
+      this.$swal({
+        icon: 'error',
+        title: 'เพิ่มข้อมูลไม่สำเร็จ',
+        text: 'เนื่องจากมีข้อมูลอยู่ในระบบอยู่แล้ว'
+      })
+    },
     addNew () {
       this.isAddnew = true
       this.$nextTick(() => {
@@ -177,13 +184,16 @@ export default {
           item.sr_grade
         ])
       })
-      await axios.post(
+      const response = await axios.post(
         'http://localhost:8081/student_result/import',
         studentResult
       )
-      console.log(studentResult)
-      this.$emit('save')
-      this.addSuccess()
+      if (!response.data.status) {
+        this.addFailed()
+      } else {
+        this.$emit('save')
+        this.addSuccess()
+      }
     }
   },
   mounted () {

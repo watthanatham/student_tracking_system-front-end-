@@ -97,6 +97,13 @@ export default {
         title: 'เพิ่มข้อมูลผลการเรียนสำเร็จ'
       })
     },
+    addFailed () {
+      this.$swal({
+        icon: 'error',
+        title: 'เพิ่มข้อมูลไม่สำเร็จ',
+        text: 'เนื่องจากมีข้อมูลอยู่แล้วหรือข้อมูลไม่ถูกต้อง'
+      })
+    },
     editSuccess () {
       this.$swal({
         icon: 'success',
@@ -131,9 +138,13 @@ export default {
         studentresult.sr_id = this.student_resultId
         // this.student_resutlItems.push(studentresult)
         this.student_resultId++
-        await axios.post('http://localhost:8081/student_result', studentresult)
-        this.getStudentResults()
-        this.addSuccess()
+        const response = await axios.post('http://localhost:8081/student_result', studentresult)
+        if (!response.data.status) {
+          this.addFailed()
+        } else {
+          this.getStudentResults()
+          this.addSuccess()
+        }
       } else {
         // edit
         await axios.put(

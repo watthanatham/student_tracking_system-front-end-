@@ -54,8 +54,13 @@ export default {
       const tid = this.selectData.value
       const stu = this.$store.state.auth.userData.id
       await axios.get('http://localhost:8081/study_results/' + tid + '/' + stu).then(data => {
-        this.subjecttypeItems = data.data
-        this.totalRows = data.data.length
+        if (data.data.length > 0) {
+          this.subjecttypeItems = data.data
+          this.totalRows = data.data.length
+        } else {
+          this.$swal({ icon: 'error', title: 'ไม่พบข้อมูล' })
+          console.log('error')
+        }
       })
     },
     select (item) {

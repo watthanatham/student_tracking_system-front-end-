@@ -86,8 +86,13 @@ export default {
       await axios
         .get('http://localhost:8081/study_check_module/check_result/' + mid + '/' + stu)
         .then((data) => {
-          this.resultItems = data.data
-          this.totalRows = data.data.length
+          if (data.data.length > 0) {
+            this.resultItems = data.data
+            this.totalRows = data.data.length
+          } else {
+            this.$swal({ icon: 'error', title: 'ไม่พบข้อมูล' })
+            console.log('error')
+          }
         })
     },
     async selectModule () {

@@ -106,6 +106,7 @@ export default {
     return {
       oid: '',
       fields: [
+        { key: 'module_id', label: 'ไอดี' },
         { key: 'module_name', label: 'โมดูล' },
         { key: 'module_credit', label: 'หน่วยกิต' },
         { key: 'module_edit', label: 'แก้ไข' }

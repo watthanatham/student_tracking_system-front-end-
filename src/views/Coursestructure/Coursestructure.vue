@@ -105,6 +105,7 @@ export default {
     return {
       oid: '',
       fields: [
+        { key: 'st_id', label: 'ไอดี' },
         { key: 'st_name', label: 'หัวข้อ' },
         { key: 'st_credit', label: 'หน่วยกิต' },
         { key: 'st_edit', label: 'แก้ไข' }

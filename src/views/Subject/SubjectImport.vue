@@ -146,6 +146,13 @@ export default {
         text: 'เนื่องจากมีข้อมูลอยู่แล้วหรือข้อมูลไม่ถูกต้อง'
       })
     },
+    addError () {
+      this.$swal({
+        icon: 'error',
+        title: 'เพิ่มข้อมูลไม่สำเร็จ',
+        text: 'ข้อมูลไม่ถูกต้อง'
+      })
+    },
     addNew () {
       this.isAddnew = true
       this.$nextTick(() => {
@@ -173,9 +180,20 @@ export default {
       })
     },
     submit () {
-      this.$emit('save')
-      this.importData()
-      this.reset()
+      const col = []
+      Object.keys(this.csv[0]).map((v) => {
+        col.push(this.csv[0][v])
+      })
+      const check = col.filter((item, index) => {
+        return col.indexOf(item) !== index
+      })
+      if (check.length > 0) {
+        this.addError()
+      } else {
+        this.$emit('save')
+        this.importData()
+        this.reset()
+      }
     },
     async importData () {
       this.csv.splice(0, 1)

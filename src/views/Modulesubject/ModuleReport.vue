@@ -1,8 +1,8 @@
 <template>
   <div class="mt-2">
-    <!-- <b-container class="pt-2">
-      <p>{{ this.course_name }} \ โมดูล \ ตรวจสอบข้อมูลของนิสิต \ ตรวจสอบรายชื่อนิสิตที่ไม่ผ่าน</p>
-    </b-container> -->
+    <b-container class="pt-2">
+      <p>{{ course_name }} \ โมดูล \ ตรวจสอบข้อมูลของนิสิต \ ตรวจสอบรายชื่อนิสิตที่ไม่ผ่าน</p>
+    </b-container>
     <div>
       <b-button to="/moduleinspect" variant="info" class="ml-3"
         ><b-icon icon="arrow-left-square"></b-icon> ย้อนกลับ</b-button>
@@ -30,6 +30,7 @@ export default {
   components: {},
   data () {
     return {
+      course_name: '',
       loading: false,
       fields: [
         { key: 'stu_id', label: 'รหัสนิสิต' },
@@ -65,7 +66,7 @@ export default {
   },
   mounted () {
     this.getModuleReports()
-    // this.course_name = this.$store.state.course_name
+    this.course_name = this.$store.state.course_name
   }
 }
 </script>

@@ -134,6 +134,13 @@ export default {
         title: 'เพิ่มข้อมูลนิสิตสำเร็จ'
       })
     },
+    addError () {
+      this.$swal({
+        icon: 'error',
+        title: 'เพิ่มข้อมูลไม่สำเร็จ',
+        text: 'ข้อมูลไม่ถูกต้อง'
+      })
+    },
     addFailed () {
       this.$swal({
         icon: 'error',
@@ -168,9 +175,20 @@ export default {
       })
     },
     submit () {
-      this.$emit('save')
-      this.importData()
-      this.reset()
+      const col = []
+      Object.keys(this.csv[0]).map((v) => {
+        col.push(this.csv[0][v])
+      })
+      const check = col.filter((item, index) => {
+        return col.indexOf(item) !== index
+      })
+      if (check.length > 0) {
+        this.addError()
+      } else {
+        this.$emit('save')
+        this.importData()
+        this.reset()
+      }
     },
     async importData () {
       this.csv.splice(0, 1)

@@ -5,30 +5,31 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    course_id: '',
-    sub_id: '',
+    course_id: localStorage.getItem('course_id') ? localStorage.getItem('course_id') : null,
+    sub_id: localStorage.getItem('sub_id') ? localStorage.getItem('sub_id') : null,
     module_id: '',
     stu_year: '',
-    course_name: ''
+    course_name: localStorage.getItem('course_name') ? localStorage.getItem('course_name') : null,
+    sub_name: localStorage.getItem('sub_name') ? localStorage.getItem('sub_name') : null
   },
   mutations: {
     setCourseId (state, id) {
       state.course_id = id
-      localStorage.setItem('courseId', id)
     },
     setSubId (state, id) {
       state.sub_id = id
-      localStorage.setItem('sub_id', id)
     },
     setModuleId (state, id) {
       state.module_id = id
-      localStorage.setItem('module_id', id)
     },
     setStuYear (state, id) {
       state.stu_year = id
     },
     setCourseName (state, name) {
       state.course_name = name
+    },
+    setSubName (state, name) {
+      state.sub_name = name
     }
   },
   actions: {
@@ -46,6 +47,9 @@ export default new Vuex.Store({
     },
     setCourseName ({ commit }, name) {
       commit('setCourseName', name)
+    },
+    setSubName ({ commit }, name) {
+      commit('setSubName', name)
     }
   },
   modules: {

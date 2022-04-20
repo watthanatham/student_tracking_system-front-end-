@@ -8,6 +8,8 @@
       @show="showModal"
       @hidden="resetModal"
       @ok="handleOk"
+      @cancel="test"
+      @close="test"
     >
       <b-form @submit.stop.prevent="submit" @reset.stop.prevent="reset">
         <b-form-group
@@ -19,6 +21,7 @@
             type="text"
             id="subject-code"
             v-model="form.sub_id"
+            :disabled="clickAdd"
           >
           </b-form-input>
         </b-form-group>
@@ -109,10 +112,20 @@ export default {
       ],
       subject_module: [
       ],
-      isAddNew: false
+      isAddNew: false,
+      clickAdd: true
+    }
+  },
+  watch: {
+    clickAdd (v) {
+      console.log(v)
     }
   },
   methods: {
+    test (e) {
+      this.clickAdd = true
+      console.log('test', this.clickAdd)
+    },
     async selectSubjectType () {
       const tid = this.$store.state.course_id
       await axios.get('http://localhost:8081/subject_type/st/' + tid).then(data => {
@@ -133,6 +146,7 @@ export default {
       // path api GET: /st/:id
       // SELECT st_id as value, CONCAT('วิชา',st_name) as text FROM subject_type a WHERE a.course_id = ?;
       this.isAddNew = true
+      this.clickAdd = false
       this.$nextTick(() => {
         this.show()
         this.isAddNew = false

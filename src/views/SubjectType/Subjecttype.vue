@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- <b-container class="pt-2">
-      <p>{{ this.course_name }} \ รายวิชา</p>
-    </b-container> -->
+    <b-container class="pt-2">
+      <p>{{ course_name }} \ รายวิชา</p>
+    </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
       <b-nav-item to="/module_structure">โครงสร้างโมดูล</b-nav-item>
@@ -49,8 +49,13 @@ export default {
       const cid = this.$store.state.course_id
       const tid = this.selectData.value
       await axios.get('http://localhost:8081/type_subject/' + cid + '/' + tid).then(data => {
-        this.subjecttypeItems = data.data
-        this.totalRows = data.data.length
+        if (data.data.length > 0) {
+          this.subjecttypeItems = data.data
+          this.totalRows = data.data.length
+        } else {
+          this.$swal({ icon: 'error', title: 'ไม่พบข้อมูล' })
+          console.log('error')
+        }
       })
     },
     select (item) {
@@ -76,6 +81,7 @@ export default {
   },
   data () {
     return {
+      course_name: '',
       loading: false,
       fields: [
         { key: 'sub_id', label: 'รหัสวิชา' },
@@ -96,7 +102,7 @@ export default {
   mounted () {
     // this.getSubjects()
     this.selectType()
-    // this.course_name = this.$store.state.course_name
+    this.course_name = this.$store.state.course_name
   }
 }
 </script>

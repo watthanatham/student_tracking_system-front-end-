@@ -8,6 +8,8 @@
       @show="showModal"
       @hidden="resetModal"
       @ok="handleOk"
+      @cancel="test"
+      @close="test"
     >
       <b-form @submit.stop.prevent="submit" @reset.stop.prevent="reset">
         <b-form-group
@@ -19,6 +21,7 @@
             type="text"
             id="student-code"
             v-model="form.stu_id"
+            :disabled="clickAdd"
           >
           </b-form-input>
         </b-form-group>
@@ -109,7 +112,13 @@ export default {
       id: 0,
       student_course: [
       ],
-      isAddNew: false
+      isAddNew: false,
+      clickAdd: true
+    }
+  },
+  watch: {
+    clickAdd (v) {
+      console.log(v)
     }
   },
   methods: {
@@ -119,8 +128,13 @@ export default {
       })
       this.student_course.unshift({ text: 'เลือกหลักสูตร', value: null })
     },
+    test (e) {
+      this.clickAdd = true
+      console.log('test', this.clickAdd)
+    },
     addNew () {
       this.isAddNew = true
+      this.clickAdd = false
       this.$nextTick(() => {
         this.show()
         this.isAddNew = false

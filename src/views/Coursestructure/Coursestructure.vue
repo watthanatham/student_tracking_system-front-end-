@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container class="pt-2">
-      <p>{{ this.cname }} \ โมดูล</p>
+      <p>{{ cname }} \ โครงสร้างหลักสูตร</p>
     </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
@@ -59,6 +59,7 @@ export default {
     },
     async getCourseStructure () {
       const id = this.$store.state.course_id
+      console.log(id)
       await axios.get('http://localhost:8081/subject_type/' + id).then(data => {
         this.courseItems = data.data
         console.log(data.data)
@@ -106,6 +107,7 @@ export default {
   },
   data () {
     return {
+      cname: '',
       oid: '',
       fields: [
         { key: 'st_id', label: 'ไอดี' },

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- <b-container class="pt-2">
-      <p>{{ this.course_name }} \ วิชา </p>
-    </b-container> -->
+    <b-container class="pt-2">
+      <p>{{ course_name }} \ วิชา </p>
+    </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
       <b-nav-item to="/module_structure">โครงสร้างโมดูล</b-nav-item>
@@ -198,6 +198,7 @@ export default {
   },
   data () {
     return {
+      course_name: '',
       oid: '',
       fields: [
         { key: 'sub_id', label: 'รหัสวิชา' },
@@ -220,7 +221,7 @@ export default {
   },
   mounted () {
     this.getSubjects()
-    // this.course_name = this.$store.state.course_name
+    this.course_name = this.$store.state.course_name
   }
 }
 </script>

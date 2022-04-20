@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- <b-container class="pt-2">
-      <p>{{ this.course_name }} \ โมดูล \ ตรวจสอบข้อมูลของนิสิต</p>
-    </b-container> -->
+    <b-container class="pt-2">
+      <p>{{ course_name }} \ โมดูล \ ตรวจสอบข้อมูลของนิสิต</p>
+    </b-container>
     <b-dropdown
       id="dropdown-1"
       :text="selectModuleLabel"
@@ -86,6 +86,7 @@ export default {
   components: {},
   data () {
     return {
+      course_name: '',
       loading: false,
       fields: [
         { key: 'sub_id', label: 'รหัสวิชา' },
@@ -152,9 +153,14 @@ export default {
       await axios
         .get('http://localhost:8081/model_subject/inspect/' + cid + '/' + mid + '/' + stu)
         .then((data) => {
-          console.log(data.data)
-          this.submoduleItems = data.data
-          this.totalRows = data.data.length
+          if (data.data.length > 0) {
+            console.log(data.data)
+            this.submoduleItems = data.data
+            this.totalRows = data.data.length
+          } else {
+            this.$swal({ icon: 'error', title: 'ไม่พบข้อมูล' })
+            console.log('error')
+          }
         })
     },
     async selectModule () {
@@ -185,7 +191,7 @@ export default {
     setTimeout(() => {
       this.scroll(this.dateYear.select)
     }, 1500)
-    // this.course_name = this.$store.state.course_name
+    this.course_name = this.$store.state.course_name
   }
 }
 </script>

@@ -1,8 +1,8 @@
 <template>
   <div fluid style="padding: 0px">
-    <!-- <b-container class="pt-2">
-      <p>{{ this.course_name }} \ โมดูล</p>
-    </b-container> -->
+    <b-container class="pt-2">
+      <p>{{ course_name }} \ โมดูล</p>
+    </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
       <b-nav-item to="/module_structure">โครงสร้างโมดูล</b-nav-item>
@@ -63,6 +63,7 @@ export default {
   },
   data () {
     return {
+      course_name: '',
       loading: false,
       fields: [
         { key: 'sub_id', label: 'รหัสวิชา' },
@@ -90,8 +91,13 @@ export default {
       await axios
         .get('http://localhost:8081/model_subject/' + cid + '/' + mid)
         .then((data) => {
-          this.moduleItems = data.data
-          this.totalRows = data.data.length
+          if (data.data.length > 0) {
+            this.moduleItems = data.data
+            this.totalRows = data.data.length
+          } else {
+            this.$swal({ icon: 'error', title: 'ไม่พบข้อมูล' })
+            console.log('error')
+          }
         })
     },
     async selectModule () {
@@ -123,7 +129,7 @@ export default {
   mounted () {
     // this.getModules()
     this.selectModule()
-    // this.course_name = this.$store.state.course_name
+    this.course_name = this.$store.state.course_name
   }
 }
 </script>

@@ -142,7 +142,14 @@ export default {
       this.$swal({
         icon: 'error',
         title: 'เพิ่มข้อมูลไม่สำเร็จ',
-        text: 'เนื่องจากมีข้อมูลอยู่แล้วหรือข้อมูลไม่ถูกต้อง'
+        text: 'เนื่องจากมีข้อมูลอยู่แล้ว'
+      })
+    },
+    addError () {
+      this.$swal({
+        icon: 'error',
+        title: 'เพิ่มข้อมูลไม่สำเร็จ',
+        text: 'ข้อมูลไม่ถูกต้อง'
       })
     },
     addNew () {
@@ -172,9 +179,20 @@ export default {
       })
     },
     submit () {
-      this.importData()
-      this.$emit('save')
-      this.reset()
+      const col = []
+      Object.keys(this.csv[0]).map((v) => {
+        col.push(this.csv[0][v])
+      })
+      const check = col.filter((item, index) => {
+        return col.indexOf(item) !== index
+      })
+      if (check.length > 0) {
+        this.addError()
+      } else {
+        this.importData()
+        this.$emit('save')
+        this.reset()
+      }
     },
     async importData () {
       this.csv.splice(0, 1)

@@ -8,11 +8,13 @@ export default new Vuex.Store({
     course_id: '',
     sub_id: '',
     module_id: '',
-    stu_year: ''
+    stu_year: '',
+    course_name: ''
   },
   mutations: {
     setCourseId (state, id) {
       state.course_id = id
+      localStorage.setItem('courseId', id)
     },
     setSubId (state, id) {
       state.sub_id = id
@@ -22,6 +24,9 @@ export default new Vuex.Store({
     },
     setStuYear (state, id) {
       state.stu_year = id
+    },
+    setCourseName (state, name) {
+      state.course_name = name
     }
   },
   actions: {
@@ -36,6 +41,9 @@ export default new Vuex.Store({
     },
     setYear ({ commit }, id) {
       commit('setStuYear', id)
+    },
+    setCourseName ({ commit }, name) {
+      commit('setCourseName', name)
     }
   },
   modules: {

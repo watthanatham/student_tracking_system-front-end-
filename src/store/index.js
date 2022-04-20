@@ -18,9 +18,11 @@ export default new Vuex.Store({
     },
     setSubId (state, id) {
       state.sub_id = id
+      localStorage.setItem('sub_id', id)
     },
     setModuleId (state, id) {
       state.module_id = id
+      localStorage.setItem('module_id', id)
     },
     setStuYear (state, id) {
       state.stu_year = id

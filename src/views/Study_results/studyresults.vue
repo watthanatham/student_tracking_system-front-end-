@@ -14,6 +14,8 @@
         <b-col>
           <h6 class="pt-3">ผลการเรียนในหมวด{{ this.selectLabel }}</h6>
           <b-table
+            striped
+            hover
             :items="subjecttypeItems"
             :fields="fields"
             class="tableStudyresult"
@@ -106,7 +108,7 @@ export default {
 .tableStudyresult {
   text-align: center;
   width: 1200px;
-  background-color: whitesmoke;
+  background-color: white;
 }
 .tablestudy {
   margin-block-end: 50px;

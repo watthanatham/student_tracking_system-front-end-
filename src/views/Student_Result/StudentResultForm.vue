@@ -8,6 +8,8 @@
       @show="showModal"
       @hidden="resetModal"
       @ok="handleOk"
+      @cancel="disForm"
+      @close="disForm"
     >
       <b-form @submit.stop.prevent="submit" @reset.stop.prevent="reset">
         <b-form-group
@@ -19,6 +21,7 @@
             type="text"
             id="studentResult-stu_id"
             v-model="form.stu_id"
+            :disabled="clickAdd"
           >
           </b-form-input>
         </b-form-group>
@@ -108,12 +111,23 @@ export default {
         { text: '2', value: '2' },
         { text: 'ฤดูร้อน', value: '3' }
       ],
-      isAddNew: false
+      isAddNew: false,
+      clickAdd: true
+    }
+  },
+  watch: {
+    clickAdd (v) {
+      console.log(v)
     }
   },
   methods: {
+    disForm () {
+      this.clickAdd = true
+      console.log('test', this.clickAdd)
+    },
     addNew () {
       this.isAddNew = true
+      this.clickAdd = false
       this.$nextTick(() => {
         this.show()
         this.isAddNew = false
@@ -161,6 +175,7 @@ export default {
     },
     resetModal (evt) {
       this.reset()
+      this.clickAdd = true
     },
     handleOk (evt) {
       evt.preventDefault()

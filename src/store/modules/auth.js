@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'
 export default {
   namespaced: true,
   state: () => ({
-    user: localStorage.getItem('user') ? localStorage.getItem('user') : null,
+    // user: localStorage.getItem('user') ? localStorage.getItem('user') : null,
     // staff: JSON.parse(localStorage.getItem('staff')) || null,
     // userData: jwtDecode(localStorage.getItem('token')) || null
     userData: localStorage.getItem('token')
@@ -36,10 +36,10 @@ export default {
         }
         console.log(type)
         const res = await loginAuth(payload.username, payload.password, type)
-        const user = res.data.user
+        // const user = res.data.user
         const token = res.data.token
         localStorage.setItem('token', token)
-        localStorage.setItem('user', JSON.stringify(user))
+        // localStorage.setItem('user', JSON.stringify(user))
 
         // Swal.fire('ล็อกอินสำเร็จ', '', 'success')
 
@@ -53,6 +53,10 @@ export default {
     logout ({ commit }) {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
+      localStorage.removeItem('course_id')
+      localStorage.removeItem('course_name')
+      localStorage.removeItem('sub_id')
+      localStorage.removeItem('sub_name')
       commit(AUTH_LOGOUT)
     }
   },

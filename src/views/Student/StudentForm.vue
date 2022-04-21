@@ -181,6 +181,7 @@ export default {
       }
     },
     resetModal (evt) {
+      this.clickAdd = true
       this.reset()
     },
     handleOk (evt) {

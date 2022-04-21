@@ -47,6 +47,12 @@
                     @click="guideImport"
                     ><b-icon icon="list-check"></b-icon> ตรวจสอบข้อมูล</b-button
                   >
+                  <b-button
+                    class="ml-2"
+                    variant="success"
+                    href="https://drive.google.com/uc?export=download&id=1ip1KRYjn_sBISRKqi8Gtr4qScjOgPcOE"
+                    ><b-icon icon="download"></b-icon> Download
+                    Template</b-button>
                 </template>
 
                 <template slot="submit" slot-scope="{ submit }">

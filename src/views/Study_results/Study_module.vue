@@ -2,7 +2,7 @@
   <div>
     <b-container>
       <br>
-      <h2>หน้าตรวจสอบโมดูล</h2>
+      <h5>ตรวจสอบผลการเรียน \ ตรวจสอบโมดูล</h5>
     </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/studyResult">ตรวจสอบหมวดวิชา</b-nav-item>

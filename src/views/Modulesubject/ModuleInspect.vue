@@ -1,7 +1,8 @@
 <template>
   <div>
     <b-container class="pt-2">
-      <p>{{ course_name }} \ โมดูล \ ตรวจสอบข้อมูลของนิสิต</p>
+      <h6>{{ course_name }}</h6>
+      <h6>โมดูล \ ตรวจสอบข้อมูลของนิสิต</h6>
     </b-container>
     <b-dropdown
       id="dropdown-1"

@@ -2,7 +2,7 @@
   <div>
     <b-container>
       <br>
-      <h2>หน้าข้อมูลนิสิต</h2>
+      <h5>ข้อมูลนิสิต</h5>
     </b-container>
     <b-container fluid>
       <b-row>

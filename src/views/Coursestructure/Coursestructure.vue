@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container class="pt-2">
-      <p>{{ cname }} \ โครงสร้างหลักสูตร</p>
+      <h6>{{ cname }} \ โครงสร้างหลักสูตร</h6>
     </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>

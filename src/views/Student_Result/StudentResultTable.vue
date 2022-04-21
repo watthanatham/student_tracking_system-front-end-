@@ -1,7 +1,8 @@
 <template>
   <div>
     <b-container class="pt-2">
-      <p>{{ course_name }} \ วิชา \ {{ subname }}</p>
+      <h6>{{ course_name }}</h6>
+      <h6> วิชา \ {{ subname }}</h6>
     </b-container>
     <b-container>
       <b-row>

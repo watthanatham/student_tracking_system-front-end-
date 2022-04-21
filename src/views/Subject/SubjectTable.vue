@@ -134,6 +134,8 @@ export default {
       console.log(item.sub_id)
       this.$store.dispatch('setSub', item.sub_id)
       this.$store.dispatch('setSubName', item.sub_name_thai)
+      localStorage.setItem('sub_id', item.sub_id)
+      localStorage.setItem('sub_name', item.sub_name_thai)
       this.$router.push({ path: '/student_result' })
     },
     async getSubjects () {

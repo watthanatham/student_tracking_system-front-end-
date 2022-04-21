@@ -8,23 +8,20 @@
       @show="showModal"
       @hidden="resetModal"
       @ok="handleOk"
-      @cancel="test"
-      @close="test"
+      @cancel="disForm"
+      @close="disForm"
     >
       <b-form @submit.stop.prevent="submit" @reset.stop.prevent="reset">
         <b-form-group
           id="form-group-student-code"
           label="รหัสนิสิต"
           label-for="student-code"
-          :invalid-feedback="invalidFeedbackStudentcode"
-          :state="stateStudentcode"
         >
           <b-form-input
             type="text"
             id="student-code"
             v-model="form.stu_id"
             :disabled="clickAdd"
-            required
           >
           </b-form-input>
         </b-form-group>
@@ -145,7 +142,7 @@ export default {
       })
       this.student_course.unshift({ text: 'เลือกหลักสูตร', value: null })
     },
-    test (e) {
+    disForm (e) {
       this.clickAdd = true
       console.log('test', this.clickAdd)
     },
@@ -198,6 +195,7 @@ export default {
       }
     },
     resetModal (evt) {
+      this.clickAdd = true
       this.reset()
     },
     handleOk (evt) {
@@ -212,16 +210,16 @@ export default {
     this.selectCourse()
   },
   computed: {
-    stateStudentcode () {
-      return this.form.stu_id.length >= 8
-    },
-    invalidFeedbackStudentcode () {
-      if (this.form.stu_id.length) {
-      }
-      if (this.form.stu_id != null) {
-      }
-      return 'ต้องใส่รหัสนิสิต'
-    },
+    // stateStudentcode () {
+    //   return this.form.stu_id.length >= 8
+    // },
+    // invalidFeedbackStudentcode () {
+    //   if (this.form.stu_id.length) {
+    //     return ''
+    //   } else {
+    //     return 'ต้องใส่รหัสนิสิต'
+    //   }
+    // },
     stateStudentfirst () {
       return this.form.stu_firstname.length > 0
     },

@@ -15,7 +15,6 @@
           label="ชื่อโมดูล"
           label-for="module-name"
           :invalid-feedback="invalidFeedbackModulename"
-          valid-feedback="สำเร็จ"
           :state="stateModulename"
         >
           <b-form-input
@@ -31,7 +30,6 @@
           label="หน่วยกิตโมดูล"
           label-for="module-credit-credit"
           :invalid-feedback="invalidFeedbackModulecredit"
-          valid-feedback="สำเร็จ"
           :state="stateModulecredit"
         >
           <b-form-input

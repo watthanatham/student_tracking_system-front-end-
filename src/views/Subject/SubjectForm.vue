@@ -8,24 +8,20 @@
       @show="showModal"
       @hidden="resetModal"
       @ok="handleOk"
-      @cancel="test"
-      @close="test"
+      @cancel="disForm"
+      @close="disForm"
     >
       <b-form @submit.stop.prevent="submit" @reset.stop.prevent="reset">
         <b-form-group
           id="form-group-subject-code"
           label="รหัสวิชา"
           label-for="subject-code"
-          :invalid-feedback="invalidFeedbackSubjectcode"
-          valid-feedback="สำเร็จ"
-          :state="stateSubjectcode"
         >
           <b-form-input
             type="text"
             id="subject-code"
             v-model="form.sub_id"
             :disabled="clickAdd"
-            required
           >
           </b-form-input>
         </b-form-group>
@@ -34,7 +30,6 @@
           label="ชื่อวิชาภาษาไทย"
           label-for="subject-name-thai"
           :invalid-feedback="invalidFeedbackSubjectname"
-          valid-feedback="สำเร็จ"
           :state="stateSubjectname"
         >
           <b-form-input
@@ -50,7 +45,6 @@
           label="ชื่อวิชาภาษาอังกฤษ"
           label-for="subject-name-eng"
           :invalid-feedback="invalidFeedbackSubjectnameeng"
-          valid-feedback="สำเร็จ"
           :state="stateSubjectnameeng"
         >
           <b-form-input
@@ -66,7 +60,6 @@
           label="หน่วยกิต"
           label-for="subject-credit"
           :invalid-feedback="invalidFeedbackSubjectcredit"
-          valid-feedback="สำเร็จ"
           :state="stateSubjectcredit"
         >
           <b-form-input
@@ -79,7 +72,6 @@
         </b-form-group>
         <b-form-group id="input-group-1" label="หมวดวิชา" label-for="input-1"
           :invalid-feedback="invalidFeedbackTypeselect"
-          valid-feedback="สำเร็จ"
           :state="stateTypeselect">
           <b-form-select
             id="input-1"
@@ -90,7 +82,6 @@
         </b-form-group>
         <b-form-group id="input-group-2" label="โมดูล" label-for="input-2"
           :invalid-feedback="invalidFeedbackModuleselect"
-          valid-feedback="สำเร็จ"
           :state="stateModuleselect">
           <b-form-select
             id="input-2"
@@ -144,7 +135,7 @@ export default {
     }
   },
   methods: {
-    test (e) {
+    disForm (e) {
       this.clickAdd = true
       console.log('test', this.clickAdd)
     },
@@ -217,6 +208,7 @@ export default {
       }
     },
     resetModal (evt) {
+      this.clickAdd = true
       this.reset()
     },
     handleOk (evt) {
@@ -233,15 +225,15 @@ export default {
     this.selectModule()
   },
   computed: {
-    stateSubjectcode () {
-      return this.form.sub_id.length >= 8
-    },
-    invalidFeedbackSubjectcode () {
-      if (this.form.sub_id.length > 0) {
-        return 'รหัสวิชาต้องมีอย่างน้อย 8 ตัว'
-      }
-      return 'ต้องใส่รหัสวิชา'
-    },
+    // stateSubjectcode () {
+    //   return this.form.sub_id.length >= 8
+    // },
+    // invalidFeedbackSubjectcode () {
+    //   if (this.form.sub_id.length > 0) {
+    //     return 'รหัสวิชาต้องมีอย่างน้อย 8 ตัว'
+    //   }
+    //   return 'ต้องใส่รหัสวิชา'
+    // },
     stateSubjectname () {
       return this.form.sub_name_thai.length >= 2
     },

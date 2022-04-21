@@ -15,7 +15,6 @@
           label="รหัสหลักสูตร"
           label-for="course-code"
           :invalid-feedback="invalidFeedbackCourseid"
-          valid-feedback="สำเร็จ"
           :state="stateCourseid"
         >
           <b-form-input
@@ -31,7 +30,6 @@
           label="ชื่อหลักสูตร"
           label-for="course-name"
           :invalid-feedback="invalidFeedbackCoursename"
-          valid-feedback="สำเร็จ"
           :state="stateCoursename"
         >
           <b-form-input
@@ -47,7 +45,6 @@
           label="หน่วยกิต"
           label-for="course-totalcredit"
           :invalid-feedback="invalidFeedbackCoursecredit"
-          valid-feedback="สำเร็จ"
           :state="stateCoursecredit"
         >
           <b-form-input

@@ -8,21 +8,20 @@
       @show="showModal"
       @hidden="resetModal"
       @ok="handleOk"
+      @cancel="disForm"
+      @close="disForm"
     >
       <b-form @submit.stop.prevent="submit" @reset.stop.prevent="reset">
         <b-form-group
           id="form-group-studentResult-stu_id"
           label="รหัสนิสิต"
           label-for="studentResult-stu_id"
-          :invalid-feedback="invalidFeedbackStuid"
-          valid-feedback="สำเร็จ"
-          :state="stateStuid"
         >
           <b-form-input
             type="text"
             id="studentResult-stu_id"
             v-model="form.stu_id"
-            required
+            :disabled="clickAdd"
           >
           </b-form-input>
         </b-form-group>
@@ -43,7 +42,6 @@
           label="ปีการศึกษา"
           label-for="studentResult-year"
           :invalid-feedback="invalidFeedbackStuyear"
-          valid-feedback="สำเร็จ"
           :state="stateStuyear"
         >
           <b-form-input
@@ -56,7 +54,6 @@
         </b-form-group>
         <b-form-group id="input-group-1" label="เทอม" label-for="input-1"
           :invalid-feedback="invalidFeedbackStuterm"
-          valid-feedback="สำเร็จ"
           :state="stateStuterm">
           <b-form-select
             id="input-1"
@@ -67,7 +64,6 @@
         </b-form-group>
         <b-form-group id="input-group-2" label="ผลการเรียน" label-for="input-2"
           :invalid-feedback="invalidFeedbackSturesult"
-          valid-feedback="สำเร็จ"
           :state="stateSturesult">
           <b-form-select
             id="input-2"
@@ -122,12 +118,23 @@ export default {
         { text: '2', value: '2' },
         { text: 'ฤดูร้อน', value: '3' }
       ],
-      isAddNew: false
+      isAddNew: false,
+      clickAdd: true
+    }
+  },
+  watch: {
+    clickAdd (v) {
+      console.log(v)
     }
   },
   methods: {
+    disForm () {
+      this.clickAdd = true
+      console.log('test', this.clickAdd)
+    },
     addNew () {
       this.isAddNew = true
+      this.clickAdd = false
       this.$nextTick(() => {
         this.show()
         this.isAddNew = false
@@ -175,6 +182,7 @@ export default {
     },
     resetModal (evt) {
       this.reset()
+      this.clickAdd = true
     },
     handleOk (evt) {
       evt.preventDefault()
@@ -186,15 +194,15 @@ export default {
     }
   },
   computed: {
-    stateStuid () {
-      return this.form.stu_id.length >= 8
-    },
-    invalidFeedbackStuid () {
-      if (this.form.stu_id.length > 0) {
-        return 'รหัสนิสิตต้องมีอย่างน้อย 8 ตัว'
-      }
-      return 'ต้องใส่รหัสนิสิต'
-    },
+    // stateStuid () {
+    //   return this.form.stu_id.length >= 8
+    // },
+    // invalidFeedbackStuid () {
+    //   if (this.form.stu_id.length > 0) {
+    //     return 'รหัสนิสิตต้องมีอย่างน้อย 8 ตัว'
+    //   }
+    //   return 'ต้องใส่รหัสนิสิต'
+    // },
     stateStuyear () {
       return this.form.sr_year.length >= 4
     },

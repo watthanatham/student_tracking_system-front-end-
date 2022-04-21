@@ -15,7 +15,6 @@
           label="หัวข้อ"
           label-for="course-code"
           :invalid-feedback="invalidFeedbackCoursecode"
-          valid-feedback="สำเร็จ"
           :state="stateCoursecode"
         >
           <b-form-input
@@ -31,7 +30,6 @@
           label="หน่วยกิต"
           label-for="course-credit-credit"
           :invalid-feedback="invalidFeedbackCoursecreditcredit"
-          valid-feedback="สำเร็จ"
           :state="stateCoursecreditcredit"
         >
           <b-form-input
@@ -135,11 +133,10 @@ export default {
       return 'ต้องใส่ชื่อหัวข้อ'
     },
     stateCoursecreditcredit () {
-      return this.form.st_credit.length >= 2
+      return this.form.st_credit.length >= 1
     },
     invalidFeedbackCoursecreditcredit () {
       if (this.form.st_credit.length > 0) {
-        return 'หน่วยกิตต้องมีมากกว่า 2 หน่วย'
       }
       return 'ต้องใส่หน่วยกิต'
     }

@@ -10,7 +10,7 @@ export default new Vuex.Store({
     module_id: '',
     stu_year: '',
     course_name: localStorage.getItem('course_name') ? localStorage.getItem('course_name') : null,
-    sub_name: localStorage.getItem('sub_id') ? localStorage.getItem('sub_id') : null
+    sub_name: localStorage.getItem('sub_name') ? localStorage.getItem('sub_name') : null
   },
   mutations: {
     setCourseId (state, id) {

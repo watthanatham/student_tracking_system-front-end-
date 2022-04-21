@@ -8,8 +8,8 @@
       @show="showModal"
       @hidden="resetModal"
       @ok="handleOk"
-      @cancel="test"
-      @close="test"
+      @cancel="disForm"
+      @close="disForm"
     >
       <b-form @submit.stop.prevent="submit" @reset.stop.prevent="reset">
         <b-form-group
@@ -122,7 +122,7 @@ export default {
     }
   },
   methods: {
-    test (e) {
+    disForm (e) {
       this.clickAdd = true
       console.log('test', this.clickAdd)
     },

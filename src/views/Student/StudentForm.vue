@@ -16,12 +16,15 @@
           id="form-group-student-code"
           label="รหัสนิสิต"
           label-for="student-code"
+          :invalid-feedback="invalidFeedbackStudentcode"
+          :state="stateStudentcode"
         >
           <b-form-input
             type="text"
             id="student-code"
             v-model="form.stu_id"
             :disabled="clickAdd"
+            required
           >
           </b-form-input>
         </b-form-group>
@@ -29,11 +32,14 @@
           id="form-group-student-firstname"
           label="ชื่อ"
           label-for="student-firstname"
+          :invalid-feedback="invalidFeedbackStudentfirst"
+          :state="stateStudentfirst"
         >
           <b-form-input
             type="text"
             id="student-firstname"
             v-model="form.stu_firstname"
+            required
           >
           </b-form-input>
         </b-form-group>
@@ -41,11 +47,14 @@
           id="form-group-student-lastname"
           label="นามสกุล"
           label-for="student-lastname"
+          :invalid-feedback="invalidFeedbackStudentlast"
+          :state="stateStudentlast"
         >
           <b-form-input
             type="text"
             id="student-lastname"
             v-model="form.stu_lastname"
+            required
           >
           </b-form-input>
         </b-form-group>
@@ -53,11 +62,14 @@
           id="form-group-student-username"
           label="ชื่อบัญชีผู้ใช้"
           label-for="student-username"
+          :invalid-feedback="invalidFeedbackStudentuser"
+          :state="stateStudentuser"
         >
           <b-form-input
             type="text"
             id="student-username"
             v-model="form.stu_username"
+            required
           >
           </b-form-input>
         </b-form-group>
@@ -65,15 +77,20 @@
           id="form-group-student-password"
           label="รหัสผ่าน"
           label-for="student-password"
+          :invalid-feedback="invalidFeedbackStudentpass"
+          :state="stateStudentpass"
         >
           <b-form-input
             type="password"
             id="student-password"
             v-model="form.stu_password"
+            required
           >
           </b-form-input>
         </b-form-group>
-        <b-form-group id="input-group-1" label="หลักสูตร" label-for="input-1">
+        <b-form-group id="input-group-1" label="หลักสูตร" label-for="input-1"
+          :invalid-feedback="invalidFeedbackStudentcourse"
+          :state="stateStudentcourse">
           <b-form-select
             id="input-1"
             v-model="form.course_id"
@@ -193,6 +210,63 @@ export default {
   },
   mounted () {
     this.selectCourse()
+  },
+  computed: {
+    stateStudentcode () {
+      return this.form.stu_id.length >= 8
+    },
+    invalidFeedbackStudentcode () {
+      if (this.form.stu_id.length) {
+      }
+      if (this.form.stu_id != null) {
+      }
+      return 'ต้องใส่รหัสนิสิต'
+    },
+    stateStudentfirst () {
+      return this.form.stu_firstname.length > 0
+    },
+    invalidFeedbackStudentfirst () {
+      if (this.form.stu_firstname.length) {
+        return 'ปีการศึกษาตัวเลขไม่เกิน 4 ตำแหน่ง'
+      }
+      return 'ต้องใส่ชื่อนิสิต'
+    },
+    stateStudentlast () {
+      return this.form.stu_lastname.length > 0
+    },
+    invalidFeedbackStudentlast () {
+      if (this.form.stu_lastname.length) {
+        return 'ปีการศึกษาตัวเลขไม่เกิน 4 ตำแหน่ง'
+      }
+      return 'ต้องใส่นามสกุล'
+    },
+    stateStudentuser () {
+      return this.form.stu_username.length >= 8
+    },
+    invalidFeedbackStudentuser () {
+      if (this.form.stu_username.length > 0) {
+        return 'ชื่อบัญชีผู้ใช้ตัวเลขไม่เกิน 8 ตำแหน่ง'
+      }
+      return 'ต้องใส่ชื่อบัญชีผู้ใช้'
+    },
+    stateStudentpass () {
+      return this.form.stu_password.length >= 8
+    },
+    invalidFeedbackStudentpass () {
+      if (this.form.stu_password.length > 0) {
+        return 'รหัสผ่านไม่เกิน 8 ตำแหน่ง'
+      }
+      return 'ต้องใส่รหัสผ่าน'
+    },
+    stateStudentcourse () {
+      return this.form.course_id != null
+    },
+    invalidFeedbackStudentcourse  () {
+      if (this.form.course_id != null) {
+        return ''
+      }
+      return 'กรุณาเลือกหลักสูตร'
+    }
   }
 }
 </script>

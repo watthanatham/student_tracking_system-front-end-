@@ -16,12 +16,16 @@
           id="form-group-subject-code"
           label="รหัสวิชา"
           label-for="subject-code"
+          :invalid-feedback="invalidFeedbackSubjectcode"
+          valid-feedback="สำเร็จ"
+          :state="stateSubjectcode"
         >
           <b-form-input
             type="text"
             id="subject-code"
             v-model="form.sub_id"
             :disabled="clickAdd"
+            required
           >
           </b-form-input>
         </b-form-group>
@@ -29,11 +33,15 @@
           id="form-group-subject-name"
           label="ชื่อวิชาภาษาไทย"
           label-for="subject-name-thai"
+          :invalid-feedback="invalidFeedbackSubjectname"
+          valid-feedback="สำเร็จ"
+          :state="stateSubjectname"
         >
           <b-form-input
             type="text"
             id="subject-name-thai"
             v-model="form.sub_name_thai"
+            required
           >
           </b-form-input>
         </b-form-group>
@@ -41,11 +49,15 @@
           id="form-group-subject-name"
           label="ชื่อวิชาภาษาอังกฤษ"
           label-for="subject-name-eng"
+          :invalid-feedback="invalidFeedbackSubjectnameeng"
+          valid-feedback="สำเร็จ"
+          :state="stateSubjectnameeng"
         >
           <b-form-input
             type="text"
             id="subject-name-eng"
             v-model="form.sub_name_eng"
+            required
           >
           </b-form-input>
         </b-form-group>
@@ -53,15 +65,22 @@
           id="form-group-subject-credit"
           label="หน่วยกิต"
           label-for="subject-credit"
+          :invalid-feedback="invalidFeedbackSubjectcredit"
+          valid-feedback="สำเร็จ"
+          :state="stateSubjectcredit"
         >
           <b-form-input
             type="number"
             id="subject-credit"
             v-model="form.sub_credit"
+            required
           >
           </b-form-input>
         </b-form-group>
-        <b-form-group id="input-group-1" label="หมวดวิชา" label-for="input-1">
+        <b-form-group id="input-group-1" label="หมวดวิชา" label-for="input-1"
+          :invalid-feedback="invalidFeedbackTypeselect"
+          valid-feedback="สำเร็จ"
+          :state="stateTypeselect">
           <b-form-select
             id="input-1"
             v-model="form.st_id"
@@ -69,7 +88,10 @@
             required
           ></b-form-select>
         </b-form-group>
-        <b-form-group id="input-group-2" label="โมดูล" label-for="input-2">
+        <b-form-group id="input-group-2" label="โมดูล" label-for="input-2"
+          :invalid-feedback="invalidFeedbackModuleselect"
+          valid-feedback="สำเร็จ"
+          :state="stateModuleselect">
           <b-form-select
             id="input-2"
             v-model="form.module_id"
@@ -209,6 +231,62 @@ export default {
   mounted () {
     this.selectSubjectType()
     this.selectModule()
+  },
+  computed: {
+    stateSubjectcode () {
+      return this.form.sub_id.length >= 8
+    },
+    invalidFeedbackSubjectcode () {
+      if (this.form.sub_id.length > 0) {
+        return 'รหัสวิชาต้องมีอย่างน้อย 8 ตัว'
+      }
+      return 'ต้องใส่รหัสวิชา'
+    },
+    stateSubjectname () {
+      return this.form.sub_name_thai.length >= 2
+    },
+    invalidFeedbackSubjectname () {
+      if (this.form.sub_name_thai.length > 0) {
+        return 'ชื่อวิชาขนาดอย่างน้อย 2 ตัวอักษร'
+      }
+      return 'ต้องใส่ชื่อวิชาภาษาไทย'
+    },
+    stateSubjectnameeng () {
+      return this.form.sub_name_eng.length >= 2
+    },
+    invalidFeedbackSubjectnameeng () {
+      if (this.form.sub_name_eng.length > 0) {
+        return 'ชื่อวิชาขนาดอย่างน้อย 2 ตัวอักษร'
+      }
+      return 'ต้องใส่ชื่อวิชาภาษาอังกฤษ'
+    },
+    stateSubjectcredit () {
+      return this.form.sub_credit.length > 0
+    },
+    invalidFeedbackSubjectcredit () {
+      if (this.form.sub_credit.length > 0) {
+        return 'ชื่อวิชาขนาดอย่างน้อย 2 ตัวอักษร'
+      }
+      return 'ต้องใส่หน่วยกิต'
+    },
+    stateTypeselect () {
+      return this.form.st_id != null
+    },
+    invalidFeedbackTypeselect () {
+      if (this.form.st_id != null) {
+        return ''
+      }
+      return 'กรุณาเลือกหมวดวิชา'
+    },
+    stateModuleselect () {
+      return this.form.module_id != null
+    },
+    invalidFeedbackModuleselect  () {
+      if (this.form.module_id != null) {
+        return ''
+      }
+      return 'กรุณาเลือกโมดูลวิชา'
+    }
   }
 }
 </script>

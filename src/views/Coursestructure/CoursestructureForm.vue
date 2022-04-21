@@ -14,11 +14,15 @@
           id="form-group-course-code"
           label="หัวข้อ"
           label-for="course-code"
+          :invalid-feedback="invalidFeedbackCoursecode"
+          valid-feedback="สำเร็จ"
+          :state="stateCoursecode"
         >
           <b-form-input
             type="text"
             id="course-code"
             v-model="form.st_name"
+            required
           >
           </b-form-input>
         </b-form-group>
@@ -26,11 +30,15 @@
           id="form-group-course-cerdit"
           label="หน่วยกิต"
           label-for="course-credit-credit"
+          :invalid-feedback="invalidFeedbackCoursecreditcredit"
+          valid-feedback="สำเร็จ"
+          :state="stateCoursecreditcredit"
         >
           <b-form-input
             type="number"
             id="course-credit-credit"
             v-model="form.st_credit"
+            required
           >
           </b-form-input>
         </b-form-group>
@@ -114,6 +122,26 @@ export default {
       this.$nextTick(() => {
         this.$bvModal.hide('modal-course')
       })
+    }
+  },
+  computed: {
+    stateCoursecode () {
+      return this.form.st_name.length >= 2
+    },
+    invalidFeedbackCoursecode () {
+      if (this.form.st_name.length > 0) {
+        return 'ชื่องานต้องมีขนาดอย่างน้อย 2 ตัวอักษร'
+      }
+      return 'ต้องใส่ชื่อหัวข้อ'
+    },
+    stateCoursecreditcredit () {
+      return this.form.st_credit.length >= 2
+    },
+    invalidFeedbackCoursecreditcredit () {
+      if (this.form.st_credit.length > 0) {
+        return 'หน่วยกิตต้องมีมากกว่า 2 หน่วย'
+      }
+      return 'ต้องใส่หน่วยกิต'
     }
   }
 }

@@ -14,11 +14,15 @@
           id="form-group-module-name"
           label="ชื่อโมดูล"
           label-for="module-name"
+          :invalid-feedback="invalidFeedbackModulename"
+          valid-feedback="สำเร็จ"
+          :state="stateModulename"
         >
           <b-form-input
             type="text"
             id="module-name"
             v-model="form.module_name"
+            required
           >
           </b-form-input>
         </b-form-group>
@@ -26,11 +30,15 @@
           id="form-group-module-credit"
           label="หน่วยกิตโมดูล"
           label-for="module-credit-credit"
+          :invalid-feedback="invalidFeedbackModulecredit"
+          valid-feedback="สำเร็จ"
+          :state="stateModulecredit"
         >
           <b-form-input
             type="number"
             id="module-credit-credit"
             v-model="form.module_credit"
+            required
           >
           </b-form-input>
         </b-form-group>
@@ -112,6 +120,26 @@ export default {
       this.$nextTick(() => {
         this.$bvModal.hide('modal-module')
       })
+    }
+  },
+  computed: {
+    stateModulename () {
+      return this.form.module_name.length >= 2
+    },
+    invalidFeedbackModulename () {
+      if (this.form.module_name.length > 0) {
+        return 'ชื่องานต้องมีขนาดอย่างน้อย 2 ตัวอักษร'
+      }
+      return 'ต้องใส่ชื่อโมดูล'
+    },
+    stateModulecredit () {
+      return this.form.module_credit.length > 0
+    },
+    invalidFeedbackModulecredit () {
+      if (this.form.module_credit.length > 0) {
+        return 'หน่วยกิตต้องมีมากกว่า 2 หน่วย'
+      }
+      return 'ต้องใส่หน่วยกิต'
     }
   }
 }

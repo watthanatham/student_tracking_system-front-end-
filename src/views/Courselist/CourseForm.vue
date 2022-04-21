@@ -14,11 +14,15 @@
           id="form-group-course-code"
           label="รหัสหลักสูตร"
           label-for="course-code"
+          :invalid-feedback="invalidFeedbackCourseid"
+          valid-feedback="สำเร็จ"
+          :state="stateCourseid"
         >
           <b-form-input
             type="text"
             id="course-code"
             v-model="form.course_id"
+            required
           >
           </b-form-input>
         </b-form-group>
@@ -26,11 +30,15 @@
           id="form-group-course-name"
           label="ชื่อหลักสูตร"
           label-for="course-name"
+          :invalid-feedback="invalidFeedbackCoursename"
+          valid-feedback="สำเร็จ"
+          :state="stateCoursename"
         >
           <b-form-input
             type="text"
             id="course-name-thai"
             v-model="form.course_name"
+            required
           >
           </b-form-input>
         </b-form-group>
@@ -38,11 +46,15 @@
           id="form-group-course-totalcredit"
           label="หน่วยกิต"
           label-for="course-totalcredit"
+          :invalid-feedback="invalidFeedbackCoursecredit"
+          valid-feedback="สำเร็จ"
+          :state="stateCoursecredit"
         >
           <b-form-input
             type="number"
             id="course-totalcredit"
             v-model="form.course_totalcredit"
+            required
           >
           </b-form-input>
         </b-form-group>
@@ -125,6 +137,35 @@ export default {
       this.$nextTick(() => {
         this.$bvModal.hide('modal-course')
       })
+    }
+  },
+  computed: {
+    stateCourseid () {
+      return this.form.course_id.length > 0
+    },
+    invalidFeedbackCourseid () {
+      if (this.form.course_id.length < 0) {
+        return 'ต้องกรอกรหัสหลักสูตร'
+      }
+      return 'กรุณาใส่รหัสหลักสูตร'
+    },
+    stateCoursename () {
+      return this.form.course_name.length > 0
+    },
+    invalidFeedbackCoursename () {
+      if (this.form.course_name.length < 0) {
+        return 'ต้องกรอกรหัสหลักสูตร'
+      }
+      return 'กรุณาใส่ชื่อหลักสูตร'
+    },
+    stateCoursecredit () {
+      return this.form.course_totalcredit.length > 0
+    },
+    invalidFeedbackCoursecredit () {
+      if (this.form.course_totalcredit.length < 0) {
+        return 'ต้องกรอกรหัสหลักสูตร'
+      }
+      return 'กรุณาใส่หน่วยกิตหลักสูตร'
     }
   }
 }

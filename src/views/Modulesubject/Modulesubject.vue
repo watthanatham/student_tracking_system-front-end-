@@ -1,7 +1,7 @@
 <template>
   <div fluid style="padding: 0px">
     <b-container class="pt-2">
-      <p>{{ course_name }} \ โมดูล</p>
+      <h6>{{ course_name }} \ โมดูล</h6>
     </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
@@ -20,7 +20,7 @@
       <b-dropdown-item v-else v-for="item in select_module" :key="item.value" @click="select(item)">{{ item.text }}</b-dropdown-item>
     </b-dropdown>
     <b-button @click="getModules" variant="primary"><i class="fa fa-search"></i> ค้นหา</b-button>
-    <b-button variant="info" class="ml-2" to="/moduleinspect"><i class="fa fa-list-alt"></i> ตรวจสอบข้อมูลของนิสิต</b-button>
+    <b-button variant="info" class="ml-2" to="/moduleinspect"><i class="fa fa-list-alt"></i> ตรวจสอบข้อมูลโมดูลของนิสิต</b-button>
     <b-container fluid>
       <b-row>
         <b-col class="text-right">

@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container class="pt-2">
-      <p>{{ course_name }} \ รายวิชา</p>
+      <h6>{{ course_name }} \ รายวิชา</h6>
     </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>

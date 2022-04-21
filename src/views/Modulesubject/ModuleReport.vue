@@ -1,7 +1,9 @@
 <template>
   <div class="mt-2">
     <b-container class="pt-2">
-      <p>{{ course_name }} \ โมดูล \ ตรวจสอบข้อมูลของนิสิต \ ตรวจสอบรายชื่อนิสิตที่ไม่ผ่าน</p>
+      <h6>{{ course_name }}</h6>
+      <h6> โมดูล \ ตรวจสอบข้อมูลของนิสิต \ ตรวจสอบรายชื่อนิสิตที่ไม่ผ่าน</h6>
+      <br>
     </b-container>
     <div>
       <b-button to="/moduleinspect" variant="info" class="ml-3"

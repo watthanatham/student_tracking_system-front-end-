@@ -11,7 +11,7 @@
     <b-container fluid>
       <b-row>
         <b-col>
-          <h6 class="pt-3">ข้อมูลผลการเรียนวิชา  {{ this.subname }}</h6>
+          <h6 class="pt-3">รายชื่อนิสิตที่ยังไม่ผ่านในวิชา  {{ this.subname }}</h6>
           <b-table
             striped
             hover

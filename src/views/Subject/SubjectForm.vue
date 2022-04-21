@@ -225,15 +225,15 @@ export default {
     this.selectModule()
   },
   computed: {
-    // stateSubjectcode () {
-    //   return this.form.sub_id.length >= 8
-    // },
-    // invalidFeedbackSubjectcode () {
-    //   if (this.form.sub_id.length > 0) {
-    //     return 'รหัสวิชาต้องมีอย่างน้อย 8 ตัว'
-    //   }
-    //   return 'ต้องใส่รหัสวิชา'
-    // },
+    stateSubjectcode () {
+      return this.form.sub_id.length >= 8
+    },
+    invalidFeedbackSubjectcode () {
+      if (this.form.sub_id.length > 0) {
+        return 'รหัสวิชาต้องมีอย่างน้อย 8 ตัว'
+      }
+      return 'ต้องใส่รหัสวิชา'
+    },
     stateSubjectname () {
       return this.form.sub_name_thai.length >= 2
     },
@@ -253,10 +253,10 @@ export default {
       return 'ต้องใส่ชื่อวิชาภาษาอังกฤษ'
     },
     stateSubjectcredit () {
-      return this.form.sub_credit.length > 0
+      return this.form.sub_credit > 0
     },
     invalidFeedbackSubjectcredit () {
-      if (this.form.sub_credit.length > 0) {
+      if (this.form.sub_credit > 0) {
         return 'ชื่อวิชาขนาดอย่างน้อย 2 ตัวอักษร'
       }
       return 'ต้องใส่หน่วยกิต'

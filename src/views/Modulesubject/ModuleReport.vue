@@ -2,7 +2,6 @@
   <div class="mt-2">
     <b-container class="pt-2">
       <h6>{{ course_name }}</h6>
-      <h6> โมดูล \ ตรวจสอบข้อมูลของนิสิต \ ตรวจสอบรายชื่อนิสิตที่ไม่ผ่าน</h6>
       <br>
     </b-container>
     <div>
@@ -12,6 +11,7 @@
     <b-container fluid>
       <b-row>
         <b-col>
+          <h6 class="pt-3">ข้อมูลผลการเรียนวิชา  {{ this.subname }}</h6>
           <b-table
             striped
             hover
@@ -33,6 +33,7 @@ export default {
   data () {
     return {
       course_name: '',
+      subname: '',
       loading: false,
       fields: [
         { key: 'stu_id', label: 'รหัสนิสิต' },
@@ -69,6 +70,7 @@ export default {
   mounted () {
     this.getModuleReports()
     this.course_name = this.$store.state.course_name
+    this.subname = this.$store.state.sub_name
   }
 }
 </script>

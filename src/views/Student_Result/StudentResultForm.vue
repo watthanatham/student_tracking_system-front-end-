@@ -34,6 +34,7 @@
             type="text"
             id="studentResult-sub_id"
             v-model="form.sub_id"
+            :disabled="clickAdd"
           >
           </b-form-input>
         </b-form-group>

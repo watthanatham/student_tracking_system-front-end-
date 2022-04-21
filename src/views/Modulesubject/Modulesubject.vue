@@ -1,14 +1,14 @@
 <template>
   <div fluid style="padding: 0px">
     <b-container class="pt-2">
-      <h6>{{ course_name }} \ โมดูล</h6>
+      <h6>{{ course_name }}</h6>
     </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
-      <b-nav-item to="/module_structure">โครงสร้างโมดูล</b-nav-item>
-      <b-nav-item to="/subject_type">รายวิชา</b-nav-item>
-      <b-nav-item to="/moduleSubject">โมดูล</b-nav-item>
-      <b-nav-item to="/subject">วิชา</b-nav-item>
+      <b-nav-item to="/module_structure">โมดูล</b-nav-item>
+      <b-nav-item to="/subject_type">รายวิชาแต่ละหมวดวิชา</b-nav-item>
+      <b-nav-item to="/moduleSubject">รายวิชาแต่ละโมดูล</b-nav-item>
+      <b-nav-item to="/subject">วิชาในหลักสูตร</b-nav-item>
     </b-nav>
     <b-dropdown
       id="dropdown-1"
@@ -17,17 +17,27 @@
       class="m-md-2"
     >
       <b-spinner label="Spinning" v-if="loading"></b-spinner>
-      <b-dropdown-item v-else v-for="item in select_module" :key="item.value" @click="select(item)">{{ item.text }}</b-dropdown-item>
+      <b-dropdown-item
+        v-else
+        v-for="item in select_module"
+        :key="item.value"
+        @click="select(item)"
+        >{{ item.text }}</b-dropdown-item
+      >
     </b-dropdown>
-    <b-button @click="getModules" variant="primary"><i class="fa fa-search"></i> ค้นหา</b-button>
-    <b-button variant="info" class="ml-2" to="/moduleinspect"><i class="fa fa-list-alt"></i> ตรวจสอบข้อมูลโมดูลของนิสิต</b-button>
+    <b-button @click="getModules" variant="primary"
+      ><i class="fa fa-search"></i> ค้นหา</b-button
+    >
+    <b-button variant="info" class="ml-2" to="/moduleinspect"
+      ><i class="fa fa-list-alt"></i> ตรวจสอบข้อมูลโมดูลของนิสิต</b-button
+    >
     <b-container fluid>
       <b-row>
-        <b-col class="text-right">
-        </b-col>
+        <b-col class="text-right"> </b-col>
       </b-row>
       <b-row>
         <b-col>
+          <h6>ตารางรายวิชาในโมดูล {{ this.selectLabel }}</h6>
           <b-table
             striped
             hover
@@ -59,8 +69,7 @@
 <script>
 import axios from 'axios'
 export default {
-  components: {
-  },
+  components: {},
   data () {
     return {
       course_name: '',
@@ -103,11 +112,13 @@ export default {
     async selectModule () {
       this.loading = true
       const cid = this.$store.state.course_id
-      await axios.get('http://localhost:8081/model_subject/md/' + cid).then(data => {
-        this.select_module = data.data
-        console.log(this.select_module)
-        this.loading = false
-      })
+      await axios
+        .get('http://localhost:8081/model_subject/md/' + cid)
+        .then((data) => {
+          this.select_module = data.data
+          console.log(this.select_module)
+          this.loading = false
+        })
       this.select_module.unshift({ text: 'เลือกโมดูล', value: null })
     },
     async saveModule (module) {

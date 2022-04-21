@@ -18,13 +18,15 @@
               <vue-csv-import
                 v-model="csv"
                 :map-fields="[
-                  'stu_id',
-                  'course_id',
-                  'stu_firstname',
-                  'stu_lastname',
-                  'stu_username',
-                  'stu_password'
+                  'รหัสนิสิต',
+                  'รหัสหลักสูตร',
+                  'ชื่อ',
+                  'นามสกุล',
+                  'บัญชีผู้ใช้',
+                  'รหัสผ่าน'
                 ]"
+                :autoMatchFields="true"
+                :autoMatchIgnoreCase="true"
               >
                 <template slot="error">
                   <p class="text-danger">
@@ -43,7 +45,6 @@
                   <b-button
                     variant="info"
                     @click.prevent="load"
-                    @click="guideImport"
                     ><b-icon icon="list-check"></b-icon> ตรวจสอบข้อมูล</b-button
                   >
                   <b-button
@@ -51,7 +52,8 @@
                     variant="success"
                     href="https://drive.google.com/uc?export=download&id=1v6eEf-xSzi3H6lG36vul65-23TV-YR-O"
                     ><b-icon icon="download"></b-icon> Download
-                    Template</b-button>
+                    Template</b-button
+                  >
                 </template>
 
                 <template slot="submit" slot-scope="{ submit }">
@@ -131,13 +133,6 @@ export default {
     }
   },
   methods: {
-    guideImport () {
-      this.$swal({
-        icon: 'info',
-        title: 'ข้อแนะนำ',
-        text: 'เรียงตามลำดับ : รหัสนิสิต | รหัสหลักสูตร | ชื่อ | นามสกุล | บัญชีผู้ใช้ | รหัสผ่าน'
-      })
-    },
     addSuccess () {
       this.$swal({
         icon: 'success',
@@ -205,14 +200,15 @@ export default {
       var arr = []
       this.csv.forEach((item) => {
         arr.push([
-          item.stu_id,
-          item.course_id,
-          item.stu_firstname,
-          item.stu_lastname,
-          item.stu_username,
-          item.stu_password
+          item['รหัสนิสิต'],
+          item['รหัสหลักสูตร'],
+          item['ชื่อ'],
+          item['นามสกุล'],
+          item['บัญชีผู้ใช้'],
+          item['รหัสผ่าน']
         ])
       })
+      console.log(arr)
       const response = await axios.post(
         'http://localhost:8081/student/import',
         arr

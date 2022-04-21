@@ -18,14 +18,16 @@
               <vue-csv-import
                 v-model="csv"
                 :map-fields="[
-                  'sub_id',
-                  'st_id',
-                  'module_id',
-                  'course_id',
-                  'sub_name_thai',
-                  'sub_name_eng',
-                  'sub_credit'
+                  'รหัสวิชา',
+                  'รหัสหมวดวิชา',
+                  'รหัสโมดูล',
+                  'รหัสหลักสูตร',
+                  'ชื่อวิชาภาษาไทย',
+                  'ชื่อวิชาภาษาอังกฤษ',
+                  'หน่วยกิต'
                 ]"
+                :autoMatchFields="true"
+                :autoMatchIgnoreCase="true"
               >
                 <template slot="error">
                   <p class="text-danger">
@@ -44,7 +46,6 @@
                   <b-button
                     variant="info"
                     @click.prevent="load"
-                    @click="guideImport"
                     ><b-icon icon="list-check"></b-icon> ตรวจสอบข้อมูล</b-button
                   >
                   <b-button
@@ -132,13 +133,6 @@ export default {
     }
   },
   methods: {
-    guideImport () {
-      this.$swal({
-        icon: 'info',
-        title: 'ข้อแนะนำ',
-        text: 'เรียงตามลำดับ : รหัสวิชา | รหัสหมวดวิชา | รหัสโมดูล | รหัสหลักสูตร | ชื่อภาษาไทย | ชื่อภาษาอังกฤษ | หน่วยกิต'
-      })
-    },
     addSuccess () {
       this.$swal({
         icon: 'success',
@@ -206,13 +200,13 @@ export default {
       var subjects = []
       this.csv.forEach((item) => {
         subjects.push([
-          item.sub_id,
-          item.st_id,
-          item.module_id,
-          item.course_id,
-          item.sub_name_thai,
-          item.sub_name_eng,
-          item.sub_credit
+          item['รหัสวิชา'],
+          item['รหัสหมวดวิชา'],
+          item['รหัสโมดูล'],
+          item['รหัสหลักสูตร'],
+          item['ชื่อวิชาภาษาไทย'],
+          item['ชื่อวิชาภาษาอังกฤษ'],
+          item['หน่วยกิต']
         ])
       })
       const response = await axios.post('http://localhost:8081/subject/import', subjects)

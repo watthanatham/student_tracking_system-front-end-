@@ -5,7 +5,7 @@
         <div class="card card-screenlogin my-5">
           <div class="card-body">
             <b-img src="../../assets/AI.png" width="555px" height="165%" class="ml-5 mr-5" ></b-img>
-            <h5 class="card-title text-center"><b> <br>Welcome to the Ai branch system<br> </b></h5>
+            <h5 class="card-title text-center"><b> <br>Welcome to the AAI <br> </b></h5>
               <div>
                 <ul class="nav navbar-nav flex-col float-center">
                   <li class="nav-item">

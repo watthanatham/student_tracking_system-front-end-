@@ -1,29 +1,48 @@
 <template>
   <div>
     <b-container class="pt-2">
-      <h6>{{ course_name }} \ รายวิชา</h6>
+      <h6>{{ course_name }}</h6>
     </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
-      <b-nav-item to="/module_structure">โครงสร้างโมดูล</b-nav-item>
-      <b-nav-item to="/subject_type">รายวิชา</b-nav-item>
-      <b-nav-item to="/moduleSubject">โมดูล</b-nav-item>
-      <b-nav-item to="/subject">วิชา</b-nav-item>
+      <b-nav-item to="/module_structure">โมดูล</b-nav-item>
+      <b-nav-item to="/subject_type">รายวิชาแต่ละหมวดวิชา</b-nav-item>
+      <b-nav-item to="/moduleSubject">รายวิชาแต่ละโมดูล</b-nav-item>
+      <b-nav-item to="/subject">วิชาในหลักสูตร</b-nav-item>
     </b-nav>
     <b-dropdown
       id="dropdown-1"
       :text="selectLabel"
       variant="outline-primary"
-      class="m-md-2">
+      class="m-md-2"
+    >
       <b-spinner label="Spinning" v-if="loading"></b-spinner>
-      <b-dropdown-item v-else v-for="item in select_type" :key="item.value" @click="select(item)">{{ item.text }}</b-dropdown-item>
+      <b-dropdown-item
+        v-else
+        v-for="item in select_type"
+        :key="item.value"
+        @click="select(item)"
+        >{{ item.text }}</b-dropdown-item
+      >
     </b-dropdown>
-    <b-button @click="getSubjects" variant="primary"><i class="fa fa-search"></i> ค้นหา</b-button>
+    <b-button @click="getSubjects" variant="primary"
+      ><i class="fa fa-search"></i> ค้นหา</b-button
+    >
     <b-container fluid>
       <b-row>
         <b-col>
-          <b-table striped hover :items="subjecttypeItems" :fields="fields" :current-page="currentPage" :per-page="perPage" @filtered="onFiltered" :filter="filter"
-          class="tabletypesubject">
+          <h6>ตารางรายวิชาในหมวด{{ this.selectLabel }}</h6>
+          <b-table
+            striped
+            hover
+            :items="subjecttypeItems"
+            :fields="fields"
+            :current-page="currentPage"
+            :per-page="perPage"
+            @filtered="onFiltered"
+            :filter="filter"
+            class="tabletypesubject"
+          >
           </b-table>
           <b-col sm="1" md="6" class="my-1">
             <b-pagination
@@ -32,7 +51,8 @@
               :per-page="perPage"
               align="fill"
               size="sm"
-              class="my-0">
+              class="my-0"
+            >
             </b-pagination>
           </b-col>
         </b-col>
@@ -48,15 +68,17 @@ export default {
     async getSubjects () {
       const cid = this.$store.state.course_id
       const tid = this.selectData.value
-      await axios.get('http://localhost:8081/type_subject/' + cid + '/' + tid).then(data => {
-        if (data.data.length > 0) {
-          this.subjecttypeItems = data.data
-          this.totalRows = data.data.length
-        } else {
-          this.$swal({ icon: 'error', title: 'ไม่พบข้อมูล' })
-          console.log('error')
-        }
-      })
+      await axios
+        .get('http://localhost:8081/type_subject/' + cid + '/' + tid)
+        .then((data) => {
+          if (data.data.length > 0) {
+            this.subjecttypeItems = data.data
+            this.totalRows = data.data.length
+          } else {
+            this.$swal({ icon: 'error', title: 'ไม่พบข้อมูล' })
+            console.log('error')
+          }
+        })
     },
     select (item) {
       this.selectData = item
@@ -66,11 +88,13 @@ export default {
       // change fixed course id when dev login system
       const id = this.$store.state.course_id
       this.loading = true
-      await axios.get('http://localhost:8081/subject_type/st/' + id).then(data => {
-        this.select_type = data.data
-        console.log(this.select_type)
-        this.loading = false
-      })
+      await axios
+        .get('http://localhost:8081/subject_type/st/' + id)
+        .then((data) => {
+          this.select_type = data.data
+          console.log(this.select_type)
+          this.loading = false
+        })
       this.select_type.unshift({ text: 'เลือกหมวดวิชา', value: null })
     },
     onFiltered (filteredItems) {
@@ -107,9 +131,10 @@ export default {
 }
 </script>
 <style>
-.tablesubjecttype{
+.tablesubjecttype {
   text-align: center;
   margin-inline-end: 300px;
   margin-block-start: 15px;
   background-color: whitesmoke;
-}</style>
+}
+</style>

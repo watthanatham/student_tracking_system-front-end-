@@ -2,7 +2,6 @@
   <div>
     <b-container class="pt-2">
       <h6>{{ course_name }}</h6>
-      <h6>โมดูล \ ตรวจสอบข้อมูลของนิสิต</h6>
     </b-container>
     <b-dropdown
       id="dropdown-1"
@@ -48,6 +47,7 @@
     <b-container fluid>
       <b-row>
         <b-col>
+          <h6>ข้อมูลผลการเรียนของนิสิตปี {{ this.selectSeriesLabel }} ในโมดูล {{ this.selectModuleLabel }}</h6>
           <b-table
             striped
             hover
@@ -121,6 +121,9 @@ export default {
       const mid = this.selectData.value
       const stu = this.selectSeries
       this.$store.commit('setSubId', item.sub_id)
+      localStorage.setItem('sub_id', item.sub_id)
+      this.$store.dispatch('setSubName', item.sub_name_thai)
+      localStorage.setItem('sub_name', item.sub_name_thai)
       this.$store.commit('setStuYear', stu)
       this.$store.commit('setModuleId', mid)
       console.log(this.selectSeries)

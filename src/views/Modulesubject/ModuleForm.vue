@@ -131,10 +131,10 @@ export default {
       return 'ต้องใส่ชื่อโมดูล'
     },
     stateModulecredit () {
-      return this.form.module_credit.length > 0
+      return this.form.module_credit > 0
     },
     invalidFeedbackModulecredit () {
-      if (this.form.module_credit.length > 0) {
+      if (this.form.module_credit > 0) {
         return 'หน่วยกิตต้องมีมากกว่า 2 หน่วย'
       }
       return 'ต้องใส่หน่วยกิต'

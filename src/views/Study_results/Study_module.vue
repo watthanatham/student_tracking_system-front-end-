@@ -1,18 +1,13 @@
 <template>
   <div>
-    <b-container>
-      <br>
-      <h5>ตรวจสอบผลการเรียน \ ตรวจสอบโมดูล</h5>
-    </b-container>
     <b-nav class="mt-4">
-      <b-nav-item to="/studyResult">ตรวจสอบหมวดวิชา</b-nav-item>
-      <b-nav-item to="/studymodule">ตรวจสอบโมดูล</b-nav-item>
-      <b-button variant="info" style="margin-left:620px" to="/studycheckmoduleresult"
-        ><i class="fa fa-list-alt"></i> ตรวจสอบผลการเรียน</b-button>
+      <b-button variant="info" to="/studycheckmoduleresult" class="ml-3"
+        ><i class="fa fa-list-alt"></i> ตรวจสอบผลการเรียนในแต่ละโมดูล</b-button>
     </b-nav>
     <b-container fluid>
       <b-row style="padding-top: 10px">
         <b-col>
+          <h6 class="pt-3">จำนวนหน่วยกิตที่เรียนผ่านในแต่ละโมดูล</h6>
           <b-table
             striped
             hover

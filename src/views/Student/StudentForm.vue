@@ -22,6 +22,8 @@
             id="student-code"
             v-model="form.stu_id"
             :disabled="clickAdd"
+            :invalid-feedback="invalidFeedbackStudentcode"
+            :state="stateStudentcode"
           >
           </b-form-input>
         </b-form-group>
@@ -165,9 +167,13 @@ export default {
       await this.$refs.modalstudent.show()
     },
     submit () {
+      // if (this.stateStudentcode && this.stateStudentfirst && this.stateStudentlast && this.stateStudentuser && this.stateStudentpass && this.stateStudentcourse) {
+      //   console.log('ok')
+      // } else {
       const student = JSON.parse(JSON.stringify(this.form))
       this.$emit('save', student)
       this.reset()
+      // }
     },
     reset () {
       this.form = {
@@ -192,6 +198,7 @@ export default {
         this.form.stu_password = this.student.stu_password
         this.form.course_id = this.student.course_id
         // this.form.course_name = this.student.course_name
+        console.log(1)
       }
     },
     resetModal (evt) {
@@ -210,16 +217,17 @@ export default {
     this.selectCourse()
   },
   computed: {
-    // stateStudentcode () {
-    //   return this.form.stu_id.length >= 8
-    // },
-    // invalidFeedbackStudentcode () {
-    //   if (this.form.stu_id.length) {
-    //     return ''
-    //   } else {
-    //     return 'ต้องใส่รหัสนิสิต'
-    //   }
-    // },
+    stateStudentcode () {
+      const regex = new RegExp('[0-9]{8}')
+      return regex.test(this.form.stu_id)
+    },
+    invalidFeedbackStudentcode () {
+      console.log(this.form.stu_id ? 1 : 0)
+      if (this.form.stu_id) {
+        return ''
+      }
+      return 'ต้องใส่รหัสนิสิต'
+    },
     stateStudentfirst () {
       return this.form.stu_firstname.length > 0
     },

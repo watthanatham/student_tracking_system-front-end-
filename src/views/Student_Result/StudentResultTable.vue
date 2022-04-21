@@ -2,7 +2,6 @@
   <div>
     <b-container class="pt-2">
       <h6>{{ course_name }}</h6>
-      <h6> วิชา \ {{ subname }}</h6>
     </b-container>
     <b-container>
       <b-row>
@@ -47,6 +46,7 @@
       </b-row>
       <b-row>
         <b-col>
+          <h6>ผลการเรียนนิสิตในรายวิชา : {{ subname }}</h6>
           <b-table
             striped
             hover

@@ -1,13 +1,5 @@
 <template>
   <div>
-    <b-container>
-      <br>
-      <h5>ตรวจสอบผลการเรียน \ ตรวจสอบหมวดวิชา</h5>
-    </b-container>
-    <b-nav class="mt-4">
-      <b-nav-item to="/studyResult">ตรวจสอบหมวดวิชา</b-nav-item>
-      <b-nav-item to="/studymodule">ตรวจสอบโมดูล</b-nav-item>
-    </b-nav>
     <b-dropdown
       id="dropdown-1"
       :text="selectLabel"
@@ -20,6 +12,7 @@
     <b-container class="tablestudy">
       <b-row>
         <b-col>
+          <h6 class="pt-3">ผลการเรียนในหมวด{{ this.selectLabel }}</h6>
           <b-table
             :items="subjecttypeItems"
             :fields="fields"

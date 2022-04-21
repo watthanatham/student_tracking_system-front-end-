@@ -1,14 +1,14 @@
 <template>
   <div>
     <b-container class="pt-2">
-      <h6>{{ cname }} \ โครงสร้างหลักสูตร</h6>
+      <h6>{{ cname }}</h6>
     </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
-      <b-nav-item to="/module_structure">โครงสร้างโมดูล</b-nav-item>
-      <b-nav-item to="/subject_type">รายวิชา</b-nav-item>
-      <b-nav-item to="/moduleSubject">โมดูล</b-nav-item>
-      <b-nav-item to="/subject">วิชา</b-nav-item>
+      <b-nav-item to="/module_structure">โมดูล</b-nav-item>
+      <b-nav-item to="/subject_type">รายวิชาแต่ละหมวดวิชา</b-nav-item>
+      <b-nav-item to="/moduleSubject">รายวิชาแต่ละโมดูล</b-nav-item>
+      <b-nav-item to="/subject">วิชาในหลักสูตร</b-nav-item>
     </b-nav>
  <b-container>
       <b-row>
@@ -22,6 +22,7 @@
       </b-row>
       <b-row>
         <b-col>
+          <h6>ตารางโครงสร้างหลักสูตรจำแนกตามหมวดวิชา</h6>
           <b-table striped hover :items="courseItems" :fields="fields" class="tablecourse">
             <template #cell(st_edit)="{ item }">
               <b-button @click="editCourse(item)" variant="warning"><i class="fas fa-edit"></i></b-button>
@@ -110,7 +111,6 @@ export default {
       cname: '',
       oid: '',
       fields: [
-        { key: 'st_id', label: 'ไอดี' },
         { key: 'st_name', label: 'หัวข้อ' },
         { key: 'st_credit', label: 'หน่วยกิต' },
         { key: 'st_edit', label: 'แก้ไข' }

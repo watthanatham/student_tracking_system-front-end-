@@ -133,10 +133,10 @@ export default {
       return 'ต้องใส่ชื่อหัวข้อ'
     },
     stateCoursecreditcredit () {
-      return this.form.st_credit.length >= 1
+      return this.form.st_credit > 0
     },
     invalidFeedbackCoursecreditcredit () {
-      if (this.form.st_credit.length > 0) {
+      if (this.form.st_credit > 0) {
       }
       return 'ต้องใส่หน่วยกิต'
     }

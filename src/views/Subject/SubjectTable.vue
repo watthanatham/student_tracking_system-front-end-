@@ -1,16 +1,16 @@
 <template>
   <div>
     <b-container class="pt-2">
-      <h6>{{ course_name }} \ วิชา </h6>
+      <h6>{{ course_name }}</h6>
     </b-container>
     <b-nav class="mt-4">
       <b-nav-item to="/coursestructure">โครงสร้างหลักสูตร</b-nav-item>
-      <b-nav-item to="/module_structure">โครงสร้างโมดูล</b-nav-item>
-      <b-nav-item to="/subject_type">รายวิชา</b-nav-item>
-      <b-nav-item to="/moduleSubject">โมดูล</b-nav-item>
-      <b-nav-item to="/subject">วิชา</b-nav-item>
+      <b-nav-item to="/module_structure">โมดูล</b-nav-item>
+      <b-nav-item to="/subject_type">รายวิชาแต่ละหมวดวิชา</b-nav-item>
+      <b-nav-item to="/moduleSubject">รายวิชาแต่ละโมดูล</b-nav-item>
+      <b-nav-item to="/subject">วิชาในหลักสูตร</b-nav-item>
     </b-nav>
-    <b-container fluid style="padding:0px">
+    <b-container fluid style="padding: 0px">
       <b-row>
         <b-col lg="4" class="textsearchsubject">
           <b-form-group>
@@ -46,6 +46,7 @@
       </b-row>
       <b-row>
         <b-col>
+          <h6 class="pt-1">ตารางวิชาในหลักสูตร</h6>
           <b-table
             striped
             hover
@@ -147,7 +148,10 @@ export default {
     },
     async saveSubject (subject) {
       if (!subject.status) {
-        const response = await axios.post('http://localhost:8081/subject', subject)
+        const response = await axios.post(
+          'http://localhost:8081/subject',
+          subject
+        )
         if (!response.data.status) {
           this.addFailed()
         } else {

@@ -18,12 +18,14 @@
               <vue-csv-import
                 v-model="csv"
                 :map-fields="[
-                  'stu_id',
-                  'sub_id',
-                  'sr_year',
-                  'sr_term',
-                  'sr_grade'
+                  'รหัสนิสิต',
+                  'รหัสวิชา',
+                  'ปีการศึกษา',
+                  'เทอม',
+                  'ผลการเรียน'
                 ]"
+                :autoMatchFields="true"
+                :autoMatchIgnoreCase="true"
               >
                 <template slot="error">
                   <p class="text-danger">
@@ -39,7 +41,7 @@
                 </template>
 
                 <template slot="next" slot-scope="{ load }">
-                  <b-button variant="info" @click.prevent="load" @click="guideImport"
+                  <b-button variant="info" @click.prevent="load"
                     ><b-icon icon="list-check"></b-icon> ตรวจสอบข้อมูล</b-button
                   >
                   <b-button
@@ -127,13 +129,6 @@ export default {
     }
   },
   methods: {
-    guideImport () {
-      this.$swal({
-        icon: 'info',
-        title: 'ข้อแนะนำ',
-        text: 'เรียงตามลำดับ : รหัสนิสิต | รหัสวิชา | ปีการศึกษา | เทอม | ผลการเรียน '
-      })
-    },
     addSuccess () {
       this.$swal({
         icon: 'success',
@@ -201,11 +196,11 @@ export default {
       var studentResult = []
       this.csv.forEach((item) => {
         studentResult.push([
-          item.stu_id,
-          item.sub_id,
-          item.sr_year,
-          item.sr_term,
-          item.sr_grade
+          item['รหัสนิสิต'],
+          item['รหัสวิชา'],
+          item['ปีการศึกษา'],
+          item['เทอม'],
+          item['ผลการเรียน']
         ])
       })
       const response = await axios.post(

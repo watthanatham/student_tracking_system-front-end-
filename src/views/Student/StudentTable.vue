@@ -2,7 +2,7 @@
   <div>
     <b-container>
       <br>
-      <h5>ข้อมูลนิสิต</h5>
+      <h6>ข้อมูลนิสิต</h6>
     </b-container>
     <b-container fluid>
       <b-row>
@@ -34,6 +34,7 @@
       </b-row>
       <b-row>
         <b-col>
+          <h6>ข้อมูลนิสิต</h6>
           <b-table
             :current-page="currentPage"
             :per-page="perPage"

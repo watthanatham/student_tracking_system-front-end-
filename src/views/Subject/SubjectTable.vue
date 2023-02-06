@@ -46,7 +46,6 @@
       </b-row>
       <b-row>
         <b-col>
-          <h6 class="pt-1">ตารางวิชาในหลักสูตร</h6>
           <b-table
             striped
             hover
